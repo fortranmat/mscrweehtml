@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MED-003 Study Guide — Units 10, 11 &amp; 12</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f1117; color: #e2e8f0; line-height: 1.65; }
+  .container { max-width: 960px; margin: 0 auto; padding: 24px 20px; }
+  h1 { color: #7dd3fc; font-size: 1.5rem; text-align: center; padding: 20px 0 6px; }
+  .tagline { text-align: center; color: #94a3b8; font-size: 0.85rem; margin-bottom: 28px; }
+  .unit-tabs { display: flex; gap: 10px; margin-bottom: 28px; flex-wrap: wrap; }
+  .unit-tab { padding: 10px 22px; border-radius: 24px; cursor: pointer; font-size: 0.85rem; font-weight: 600;
+    background: #1e2330; border: 2px solid #2d3748; color: #94a3b8; transition: all .2s; }
+  .unit-tab.active { background: #1e3a5f; border-color: #3b82f6; color: #7dd3fc; }
+  .unit-content { display: none; }
+  .unit-content.active { display: block; }
+  .qa-card { background: #1e2330; border-radius: 10px; margin-bottom: 16px; border: 1px solid #2d3748; overflow: hidden; }
+  .qa-header { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; cursor: pointer; user-select: none; }
+  .qa-header:hover { background: #252d3d; }
+  .q-badge { flex-shrink: 0; background: #1e3a5f; color: #7dd3fc; font-size: 0.7rem; font-weight: 700;
+    padding: 3px 8px; border-radius: 10px; margin-top: 2px; white-space: nowrap; }
+  .q-badge.rep { background: #2d1b4e; color: #f0abfc; }
+  .q-text { font-weight: 600; color: #f1f5f9; font-size: 0.92rem; flex: 1; }
+  .expand-icon { color: #4b5563; font-size: 1rem; margin-top: 2px; transition: transform .2s; flex-shrink: 0; }
+  .qa-card.open .expand-icon { transform: rotate(90deg); }
+  .qa-body { display: none; padding: 0 16px 18px; }
+  .qa-card.open .qa-body { display: block; }
+  .exam-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .etag { background: #162032; color: #67e8f9; font-size: 0.7rem; padding: 2px 8px; border-radius: 8px; border: 1px solid #1e3a5f; }
+  .ans-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: #fbbf24; margin: 12px 0 5px; }
+  .ans-body { color: #cbd5e1; font-size: 0.88rem; }
+  .ans-body p { margin-bottom: 8px; }
+  .chain { display: flex; flex-wrap: wrap; gap: 0; margin: 8px 0; align-items: center; }
+  .chain-item { background: #162032; color: #93c5fd; font-size: 0.77rem; padding: 5px 10px; border: 1px solid #1e3a5f; font-weight: 600; text-align: center; }
+  .chain-arrow { color: #fbbf24; font-size: 1rem; padding: 0 4px; }
+  .pt-list { list-style: none; margin: 6px 0; }
+  .pt-list li { padding: 3px 0 3px 16px; position: relative; font-size: 0.87rem; color: #cbd5e1; }
+  .pt-list li::before { content: '•'; position: absolute; left: 0; color: #fbbf24; }
+  .pt-list li strong { color: #f1f5f9; }
+  .num-list { list-style: none; margin: 6px 0; counter-reset: num; }
+  .num-list li { padding: 4px 0 4px 26px; position: relative; font-size: 0.87rem; color: #cbd5e1; counter-increment: num; }
+  .num-list li::before { content: counter(num); position: absolute; left: 0; background: #1e3a5f; color: #7dd3fc; font-size: 0.7rem; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; top: 5px; }
+  .num-list li strong { color: #f1f5f9; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 8px 0; }
+  .col-box { background: #161b27; border-radius: 6px; padding: 10px 12px; border: 1px solid #2d3748; }
+  .col-box .col-title { font-size: 0.75rem; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; }
+  .hbox { border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 0.85rem; }
+  .hbox.gold { background: #1a1200; border-left: 3px solid #fbbf24; color: #fcd34d; }
+  .hbox.green { background: #0d1a10; border-left: 3px solid #4ade80; color: #6ee7b7; }
+  .hbox.red { background: #1a0a0a; border-left: 3px solid #f87171; color: #fca5a5; }
+  .hbox.blue { background: #0a1020; border-left: 3px solid #3b82f6; color: #93c5fd; }
+  .hbox.purple { background: #1a0a2a; border-left: 3px solid #a855f7; color: #f0abfc; }
+  .diag-wrap { background: #161b27; border-radius: 8px; padding: 12px; margin: 12px 0; overflow-x: auto; }
+  .diag-label { font-size: 0.75rem; color: #64748b; margin-top: 6px; text-align: center; }
+  .rep-note { font-size: 0.75rem; color: #f0abfc; background: #1a0a2a; border-radius: 4px; padding: 3px 8px; margin-bottom: 8px; display: inline-block; }
+  .wc { font-size: 0.68rem; color: #64748b; margin-left: 6px; }
+  .kv-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; margin: 8px 0; }
+  .kv-table th { background: #1e3a5f; color: #7dd3fc; padding: 6px 10px; text-align: left; font-size: 0.78rem; }
+  .kv-table td { padding: 5px 10px; border-bottom: 1px solid #1e2a3a; color: #cbd5e1; vertical-align: top; }
+  .kv-table tr:nth-child(even) td { background: #161b27; }
+  .building-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 10px 0; }
+  .b-card { background: #161b27; border-radius: 6px; padding: 10px; border: 1px solid #2d3748; }
+  .b-card .b-title { font-size: 0.75rem; font-weight: 700; margin-bottom: 5px; color: #7dd3fc; }
+  @media (max-width: 640px) { .two-col, .building-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>MED-003 — Quick Exam Study Guide</h1>
+<p class="tagline">Units 10 · 11 · 12 &nbsp;|&nbsp; Every exam question answered &nbsp;|&nbsp; Plain English · Exam-ready</p>
+
+<div class="unit-tabs">
+  <div class="unit-tab active" onclick="showUnit('u10')">Unit 10 — Micro-Economics</div>
+  <div class="unit-tab" onclick="showUnit('u11')">Unit 11 — Energy Efficiency</div>
+  <div class="unit-tab" onclick="showUnit('u12')">Unit 12 — Social Control</div>
+</div>
+
+<!-- ════════════════════════════ UNIT 10 ════════════════════════════ -->
+<div class="unit-content active" id="u10">
+
+  <!-- Q1: Energy economics + price response -->
+  <div class="qa-card open">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">Dec-24</span>
+      <span class="q-text">Define energy economics. Explain with respect to energy demand and its response to price.</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Dec-24 Q4b</span><span class="etag">SAQ 1 · SAQ 2</span></div>
+
+      <div class="ans-label">Definition</div>
+      <div class="ans-body"><p>Energy economics is the branch of economics that studies how energy is produced, distributed, priced, and consumed — and how energy markets, policies and technologies interact with the broader economy, society and environment. Its core concern: how do prices, policies and technology affect the QUANTITY and MIX of energy people use?</p></div>
+
+      <div class="ans-label">Energy Demand and Its Response to Price</div>
+      <div class="ans-body"><p><strong>Derived demand:</strong> People don't want energy itself — they want warmth, light, mobility, cooked food. Energy is demanded ONLY because it delivers these services. This is called derived demand. Implication: if the same service can be delivered with less energy (LED lights, efficient cars), total energy demand falls even if the price of energy stays the same.</p></div>
+
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title" style="color:#f87171;">📌 Short-run: INELASTIC</div>
+          <ul class="pt-list">
+            <li>Elasticity: <strong>-0.1 to -0.4</strong></li>
+            <li>If electricity price rises 20%, consumption falls only 2–8%</li>
+            <li>Why? People can't immediately change appliances, insulation, or industrial processes</li>
+            <li>Heating is essential — you can't easily substitute it in a cold winter</li>
+            <li>Transport fuel — can't stop commuting overnight</li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="col-title" style="color:#4ade80;">📌 Long-run: MORE ELASTIC</div>
+          <ul class="pt-list">
+            <li>Elasticity: <strong>-0.5 to -1.0</strong></li>
+            <li>Over 5–10 years, sustained high prices DO change behaviour</li>
+            <li>People buy efficient appliances, insulate homes, switch fuels</li>
+            <li>Industries invest in efficient machinery, shift production processes</li>
+            <li>1973 oil shock → OECD countries cut energy intensity by 30% over 20 years</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ans-label">Why is marketed energy NOT an essential good? (SAQ 1)</div>
+      <div class="ans-body"><p>Modern economists classify energy as a <strong>normal good, not an essential good</strong>. This is because: (a) when incomes fall, energy demand falls too — it is not maintained at all costs like food and medicine; (b) demand responds to price (even if inelastically); (c) the specific energy form (coal, gas, solar, biomass) is substitutable — what matters is the SERVICE, not the carrier. However, ACCESS to some minimum energy (light to study, fuel to cook) IS essential for human welfare — this is the energy poverty argument.</p></div>
+
+      <div class="ans-label">Factors Influencing Cost and Prices of Energy (SAQ 2)</div>
+      <ul class="pt-list">
+        <li><strong>Capital cost (CAPEX)</strong> — building a power plant, dam, or solar farm. Higher for nuclear and large hydro; falling rapidly for solar PV and wind.</li>
+        <li><strong>Operating and fuel cost (OPEX)</strong> — coal plants have low CAPEX but high ongoing fuel cost. Solar has high CAPEX but near-zero fuel cost.</li>
+        <li><strong>Environmental externalities</strong> — pollution costs (health, climate) not usually included in market prices. Carbon tax attempts to correct this.</li>
+        <li><strong>Government subsidies and taxes</strong> — fossil fuel subsidies lower prices; carbon taxes raise them; renewable energy subsidies lower solar/wind prices.</li>
+        <li><strong>Market structure</strong> — monopoly utilities charge higher prices than competitive markets; electricity distribution is a natural monopoly requiring regulation.</li>
+        <li><strong>International fuel prices</strong> — global oil and gas prices directly affect electricity and transport costs in import-dependent nations like India.</li>
+        <li><strong>Infrastructure investment</strong> — cost of transmission lines, pipelines, and distribution networks is a major component of final electricity price.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q2: Carbon Taxation -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">Dec-22</span>
+      <span class="q-text">Need and benefits of carbon taxation</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Dec-22 Q7a</span><span class="etag">Terminal Q4 — economic instruments for CO₂</span></div>
+
+      <div class="ans-label">Why Carbon Tax is Needed</div>
+      <div class="ans-body"><p>When you burn coal to make electricity, you release CO₂ which causes climate damage worth (by various estimates) $50–200 per tonne of CO₂. But the electricity consumer pays nothing for that damage — it is an <strong>externality</strong>, a cost imposed on others without their consent. Carbon tax forces the polluter to pay this external cost, making clean energy competitive with dirty energy automatically.</p></div>
+
+      <div class="diag-wrap">
+        <svg viewBox="0 0 680 80" xmlns="http://www.w3.org/2000/svg" width="100%">
+          <rect width="680" height="80" fill="#161b27" rx="6"/>
+          <defs><marker id="ct" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto">
+            <polygon points="0 0,8 2.5,0 5" fill="#fbbf24"/></marker></defs>
+          <rect x="5" y="15" width="130" height="50" rx="4" fill="#1a0a0a" stroke="#f87171" stroke-width="1.5"/>
+          <text x="70" y="37" fill="#f87171" font-size="9" font-weight="bold" text-anchor="middle">FOSSIL FUEL</text>
+          <text x="70" y="50" fill="#f87171" font-size="9" font-weight="bold" text-anchor="middle">COMBUSTION</text>
+          <text x="70" y="65" fill="#64748b" font-size="7" text-anchor="middle">CO₂ emitted = social cost</text>
+          <line x1="136" y1="40" x2="156" y2="40" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#ct)"/>
+          <rect x="157" y="15" width="150" height="50" rx="4" fill="#292524" stroke="#f59e0b" stroke-width="1.5"/>
+          <text x="232" y="35" fill="#fcd34d" font-size="9" font-weight="bold" text-anchor="middle">WITHOUT CARBON TAX</text>
+          <text x="232" y="49" fill="#94a3b8" font-size="8" text-anchor="middle">Coal = cheapest option</text>
+          <text x="232" y="61" fill="#94a3b8" font-size="8" text-anchor="middle">Climate cost = zero to producer</text>
+          <line x1="308" y1="40" x2="328" y2="40" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#ct)"/>
+          <rect x="329" y="15" width="170" height="50" rx="4" fill="#0d2b1e" stroke="#10b981" stroke-width="1.5"/>
+          <text x="414" y="35" fill="#6ee7b7" font-size="9" font-weight="bold" text-anchor="middle">WITH CARBON TAX</text>
+          <text x="414" y="49" fill="#94a3b8" font-size="8" text-anchor="middle">Coal price rises to true cost</text>
+          <text x="414" y="61" fill="#94a3b8" font-size="8" text-anchor="middle">Renewables become competitive</text>
+          <line x1="500" y1="40" x2="520" y2="40" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#ct)"/>
+          <rect x="521" y="15" width="155" height="50" rx="4" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+          <text x="598" y="35" fill="#7dd3fc" font-size="9" font-weight="bold" text-anchor="middle">OUTCOME</text>
+          <text x="598" y="49" fill="#94a3b8" font-size="8" text-anchor="middle">Market shifts to cleaner</text>
+          <text x="598" y="61" fill="#94a3b8" font-size="8" text-anchor="middle">energy automatically</text>
+        </svg>
+        <div class="diag-label">Carbon tax corrects the market failure — makes pollution have a price</div>
+      </div>
+
+      <div class="ans-label">Benefits of Carbon Taxation</div>
+      <ol class="num-list">
+        <li><strong>Internalises the externality</strong> — makes fossil fuels bear the true cost of the climate damage they cause. The market then drives clean energy adoption automatically without government picking specific technologies.</li>
+        <li><strong>Revenue for clean investment</strong> — carbon tax revenue can fund renewable energy subsidies, energy efficiency programmes, or be returned to citizens as a dividend (British Columbia, Canada does this).</li>
+        <li><strong>Technology-neutral</strong> — the market finds the cheapest emission reductions, whether solar, wind, efficiency, or CCS. Government doesn't need to predict which technology will win.</li>
+        <li><strong>Encourages innovation</strong> — a sustained carbon price creates strong financial incentive for companies to invest in clean technology R&D to avoid the tax.</li>
+        <li><strong>Reduces other taxes</strong> — "environmental tax reform" — raise carbon tax, reduce income or payroll taxes. Tax bad things (pollution) not good things (work).</li>
+        <li><strong>International competitiveness tool</strong> — EU's Carbon Border Adjustment Mechanism (CBAM) prevents carbon leakage — imports from countries without carbon pricing pay equivalent tariff.</li>
+      </ol>
+
+      <div class="hbox gold">WEC Goals for Energy Sustainability (Dec-22 Q7b — pick any two): (1) Ensure adequate, reliable and affordable energy supply for all. (2) Minimise environmental damage from energy production and use. (3) Promote energy efficiency at all stages. (4) Facilitate technology transfer to developing nations. (5) Promote use of renewable energy resources.</div>
+    </div>
+  </div>
+
+  <!-- Q3: Environmental damage in energy costing + linkages -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">Terminal</span>
+      <span class="q-text">Why include environmental damage in energy costing / Energy–growth–sustainability linkages</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Terminal Q2</span><span class="etag">Terminal Q3</span></div>
+
+      <div class="ans-label">Why Environmental Damage Must Be in Energy Costing (Terminal Q2)</div>
+      <div class="ans-body"><p>Market prices for coal and oil reflect only the <strong>private costs</strong> of extraction, processing and delivery. They do NOT include:</p></div>
+      <ul class="pt-list">
+        <li><strong>Health costs</strong> — air pollution from coal plants causes respiratory disease, hospital admissions, premature deaths. In India, air pollution costs ~1.7% of GDP annually in health damage.</li>
+        <li><strong>Climate change damage</strong> — IPCC estimates unmitigated climate change will cost 10–23% of global GDP by 2100. Current fossil fuel use imposes these future costs on humanity without paying for them.</li>
+        <li><strong>Water pollution</strong> — coal ash ponds contaminate groundwater; oil spills destroy fisheries. These costs are borne by communities and taxpayers, not energy producers.</li>
+        <li><strong>Ecosystem services lost</strong> — mining destroys forests whose carbon absorption, water regulation and biodiversity have economic value never reflected in the coal price.</li>
+      </ul>
+      <div class="ans-body" style="margin-top:6px;"><p>When these costs are excluded, fossil fuels appear cheaper than they really are → society over-invests in fossil fuels and under-invests in clean alternatives. <strong>Full cost accounting</strong> — including environmental damage in energy prices — would make renewable energy the obvious economic choice even without climate commitments.</p></div>
+
+      <div class="ans-label">Energy–Economic Growth–Sustainability Linkages (Terminal Q3)</div>
+      <div class="chain">
+        <span class="chain-item">More energy<br>→ more production</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">GDP grows<br>→ incomes rise</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">More energy<br>demanded</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">If fossil fuels:<br>more pollution</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">Environmental<br>degradation</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">Undermines<br>future growth</span>
+      </div>
+      <div class="ans-body" style="margin-top:8px;"><p>The <strong>Environmental Kuznets Curve</strong> hypothesis suggests pollution first rises with income (industrialisation phase) then falls as countries get rich enough to demand and afford clean energy. But waiting for this natural process would cause catastrophic climate change. <strong>Decoupling</strong> — growing GDP while reducing energy consumption — is achievable through efficiency and clean energy technology. Germany grew GDP 25% between 2000–2020 while cutting energy consumption 15%.</p></div>
+
+      <div class="ans-label">Technological Advances and Energy Price Convergence (Terminal Q1)</div>
+      <ul class="pt-list">
+        <li>Solar PV cost fell <strong>90%+ since 2010</strong> — now cheaper than new coal in most countries</li>
+        <li>Wind energy costs fell <strong>70%</strong> in the same period</li>
+        <li>Li-ion battery costs fell <strong>97% since 1991</strong> — enabling EVs and grid storage</li>
+        <li>As renewables scale up, their costs continue falling (learning curve / Wright's Law)</li>
+        <li>Meanwhile fossil fuel costs face carbon pricing, stranded asset risk, and rising extraction cost</li>
+        <li>Result: all energy commodities' costs are converging toward the <strong>marginal cost of renewable electricity</strong> which approaches zero for fuel cost</li>
+        <li>This convergence is disrupting the economics of gas peakers, oil refineries and coal mines globally</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q4: Good governance imperatives -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">SAQ 4</span>
+      <span class="q-text">Imperatives of good governance for the energy sector</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">SAQ 4</span><span class="etag">SAQ 3 — energy inputs and economic growth</span></div>
+
+      <div class="ans-label">6 Imperatives of Good Governance for Energy</div>
+      <ol class="num-list">
+        <li><strong>Transparent and independent regulation</strong> — an independent regulator (like India's CERC) sets tariffs based on cost of service, not political convenience. Regulatory capture (where the regulator serves the industry) must be prevented through strong institutional design.</li>
+        <li><strong>Clear and stable long-term policy</strong> — investors in power plants commit capital for 20–30 years. Frequent policy reversals (changing solar tariffs, withdrawing subsidies overnight) destroy investor confidence and raise the cost of capital for ALL future projects.</li>
+        <li><strong>Anti-corruption measures</strong> — energy sector contracts (coal allocations, power purchase agreements, grid connections) are massive and historically prone to corruption. Transparent tendering and e-procurement reduce rent-seeking.</li>
+        <li><strong>Financial discipline in utilities</strong> — DISCOMs (distribution companies) must be financially viable. Politically-motivated free electricity to farmers creates perpetual losses that crowd out grid investment and renewable energy procurement.</li>
+        <li><strong>Universal service obligations</strong> — good governance mandates that utilities serve ALL consumers including unprofitable rural areas, not just cherry-pick urban commercial customers.</li>
+        <li><strong>Accountability and public participation</strong> — large energy projects (dams, nuclear plants, coal mines) must involve genuine community consultation and environmental impact assessment. Decisions made without consent create conflict, delays and project failures.</li>
+      </ol>
+
+      <div class="hbox blue">How energy scarcity constrains growth (SAQ 3): No electricity → factories cannot run → exports fall. No reliable power → cold chain fails → farm produce rots. Power cuts → IT companies lose clients. In India, industrial power cuts in 2022–23 cost an estimated ₹1 lakh crore in lost production. Policy solutions: Accurate demand forecasting, advance capacity planning, diversified supply, demand management, cross-border energy trade.</div>
+    </div>
+  </div>
+
+</div><!-- end unit 10 -->
+
+
+<!-- ════════════════════════════ UNIT 11 ════════════════════════════ -->
+<div class="unit-content" id="u11">
+
+  <!-- Q1: Energy efficiency in buildings — 4 papers (highest in unit) -->
+  <div class="qa-card open">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 4 papers</span>
+      <span class="q-text">Energy efficiency in buildings — features, technological measures, short note</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-25 Q6a — short note</span><span class="etag">Jun-24 Q6d — short note</span>
+        <span class="etag">Dec-23 Q6b — technological measures</span>
+        <span class="etag">Dec-21 Q5b — main features</span><span class="etag">Jun-22 Q6b — short note</span>
+      </div>
+      <div class="rep-note">⚠ Asked 4–5 times — this is Unit 11's anchor answer</div>
+
+      <div class="ans-label">Key Features of an Energy Efficient Building</div>
+      <div class="building-grid">
+        <div class="b-card">
+          <div class="b-title">🏠 Building Envelope</div>
+          <ul class="pt-list">
+            <li>Roof insulation — prevents heat gain in summer, heat loss in winter</li>
+            <li>Wall insulation — cavity walls or external cladding</li>
+            <li>Double/triple glazed windows — low-e glass coating</li>
+            <li>Draught-proofing — seal all gaps in doors, windows, floors</li>
+            <li>Light-coloured reflective roof — reduces solar heat gain by 30%</li>
+          </ul>
+        </div>
+        <div class="b-card">
+          <div class="b-title">☀ Passive Design</div>
+          <ul class="pt-list">
+            <li>South-facing orientation — maximise winter sun, minimise summer sun</li>
+            <li>Shading devices — overhangs, louvers block high summer sun</li>
+            <li>Natural ventilation — cross-ventilation through window placement</li>
+            <li>Thermal mass — thick stone/concrete walls absorb daytime heat, release at night</li>
+            <li>Daylighting — skylights, light wells reduce artificial lighting need</li>
+          </ul>
+        </div>
+        <div class="b-card">
+          <div class="b-title">⚡ Active Systems</div>
+          <ul class="pt-list">
+            <li>High-efficiency HVAC — inverter-type AC (5-star ISEER rating)</li>
+            <li>Variable speed drives on fans and pumps</li>
+            <li>LED lighting with occupancy sensors and daylight dimming</li>
+            <li>Building Automation System (BAS) — centralised control</li>
+            <li>Solar water heater — replaces electric geyser</li>
+          </ul>
+        </div>
+        <div class="b-card">
+          <div class="b-title">🔋 On-site Generation</div>
+          <ul class="pt-list">
+            <li>Rooftop solar PV — generate electricity at point of use</li>
+            <li>Solar thermal — hot water for residential and commercial</li>
+            <li>Small wind turbine (where wind resource available)</li>
+            <li>Net metering — export surplus to grid, import when needed</li>
+          </ul>
+        </div>
+        <div class="b-card">
+          <div class="b-title">💧 Water + Waste</div>
+          <ul class="pt-list">
+            <li>Rainwater harvesting — reduces pumping energy for water supply</li>
+            <li>Greywater recycling — reduces hot water heating energy</li>
+            <li>Biogas from organic waste — cooking fuel on-site</li>
+            <li>Energy-efficient water fixtures — low-flow, pressure regulation</li>
+          </ul>
+        </div>
+        <div class="b-card">
+          <div class="b-title">📋 Ratings &amp; Codes</div>
+          <ul class="pt-list">
+            <li><strong>ECBC</strong> — Energy Conservation Building Code (India, mandatory for commercial buildings &gt;500 kW)</li>
+            <li><strong>GRIHA</strong> — Green Rating for Integrated Habitat Assessment (India's own rating)</li>
+            <li><strong>LEED</strong> — Leadership in Energy and Environmental Design (international)</li>
+            <li>Net-zero energy building — generates as much as it uses annually</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ans-label">Technological Measures for Energy Efficiency in Buildings (Dec-23 Q6b)</div>
+      <ol class="num-list">
+        <li><strong>High-performance glazing</strong> — double or triple glazed windows with low-emissivity (low-e) coating reduce heat transfer by 50–70%. Particularly important in India's climate where solar heat gain through glass is a major cooling load.</li>
+        <li><strong>Roof garden / green roof</strong> — a layer of plants and soil on the roof provides insulation (reduces cooling energy 20–30%), absorbs rainwater, and reduces urban heat island effect.</li>
+        <li><strong>Phase change materials (PCM)</strong> — materials that absorb and release heat as they change from solid to liquid. Embedded in walls or ceilings, they smooth out temperature swings, reducing HVAC load.</li>
+        <li><strong>Heat pumps</strong> — move heat rather than generate it. A heat pump can deliver 3–4 kWh of heating/cooling for every 1 kWh of electricity consumed (COP of 3–4), vs electric heater which delivers only 1 kWh per 1 kWh (COP of 1).</li>
+        <li><strong>LED + smart lighting systems</strong> — LEDs use 80% less energy than incandescent bulbs. Combined with occupancy sensors, daylight sensors and programmable timers, lighting energy can be cut 70% from baseline.</li>
+        <li><strong>Building Automation System (BAS)</strong> — centralised computer system monitors and controls all building systems (HVAC, lighting, lifts, access). Can reduce energy consumption 15–30% through optimisation alone.</li>
+        <li><strong>Variable Refrigerant Flow (VRF) air conditioning</strong> — modulates refrigerant flow to match actual cooling/heating needs. 30–40% more efficient than conventional split ACs in commercial buildings.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Q2: Supply and demand side efficiency in workplace -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">Jun-25</span>
+      <span class="q-text">How to improve supply and demand side energy efficiency in your workplace</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Jun-25 Q5b</span><span class="etag">Terminal Q3 · Terminal Q6</span></div>
+
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title" style="color:#7dd3fc;">⚡ SUPPLY SIDE — Workplace</div>
+          <ol class="num-list">
+            <li><strong>Rooftop solar PV</strong> — most workplaces have roof area; solar can supply 20–50% of daytime electricity need</li>
+            <li><strong>Captive power plant</strong> — large industrial/commercial complexes generate own power via gas engine or biomass gasifier; sell surplus to grid</li>
+            <li><strong>CHP (Combined Heat and Power)</strong> — if workplace has both heat and electricity demand (factory, hospital, hotel), CHP delivers 85% efficiency vs 35% for grid electricity alone</li>
+            <li><strong>Switch to renewable electricity tariff</strong> — choose green tariff from DISCOM or buy Renewable Energy Certificates (RECs)</li>
+            <li><strong>Reduce T&D losses</strong> — use high-voltage distribution within the campus; power factor correction capacitors eliminate reactive power losses</li>
+          </ol>
+        </div>
+        <div class="col-box">
+          <div class="col-title" style="color:#4ade80;">🔋 DEMAND SIDE — Workplace</div>
+          <ol class="num-list">
+            <li><strong>Energy audit</strong> — first step always; identifies the biggest wastes and most cost-effective fixes; ISO 50001 energy management system for ongoing optimisation</li>
+            <li><strong>LED lighting + sensors</strong> — replace all fluorescent tubes with LEDs; motion sensors in corridors, toilets, meeting rooms; daylight dimming on perimeter zones</li>
+            <li><strong>HVAC optimisation</strong> — set temperature to 24°C (not 18°C); VFDs on motors; scheduled shutdown overnight and weekends; filter cleaning monthly</li>
+            <li><strong>Computer power management</strong> — activate sleep mode after 10 minutes; replace desktops with laptops (70% less energy); virtualise servers</li>
+            <li><strong>Behaviour change programme</strong> — energy champions, competition between departments, dashboard showing real-time consumption; typically saves 5–10% with zero capital cost</li>
+          </ol>
+        </div>
+      </div>
+      <div class="hbox gold">💡 Exam tip: Frame answer with workplace context (office, factory, hospital, educational institution). For a PMC/site office context — generators, air conditioning, computers, and site lighting are the main energy consumers. Solar for day use + LED + inverter AC = typical package.</div>
+    </div>
+  </div>
+
+  <!-- Q3: Energy services concept + sectors -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">Terminal Q1</span>
+      <span class="q-text">What are energy services? Describe energy services across sectors. Key issues for energy sustainability.</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Terminal Q1</span><span class="etag">SAQ 3 · SAQ 4</span></div>
+
+      <div class="ans-label">What Are Energy Services?</div>
+      <div class="ans-body"><p>Energy services are the <strong>useful outcomes that energy delivers</strong> — warmth, light, cooked food, refrigeration, mobility, mechanical work. The key insight: people buy services, not energy. 10 watts of LED light provides the same service as 100 watts of incandescent light. This reframing drives energy efficiency policy — focus on delivering the service efficiently, not on maximising energy supply.</p></div>
+
+      <div class="ans-label">Energy Services by Sector</div>
+      <table class="kv-table">
+        <tr><th>Sector</th><th>Key Energy Services</th><th>Main Energy Forms</th></tr>
+        <tr>
+          <td><strong>Commercial</strong></td>
+          <td>Comfort (heating/cooling), lighting, computing, data storage, communication, food service</td>
+          <td>Electricity (dominant), gas for heating/cooking</td>
+        </tr>
+        <tr>
+          <td><strong>Agricultural</strong></td>
+          <td>Irrigation (water pumping), tilling, harvesting, drying, cold storage, fertiliser production</td>
+          <td>Electricity for pumps, diesel for tractors, gas for fertiliser</td>
+        </tr>
+        <tr>
+          <td><strong>Industrial</strong></td>
+          <td>Process heat, mechanical work (motors/compressors), lighting, space conditioning, material transformation (smelting, chemical reactions)</td>
+          <td>Electricity, coal, gas, oil, biomass depending on process</td>
+        </tr>
+        <tr>
+          <td><strong>Services (health, education, IT)</strong></td>
+          <td>Lighting, computing, medical equipment, sterilisation, climate control, communication</td>
+          <td>Electricity (almost entirely), with backup diesel generators</td>
+        </tr>
+        <tr>
+          <td><strong>Transport</strong></td>
+          <td>Mobility of people and goods — any distance, any speed</td>
+          <td>Petroleum (oil), shifting to electricity (EVs, metros)</td>
+        </tr>
+      </table>
+
+      <div class="ans-label">Key Issues for Energy Sustainability (SAQ 4)</div>
+      <ul class="pt-list">
+        <li><strong>Supply side</strong> — dependence on finite fossil fuels with rising extraction cost; environmental damage of large supply infrastructure; grid reliability and resilience</li>
+        <li><strong>Demand side</strong> — inefficient end-use technologies; lack of incentives to invest in efficiency; rebound effect eroding efficiency gains; energy poverty preventing access to efficient appliances</li>
+        <li><strong>Market failures</strong> — externalities not priced; natural monopoly in transmission/distribution; split incentives between landlord and tenant</li>
+        <li><strong>Technology gaps</strong> — need for better storage, smart grid, green hydrogen, and long-duration storage for 100% renewable systems</li>
+        <li><strong>Finance gap</strong> — upfront capital for clean energy and efficiency is a barrier for the poor and developing nations</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q4: Supply side efficiency technologies + transport -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">Terminal Q2 + Q5</span>
+      <span class="q-text">New technologies for supply-side efficiency / Energy efficiency in transport sector</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Terminal Q2 — supply side</span><span class="etag">Terminal Q5 — transport</span><span class="etag">SAQ 5</span></div>
+
+      <div class="ans-label">New Technologies Improving Supply-Side Efficiency</div>
+      <ol class="num-list">
+        <li><strong>Supercritical and ultra-supercritical coal plants</strong> — operate at higher steam temperatures and pressures, raising efficiency from conventional 33–37% to 42–48%. Less coal burned per unit of electricity → less CO₂ and pollution per kWh.</li>
+        <li><strong>Combined Cycle Gas Turbines (CCGT)</strong> — use hot exhaust from gas turbine to generate steam for a second turbine. Total efficiency 55–60% vs 35% for simple gas turbine. Most efficient fossil fuel technology available.</li>
+        <li><strong>Cogeneration (CHP)</strong> — simultaneous generation of heat and power from a single fuel. Total efficiency 80–90%. Sugar mills, paper plants, hospitals and district heating systems all benefit.</li>
+        <li><strong>Smart grid with demand response</strong> — real-time communication between grid and consumers allows automatic load reduction during peaks. Reduces need for expensive peaking plants that run only a few hours per year.</li>
+        <li><strong>Large-scale energy storage (pumped hydro, batteries)</strong> — allows renewable energy generated at peak times to be used when needed. Reduces curtailment (wasted solar/wind) and stabilises grid frequency.</li>
+        <li><strong>High Voltage Direct Current (HVDC) transmission</strong> — transmits electricity long distances with 3–5% losses vs 10–15% for AC transmission. Enables large-scale renewable energy from sunny/windy remote areas to reach cities.</li>
+      </ol>
+
+      <div class="ans-label">Energy Efficiency in Transport (Terminal Q5)</div>
+      <ol class="num-list">
+        <li><strong>Electric vehicles (EVs)</strong> — EVs convert 85–90% of electrical energy to motion vs 25–30% for petrol engines. India's FAME scheme subsidises EVs. With clean electricity, EVs emit near-zero CO₂.</li>
+        <li><strong>Modal shift to public transport</strong> — metro rail moves 40,000 passengers/hr at 1/10th the energy per person-km of private cars. BRT (Bus Rapid Transit) similarly efficient. India's metro network now 900+ km.</li>
+        <li><strong>Fuel efficiency standards for vehicles</strong> — Corporate Average Fuel Economy (CAFE) standards in India mandate improving fleet average fuel economy. BS6 (Bharat Stage 6) emission norms also cut fuel consumption.</li>
+        <li><strong>Freight modal shift</strong> — rail freight uses 5–7× less energy per tonne-km than road. India's Dedicated Freight Corridors (DFC) are shifting cargo from diesel trucks to electric trains.</li>
+        <li><strong>Ethanol blending (E20)</strong> — blending petrol with 20% sugarcane/grain ethanol reduces petroleum import by 20%, cuts net CO₂ as ethanol is carbon-neutral if grown sustainably.</li>
+        <li><strong>Non-motorised transport</strong> — cycling and walking infrastructure reduces short-trip vehicle use. Also improves public health (double benefit).</li>
+        <li><strong>Dematerialisation</strong> — video conferencing replaces business travel. E-commerce reduces shopping trips. Digital services reduce paper/printing transport.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Q5: Dematerialisation + reasons for low RE adoption -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">SAQ</span>
+      <span class="q-text">Dematerialisation and energy efficiency / Economic reasons for low renewable energy adoption</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">SAQ 7 — dematerialisation</span><span class="etag">SAQ 2 — economic reasons for low RE</span></div>
+
+      <div class="ans-label">Dematerialisation and Energy Efficiency (SAQ 7)</div>
+      <div class="ans-body"><p>Dematerialisation means delivering the same economic value with LESS physical material and energy. The digital economy is the prime example: streaming music replaces CDs and their factories; cloud computing replaces physical servers; e-books replace paper books; video calls replace flights.</p></div>
+      <ul class="pt-list">
+        <li><strong>IT and communication</strong> — a smartphone replaces a camera, music player, navigation system, alarm clock, and newspaper — all made from energy-intensive materials. One device, one charger.</li>
+        <li><strong>Sharing economy</strong> — Ola/Uber means one car serves 10 riders per day vs a private car used 1 hour/day. Airbnb fills existing accommodation vs building new hotels.</li>
+        <li><strong>Additive manufacturing (3D printing)</strong> — makes exactly what is needed with minimal waste material vs subtractive manufacturing that cuts away large amounts.</li>
+        <li><strong>Industry 4.0</strong> — sensors, AI and real-time control minimise material waste and energy use in manufacturing processes.</li>
+        <li><strong>Green chemistry</strong> — redesigning chemical processes to use less energy, fewer hazardous inputs, and produce less waste.</li>
+      </ul>
+
+      <div class="ans-label">Economic Reasons for Low Widespread RE Adoption (SAQ 2)</div>
+      <ul class="pt-list">
+        <li><strong>High upfront capital cost</strong> — solar farm requires Rs.4–5 crore/MW upfront. Even though lifetime cost is competitive, many investors/consumers can't access the capital.</li>
+        <li><strong>Fossil fuel subsidies distort the market</strong> — globally $7 trillion/year in fossil fuel subsidies (IMF) make coal and oil artificially cheap. Renewables cannot compete against subsidised competitors.</li>
+        <li><strong>Grid integration costs</strong> — variable solar and wind need grid upgrades, storage, and backup capacity. These system costs are real but often ignored in simplistic price comparisons.</li>
+        <li><strong>Regulatory and policy uncertainty</strong> — changing feed-in tariffs, retroactive tax changes, and policy reversals raise the risk premium for RE investors, making borrowing costs higher.</li>
+        <li><strong>Information asymmetries</strong> — many consumers and small businesses don't know that solar is now cheaper than grid electricity for them. Awareness and trust are missing.</li>
+        <li><strong>Split incentives</strong> — building owner doesn't pay electricity bills; tenant does. Owner has no incentive to invest in solar or insulation that would benefit the tenant.</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- end unit 11 -->
+
+
+<!-- ════════════════════════════ UNIT 12 ════════════════════════════ -->
+<div class="unit-content" id="u12">
+
+  <!-- Q1: Energy for urban poor — 4 papers -->
+  <div class="qa-card open">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 4 papers</span>
+      <span class="q-text">Key challenges in providing sustainable energy for the urban poor <span class="wc">250 words</span></span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-25 Q1c</span><span class="etag">Jun-24 Q3a</span>
+        <span class="etag">Dec-23 Q7a — 250 words</span><span class="etag">Dec-21 Q1d — economic challenges</span>
+      </div>
+      <div class="rep-note">⚠ 4 exam papers — urban poor energy is Unit 12's core exam topic</div>
+
+      <div class="ans-label">Who Are the Urban Poor?</div>
+      <div class="ans-body"><p>Slum dwellers, pavement dwellers, informal settlement residents — typically renting illegally constructed housing without official utility connections. In India, ~60 million people live in urban slums (Census 2011), growing rapidly with rural-urban migration. They are caught in a poverty-energy trap: lack of legal energy access raises their energy costs ABOVE those of the middle class, deepening poverty.</p></div>
+
+      <div class="ans-label">8 Key Challenges</div>
+      <ol class="num-list">
+        <li><strong>Illegal settlements and lack of formal connection</strong> — slums are often on unauthorised land. Utilities won't invest in formal connections. Residents depend on illegal tapping (bijli chori) or shared meters — paying 3–5× official rates to intermediaries.</li>
+        <li><strong>Affordability</strong> — urban poor spend 10–20% of income on energy (kerosene, LPG, electricity), far more than the middle class (2–3%). Even when connections are available, monthly bills are unaffordable.</li>
+        <li><strong>LPG cylinder cost</strong> — a single LPG cylinder costs ₹900+. For a family earning ₹8,000/month, this is 11% of income for one cylinder lasting 3 weeks. Many revert to kerosene or biomass (fire risk in dense slums).</li>
+        <li><strong>Indoor air pollution from biomass/kerosene</strong> — densely packed slum housing with poor ventilation means biomass cooking is extremely hazardous. Kerosene stoves cause fires and respiratory disease.</li>
+        <li><strong>Energy insecurity for small businesses</strong> — urban poor often run home-based micro-enterprises (tailoring, food processing, repair shops). Unreliable power cuts their productivity and income directly.</li>
+        <li><strong>Theft and piracy cycle</strong> — electricity theft in slums contributes to high aggregate T&D losses → utilities recover costs by raising tariffs → legal consumers pay more → more incentive to steal. A vicious cycle.</li>
+        <li><strong>Lack of documentation</strong> — formal utility connections require address proof, identity documents, and landlord permission — all barriers for migrants and informal settlers.</li>
+        <li><strong>Policy exclusion</strong> — urban subsidies (Ujjwala LPG, Saubhagya electricity) are often designed for rural BPL families, not urban slum dwellers with different tenure and documentation challenges.</li>
+      </ol>
+
+      <div class="hbox gold">💡 Solution framework: Special provisions for informal settlements (regularised connections without full documentation); cross-subsidy from commercial to residential poor; solar micro-grids for slum clusters; Ujjwala extension to urban migrants; community biogas from urban organic waste.</div>
+    </div>
+  </div>
+
+  <!-- Q2: Rural India — health and nutrition effects of energy scarcity -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 2 papers</span>
+      <span class="q-text">Health and nutrition effects of energy scarcity in rural India / Health effects of rural energy practices</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Jun-25 Q3b — poverty + health + nutrition</span>
+        <span class="etag">Jun-23 Q3b — health effects of energy consumption practices</span>
+      </div>
+
+      <div class="ans-label">The Rural Energy–Health–Nutrition Chain</div>
+      <div class="chain">
+        <span class="chain-item">Energy<br>poverty</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">Biomass<br>cooking</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">Indoor air<br>pollution</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">Respiratory<br>disease</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">Lost work<br>days</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">Lower<br>income</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">Less food<br>= malnutrition</span>
+      </div>
+
+      <div class="ans-label">Health Effects of Biomass Cooking (Most Important)</div>
+      <ul class="pt-list">
+        <li><strong>Indoor air pollution kills ~500,000 Indians per year</strong> (WHO estimate). Biomass burning on open chulhas produces PM2.5, carbon monoxide, polycyclic aromatic hydrocarbons (PAHs) and other toxins at concentrations 10–50× WHO safe limits inside the kitchen.</li>
+        <li><strong>Women bear the worst burden</strong> — 3–5 hours per day over open fire. Lung cancer, COPD (chronic obstructive pulmonary disease), cataracts from smoke exposure are predominantly female diseases in rural India because of cooking role.</li>
+        <li><strong>Children suffer acute respiratory infections (ARI)</strong> — a leading cause of child mortality in India. Under-5 children in kitchens while mothers cook have severely damaged lung development.</li>
+        <li><strong>Low birth weight</strong> — pregnant women cooking on biomass inhale CO, which crosses placenta → low birth weight babies → lifetime health disadvantage and reduced productivity.</li>
+        <li><strong>Burns and accidents</strong> — open fires in small crowded kitchens cause accidents; clothing fires are a significant cause of rural female mortality.</li>
+      </ul>
+
+      <div class="ans-label">Nutrition Effects of Energy Scarcity</div>
+      <ul class="pt-list">
+        <li><strong>Limited cooking time and fuel</strong> — when firewood is scarce, families switch to eating less-cooked or raw food, or skip hot meals. Nutritional diversity falls.</li>
+        <li><strong>No refrigeration</strong> — without electricity, no cold storage → food spoils rapidly → waste of nutrients → families eat less varied diet → micronutrient deficiencies</li>
+        <li><strong>No cold chain for milk</strong> — rural dairy farmers lose 20–30% of milk to spoilage without refrigeration → income loss → less food purchasing power</li>
+        <li><strong>Water scarcity link</strong> — energy needed for pumping clean water. Without it, families use contaminated water → waterborne disease → worsened nutrition absorption</li>
+        <li><strong>Agricultural productivity loss</strong> — without reliable irrigation power, one failed crop can mean six months of food insecurity for a family</li>
+      </ul>
+
+      <div class="hbox green">The solution is not just energy access — it is CLEAN energy access. Ujjwala Yojana (LPG connections) + PM Surya Ghar (solar) + KUSUM (solar pumps) together address health, nutrition, and income simultaneously — this is the integrated approach that makes energy policy a development intervention, not just an infrastructure project.</div>
+    </div>
+  </div>
+
+  <!-- Q3: Professional Energy Audit -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">Jun-19</span>
+      <span class="q-text">What is a professional energy audit? How is it carried out? What are its outcomes?</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Jun-19 Q2a</span><span class="etag">Terminal Q3</span></div>
+
+      <div class="ans-label">What is a Professional Energy Audit?</div>
+      <div class="ans-body"><p>A professional energy audit is a <strong>systematic, detailed investigation of an organisation's energy flows and uses</strong>, conducted by a certified energy auditor (BEE Accredited Energy Auditor in India), to identify where energy is being wasted and recommend cost-effective measures to reduce consumption. Unlike a simple home walkthrough, a professional audit uses measurement instruments, data analysis, and economic modelling to quantify savings and payback periods.</p></div>
+
+      <div class="ans-label">How It Is Carried Out — 6 Steps</div>
+      <ol class="num-list">
+        <li><strong>Pre-audit planning</strong> — collect 12 months of energy bills, utility data, equipment list, floor plans. Set the scope (whole facility or specific system). Define KPIs (key performance indicators) like specific energy consumption per tonne of product or per square metre.</li>
+        <li><strong>Walk-through inspection</strong> — audit team physically inspects all energy-consuming systems — boilers, chillers, compressors, motors, lighting, building envelope. Identifies obvious wastes and prioritises detailed investigation areas.</li>
+        <li><strong>Measurement and data collection</strong> — install data loggers on major equipment (power analysers on motors, thermal cameras on buildings, flow meters on steam lines). Measure actual consumption vs design specification. Identify operating hours, load profiles, and efficiency losses.</li>
+        <li><strong>Data analysis and benchmarking</strong> — compare actual specific energy consumption with industry benchmarks (BEE sector benchmarks for 13 designated consuming sectors). Calculate energy performance indices. Model potential savings from each identified measure.</li>
+        <li><strong>Report preparation</strong> — list all energy conservation measures (ECMs) with investment required, annual savings, simple payback period, and NPV. Rank by cost-effectiveness. Include implementation plan and monitoring protocol.</li>
+        <li><strong>Follow-up and verification</strong> — after implementation, measure actual savings achieved vs predicted. Issue M&V (Measurement and Verification) report. In PAT scheme, this is done by accredited third-party auditors.</li>
+      </ol>
+
+      <div class="ans-label">Outcomes of a Professional Energy Audit</div>
+      <ul class="pt-list">
+        <li>Prioritised list of energy saving opportunities with quantified financial returns</li>
+        <li>Baseline of current energy performance against which future progress is measured</li>
+        <li>Compliance documentation for regulatory requirements (PAT scheme, ISO 50001)</li>
+        <li>Carbon footprint inventory as basis for CSR and emission reporting</li>
+        <li>Capital investment plan for energy efficiency improvements with IRR and payback</li>
+        <li>Typically identifies savings of <strong>10–30% of energy costs</strong> with payback periods of 1–5 years</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q4: Social approach to energy efficiency + agenda for change -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">Terminal Q1 + Q5</span>
+      <span class="q-text">Social approach to energy efficiency / Agenda for change for rural and urban poor</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Terminal Q1 — social approach</span><span class="etag">Terminal Q5 — agenda for change</span><span class="etag">SAQ 4</span></div>
+
+      <div class="ans-label">Social Approach to Energy Efficiency</div>
+      <div class="ans-body"><p>The <strong>social approach</strong> recognises that energy efficiency is not just a technical challenge but a SOCIAL challenge. Technology alone — efficient bulbs, better stoves — does not guarantee adoption. Behaviour, culture, affordability, social norms, and community trust all determine whether efficiency technology is actually used and maintained.</p></div>
+
+      <ol class="num-list">
+        <li><strong>Community awareness and education</strong> — women's self-help groups (SHGs), gram sabhas, and school programmes to demonstrate the financial and health benefits of efficient cooking, lighting, and appliances. People adopt new technologies when neighbours they trust adopt them first (social proof).</li>
+        <li><strong>Participatory planning</strong> — involving the community in identifying energy needs and choosing solutions. Top-down solutions (government installs biogas plants without training families to maintain them) consistently fail; bottom-up solutions succeed.</li>
+        <li><strong>Microfinance for efficient appliances</strong> — energy-efficient appliances cost more upfront but less over lifetime. Microfinance institutions (like NABARD's programmes) provide small loans so BPL families can buy 5-star appliances and solar systems. Monthly EMI is less than monthly energy savings.</li>
+        <li><strong>Women as energy managers</strong> — women cook, fetch water and firewood, and manage household budgets. Targeting energy programmes at women ensures adoption, maintenance, and multiplier effects on nutrition and child welfare.</li>
+        <li><strong>Local entrepreneurship</strong> — train local youth as solar technicians, cookstove installers, and energy auditors. Creates local jobs AND ensures ongoing maintenance rather than abandoned equipment after 6 months.</li>
+      </ol>
+
+      <div class="ans-label">Agenda for Change — Meeting Energy Needs of Poor (Terminal Q5)</div>
+      <ul class="pt-list">
+        <li><strong>Universal LPG access</strong> — extend Ujjwala Yojana to all BPL households with subsidised refills, not just free connections that are never used</li>
+        <li><strong>Solar home systems</strong> — 10W–100W solar systems for lighting, phone charging, and small appliances in every off-grid home; PM Surya Ghar scheme targets 1 crore homes</li>
+        <li><strong>Mini-grid policy</strong> — regulated private mini-grid operators allowed to serve communities; competitive tariffs; grid connectivity guaranteed when main grid arrives</li>
+        <li><strong>Productive use of electricity</strong> — rural electrification must power not just homes but farms (pumps), small industries (flour mills, cold storage), and services (healthcare, education)</li>
+        <li><strong>Urban slum electrification</strong> — special tenure-neutral connections for slum dwellers; prepaid smart meters remove billing barriers; community meters with sub-metering</li>
+        <li><strong>Address energy poverty holistically</strong> — link energy access programmes with MGNREGA (employment), PMAY (housing), and PMKVY (skills) — energy as development, not just infrastructure</li>
+      </ul>
+
+      <div class="hbox blue">Solar thermal principle (Terminal Q6): Solar thermal devices use the greenhouse effect at small scale — a black absorber surface heats a fluid (water or air) trapped under transparent glazing. Key components: collector panel (absorber + glazing + insulation), storage tank, circulation pump, controller, and heat exchanger. Flat-plate collectors work up to 80°C; evacuated tube collectors reach 120°C+.</div>
+    </div>
+  </div>
+
+</div><!-- end unit 12 -->
+
+</div><!-- container -->
+
+<script>
+function showUnit(id) {
+  document.querySelectorAll('.unit-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.unit-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const idx = {u10:0, u11:1, u12:2}[id];
+  document.querySelectorAll('.unit-tab')[idx].classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function toggle(header) {
+  header.closest('.qa-card').classList.toggle('open');
+}
+</script>
+</body>
+</html>
