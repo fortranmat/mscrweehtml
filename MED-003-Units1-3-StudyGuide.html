@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MED-003 Study Guide — Units 1, 2 &amp; 3</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f1117; color: #e2e8f0; line-height: 1.65; }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 24px 20px; }
+
+  h1 { color: #7dd3fc; font-size: 1.5rem; text-align: center; padding: 20px 0 6px; }
+  .tagline { text-align: center; color: #94a3b8; font-size: 0.85rem; margin-bottom: 28px; }
+
+  /* Unit tabs */
+  .unit-tabs { display: flex; gap: 10px; margin-bottom: 28px; flex-wrap: wrap; }
+  .unit-tab { padding: 10px 22px; border-radius: 24px; cursor: pointer; font-size: 0.85rem; font-weight: 600;
+    background: #1e2330; border: 2px solid #2d3748; color: #94a3b8; transition: all .2s; }
+  .unit-tab.active { background: #1e3a5f; border-color: #3b82f6; color: #7dd3fc; }
+
+  .unit-content { display: none; }
+  .unit-content.active { display: block; }
+
+  /* Q&A card */
+  .qa-card { background: #1e2330; border-radius: 10px; margin-bottom: 18px; border: 1px solid #2d3748; overflow: hidden; }
+  .qa-header { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; cursor: pointer; }
+  .qa-header:hover { background: #252d3d; }
+  .q-badge { flex-shrink: 0; background: #1e3a5f; color: #7dd3fc; font-size: 0.7rem; font-weight: 700;
+    padding: 3px 8px; border-radius: 10px; margin-top: 2px; white-space: nowrap; }
+  .q-badge.rep { background: #2d1b4e; color: #f0abfc; }
+  .q-text { font-weight: 600; color: #f1f5f9; font-size: 0.92rem; flex: 1; }
+  .expand-icon { color: #4b5563; font-size: 1rem; margin-top: 2px; transition: transform .2s; }
+  .qa-card.open .expand-icon { transform: rotate(90deg); }
+
+  .qa-body { display: none; padding: 0 16px 16px 16px; }
+  .qa-card.open .qa-body { display: block; }
+
+  /* Exam tag strip */
+  .exam-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .etag { background: #162032; color: #67e8f9; font-size: 0.7rem; padding: 2px 8px; border-radius: 8px; border: 1px solid #1e3a5f; }
+
+  /* Answer sections */
+  .ans-section { margin-bottom: 14px; }
+  .ans-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+    color: #fbbf24; margin-bottom: 6px; }
+  .ans-body { color: #cbd5e1; font-size: 0.88rem; }
+  .ans-body p { margin-bottom: 8px; }
+
+  /* Key chain */
+  .chain { display: flex; flex-wrap: wrap; gap: 0; margin: 8px 0; align-items: center; }
+  .chain-item { background: #162032; color: #93c5fd; font-size: 0.78rem; padding: 4px 10px;
+    border: 1px solid #1e3a5f; font-weight: 600; }
+  .chain-arrow { color: #fbbf24; font-size: 0.9rem; padding: 0 4px; }
+
+  /* Point list */
+  .pt-list { list-style: none; margin: 6px 0; }
+  .pt-list li { padding: 3px 0 3px 16px; position: relative; font-size: 0.87rem; color: #cbd5e1; }
+  .pt-list li::before { content: '•'; position: absolute; left: 0; color: #fbbf24; }
+  .pt-list li strong { color: #f1f5f9; }
+
+  /* Two column layout */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 8px 0; }
+  .col-box { background: #161b27; border-radius: 6px; padding: 10px 12px; border: 1px solid #2d3748; }
+  .col-box .col-title { font-size: 0.75rem; font-weight: 700; color: #7dd3fc; margin-bottom: 6px; text-transform: uppercase; }
+
+  /* Highlight box */
+  .hbox { border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 0.85rem; }
+  .hbox.gold { background: #1a1200; border-left: 3px solid #fbbf24; color: #fcd34d; }
+  .hbox.green { background: #0d1a10; border-left: 3px solid #4ade80; color: #6ee7b7; }
+  .hbox.red { background: #1a0a0a; border-left: 3px solid #f87171; color: #fca5a5; }
+  .hbox.blue { background: #0a1020; border-left: 3px solid #3b82f6; color: #93c5fd; }
+
+  /* Diagram inline SVG */
+  .diag-wrap { background: #161b27; border-radius: 8px; padding: 12px; margin: 12px 0; overflow-x: auto; }
+  .diag-label { font-size: 0.75rem; color: #64748b; margin-top: 6px; text-align: center; }
+
+  /* Word count badge */
+  .wc { font-size: 0.68rem; color: #64748b; margin-left: 8px; }
+
+  /* Stage box for processes */
+  .stages { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; align-items: center; }
+  .stage { background: #1e2d40; border: 1px solid #2d3748; border-radius: 6px;
+    padding: 6px 10px; font-size: 0.78rem; color: #93c5fd; text-align: center; min-width: 80px; }
+  .stage strong { display: block; color: #7dd3fc; font-size: 0.8rem; }
+
+  /* Section divider */
+  .unit-divider { border: none; border-top: 1px solid #2d3748; margin: 24px 0; }
+
+  /* Repeated question note */
+  .rep-note { font-size: 0.75rem; color: #f0abfc; background: #1a0a2a; border-radius: 4px;
+    padding: 3px 8px; margin-bottom: 8px; display: inline-block; }
+
+  @media (max-width: 600px) {
+    .two-col { grid-template-columns: 1fr; }
+    .chain { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>MED-003 — Quick Exam Study Guide</h1>
+<p class="tagline">Units 1 · 2 · 3 &nbsp;|&nbsp; Every exam question answered &nbsp;|&nbsp; Plain English · Exam-ready</p>
+
+<div class="unit-tabs">
+  <div class="unit-tab active" onclick="showUnit('u1')">Unit 1 — The Energy Economy</div>
+  <div class="unit-tab" onclick="showUnit('u2')">Unit 2 — Energy Consumption Patterns</div>
+  <div class="unit-tab" onclick="showUnit('u3')">Unit 3 — Energy Production Technologies</div>
+</div>
+
+<!-- ═══════════════════ UNIT 1 ═══════════════════ -->
+<div class="unit-content active" id="u1">
+
+  <!-- Q1: Carrying Capacity — appears 5 times! -->
+  <div class="qa-card open">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 5 papers</span>
+      <span class="q-text">Carrying Capacity — Define, Types, Parameters, Estimation, Social Sustainability</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-25 Q4a</span><span class="etag">Dec-24 Q3b</span>
+        <span class="etag">Dec-22 Q3a</span><span class="etag">Jun-22 Q5b</span>
+        <span class="etag">Jun-19 Q4b</span>
+      </div>
+      <div class="rep-note">⚠ Same concept asked 5 times — learn this answer perfectly</div>
+
+      <div class="ans-section">
+        <div class="ans-label">What is Carrying Capacity? (Definition)</div>
+        <div class="ans-body">
+          <p>Carrying capacity is the maximum number of people (or level of economic activity) that the Earth can support on a long-term basis without destroying the natural systems that life depends on. Think of it as the Earth's "load limit."</p>
+        </div>
+      </div>
+
+      <div class="ans-section">
+        <div class="ans-label">Two Types</div>
+        <div class="two-col">
+          <div class="col-box">
+            <div class="col-title">🌍 Biophysical Carrying Capacity</div>
+            <ul class="pt-list">
+              <li>Based on Earth's <strong>physical and biological limits</strong></li>
+              <li>Total biological productivity of all ecosystems</li>
+              <li>Measured by <strong>ecological footprint</strong> (land needed to support us)</li>
+              <li>Fixed by nature — cannot be negotiated</li>
+              <li>Currently: humanity uses <strong>1.7 Earths</strong> — we are in overshoot</li>
+            </ul>
+          </div>
+          <div class="col-box">
+            <div class="col-title">🤝 Social Carrying Capacity</div>
+            <ul class="pt-list">
+              <li>Based on <strong>human values, equity and quality of life</strong></li>
+              <li>Every person must get a minimum share of energy/food/water</li>
+              <li>Shaped by culture, policy and lifestyle choices</li>
+              <li>Can change with technology and governance</li>
+              <li>Requires <strong>intergenerational justice</strong> — fair share for future generations</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="ans-section">
+        <div class="ans-label">5 Parameters Used to Estimate Carrying Capacity</div>
+        <ul class="pt-list">
+          <li><strong>Energy availability per capita</strong> — how much sustainable energy the Earth can provide per person</li>
+          <li><strong>Land and food production capacity</strong> — agricultural land, soil fertility, water for irrigation</li>
+          <li><strong>Freshwater availability</strong> — per capita water for drinking, farming, industry</li>
+          <li><strong>Ecological footprint vs biocapacity</strong> — when footprint exceeds biocapacity = overshoot</li>
+          <li><strong>Carbon absorption capacity</strong> — atmosphere + oceans absorb only a limited amount of CO₂ safely</li>
+        </ul>
+      </div>
+
+      <div class="ans-section">
+        <div class="ans-label">Basis of Socially Sustainable Carrying Capacity</div>
+        <ul class="pt-list">
+          <li><strong>Equity</strong> — rich nations (20% of people) consume 80% of energy; this must change</li>
+          <li><strong>Minimum threshold</strong> — every person deserves basic energy, food, water and dignity</li>
+          <li><strong>Intergenerational justice</strong> — don't use up resources that future generations will need (Brundtland definition of sustainable development)</li>
+          <li><strong>Technology factor</strong> — solar-powered world can support far more people than coal-powered world</li>
+          <li><strong>Cultural factor</strong> — not everyone needs to consume at Western levels</li>
+        </ul>
+      </div>
+
+      <div class="hbox gold">💡 Key exam point: Carrying capacity is NOT a fixed number. It goes UP when technology improves efficiency and DOWN when we over-consume or destroy ecosystems.</div>
+    </div>
+  </div>
+
+  <!-- Q2: Sources of Mechanical Energy -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">1 paper</span>
+      <span class="q-text">Briefly explain various sources of mechanical energy <span class="wc">(~150 words)</span></span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Dec-23 Q1a</span></div>
+      <div class="ans-body">
+        <p>Mechanical energy is the energy an object has because of its motion (kinetic energy) or position (potential energy). The main sources are:</p>
+        <ul class="pt-list">
+          <li><strong>Flowing water (hydro)</strong> — rivers and waterfalls have kinetic energy; stored water in a dam has potential energy. Used to spin turbines in hydropower plants.</li>
+          <li><strong>Wind</strong> — moving air has kinetic energy. Wind turbines convert this into electricity.</li>
+          <li><strong>Tidal energy</strong> — the rise and fall of tides creates mechanical movement that can drive generators.</li>
+          <li><strong>Steam (from thermal/nuclear plants)</strong> — high-pressure steam spins turbine blades. Technically thermal in origin but mechanical in action.</li>
+          <li><strong>Wave energy</strong> — ocean waves have mechanical energy that can be captured by wave energy converters.</li>
+          <li><strong>Geothermal steam</strong> — underground pressure drives steam that spins turbines.</li>
+        </ul>
+        <p>In all electricity generation, mechanical energy (spinning turbine) is the immediate source — regardless of whether the original energy came from coal, solar, wind or nuclear.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3: Oil Production Stages -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">1 paper</span>
+      <span class="q-text">Three main stages of oil production at a reservoir — with diagram <span class="wc">(250 words)</span></span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Dec-22 Q5b — "with suitable diagram"</span></div>
+
+      <div class="diag-wrap">
+        <svg viewBox="0 0 700 130" xmlns="http://www.w3.org/2000/svg" width="100%">
+          <rect width="700" height="130" fill="#161b27" rx="6"/>
+          <rect x="10" y="15" width="200" height="100" rx="5" fill="#1e2d40" stroke="#3b82f6" stroke-width="1.5"/>
+          <text x="110" y="35" fill="#7dd3fc" font-size="10" font-weight="bold" text-anchor="middle">STAGE 1: PRIMARY</text>
+          <text x="110" y="52" fill="#94a3b8" font-size="9" text-anchor="middle">Natural reservoir pressure</text>
+          <text x="110" y="66" fill="#94a3b8" font-size="9" text-anchor="middle">pushes oil to surface</text>
+          <text x="110" y="80" fill="#94a3b8" font-size="9" text-anchor="middle">No pumping needed</text>
+          <text x="110" y="106" fill="#fbbf24" font-size="9" font-weight="bold" text-anchor="middle">Recovers 10–20% of oil</text>
+          <text x="218" y="70" fill="#fbbf24" font-size="14">→</text>
+          <rect x="240" y="15" width="210" height="100" rx="5" fill="#1e2d40" stroke="#10b981" stroke-width="1.5"/>
+          <text x="345" y="35" fill="#6ee7b7" font-size="10" font-weight="bold" text-anchor="middle">STAGE 2: SECONDARY</text>
+          <text x="345" y="52" fill="#94a3b8" font-size="9" text-anchor="middle">Water or gas injected to</text>
+          <text x="345" y="66" fill="#94a3b8" font-size="9" text-anchor="middle">maintain pressure + push oil</text>
+          <text x="345" y="80" fill="#94a3b8" font-size="9" text-anchor="middle">Pumping equipment used</text>
+          <text x="345" y="106" fill="#fbbf24" font-size="9" font-weight="bold" text-anchor="middle">Recovers 20–40% more</text>
+          <text x="458" y="70" fill="#fbbf24" font-size="14">→</text>
+          <rect x="474" y="15" width="210" height="100" rx="5" fill="#1e2d40" stroke="#f59e0b" stroke-width="1.5"/>
+          <text x="579" y="35" fill="#fcd34d" font-size="10" font-weight="bold" text-anchor="middle">STAGE 3: TERTIARY (EOR)</text>
+          <text x="579" y="52" fill="#94a3b8" font-size="9" text-anchor="middle">Steam, CO₂ or chemicals</text>
+          <text x="579" y="66" fill="#94a3b8" font-size="9" text-anchor="middle">injected to free trapped oil</text>
+          <text x="579" y="80" fill="#94a3b8" font-size="9" text-anchor="middle">Very high cost and energy</text>
+          <text x="579" y="106" fill="#fbbf24" font-size="9" font-weight="bold" text-anchor="middle">Recovers 5–15% more</text>
+        </svg>
+        <div class="diag-label">Three stages of oil production — total recovery typically 30–60% of oil in place</div>
+      </div>
+
+      <div class="ans-body">
+        <p><strong>Stage 1 — Primary Recovery:</strong> When oil is first discovered, the natural pressure inside the reservoir (from gas cap above or water below) pushes oil up through the well to the surface. No external energy is needed. This recovers about 10–20% of total oil in the reservoir.</p>
+        <p><strong>Stage 2 — Secondary Recovery:</strong> Once natural pressure drops, water or gas is injected into the reservoir through separate injection wells. This maintains pressure and physically pushes remaining oil toward the production wells. Pumping equipment is used. This recovers an additional 20–40% of oil.</p>
+        <p><strong>Stage 3 — Tertiary Recovery / Enhanced Oil Recovery (EOR):</strong> For the oil that remains trapped in rock pores, advanced methods are used — steam flooding (heat thins the oil), CO₂ injection (dissolves in oil making it flow), or chemical surfactants (like soap, reducing surface tension). This is very expensive and energy-intensive. It recovers a further 5–15% of oil.</p>
+        <p>Total recovery from a reservoir using all three stages is typically 30–60% of the oil originally in place. The remaining oil is simply too difficult or expensive to extract with current technology.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4: Terminal — Energy and Economic Growth -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">Terminal</span>
+      <span class="q-text">Role of energy in economic growth of developing countries + government policy effects</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="ans-section">
+        <div class="ans-label">The Energy–GDP Link (historical pattern)</div>
+        <div class="diag-wrap">
+          <svg viewBox="0 0 680 80" xmlns="http://www.w3.org/2000/svg" width="100%">
+            <rect width="680" height="80" fill="#161b27" rx="6"/>
+            <rect x="8" y="10" width="105" height="60" rx="4" fill="#1e2d40" stroke="#6b7280" stroke-width="1"/>
+            <text x="60" y="32" fill="#94a3b8" font-size="9" font-weight="bold" text-anchor="middle">Pre-1750</text>
+            <text x="60" y="46" fill="#fbbf24" font-size="11" font-weight="bold" text-anchor="middle">GDP: 0.5%</text>
+            <text x="60" y="62" fill="#64748b" font-size="8" text-anchor="middle">Traditional biomass</text>
+            <text x="120" y="42" fill="#fbbf24" font-size="13">→</text>
+            <rect x="133" y="10" width="105" height="60" rx="4" fill="#1e2d40" stroke="#3b82f6" stroke-width="1"/>
+            <text x="185" y="32" fill="#93c5fd" font-size="9" font-weight="bold" text-anchor="middle">1760–1820</text>
+            <text x="185" y="46" fill="#fbbf24" font-size="11" font-weight="bold" text-anchor="middle">GDP: 1.5%</text>
+            <text x="185" y="62" fill="#64748b" font-size="8" text-anchor="middle">Coal + Steam engine</text>
+            <text x="245" y="42" fill="#fbbf24" font-size="13">→</text>
+            <rect x="258" y="10" width="105" height="60" rx="4" fill="#1e2d40" stroke="#10b981" stroke-width="1"/>
+            <text x="310" y="32" fill="#6ee7b7" font-size="9" font-weight="bold" text-anchor="middle">1820–1913</text>
+            <text x="310" y="46" fill="#fbbf24" font-size="11" font-weight="bold" text-anchor="middle">GDP: 2.5%</text>
+            <text x="310" y="62" fill="#64748b" font-size="8" text-anchor="middle">Industrial spread</text>
+            <text x="370" y="42" fill="#fbbf24" font-size="13">→</text>
+            <rect x="383" y="10" width="115" height="60" rx="4" fill="#1e2d40" stroke="#f59e0b" stroke-width="1.5"/>
+            <text x="440" y="32" fill="#fcd34d" font-size="9" font-weight="bold" text-anchor="middle">1950–1973</text>
+            <text x="440" y="46" fill="#fbbf24" font-size="13" font-weight="bold" text-anchor="middle">GDP: 5.0%</text>
+            <text x="440" y="62" fill="#64748b" font-size="8" text-anchor="middle">Cheap petroleum</text>
+            <text x="505" y="42" fill="#fbbf24" font-size="13">→</text>
+            <rect x="518" y="10" width="152" height="60" rx="4" fill="#1e2d40" stroke="#a855f7" stroke-width="1"/>
+            <text x="594" y="32" fill="#f0abfc" font-size="9" font-weight="bold" text-anchor="middle">Post-1973</text>
+            <text x="594" y="46" fill="#fbbf24" font-size="11" font-weight="bold" text-anchor="middle">GDP: 3.0%</text>
+            <text x="594" y="62" fill="#64748b" font-size="8" text-anchor="middle">Oil shock + efficiency</text>
+          </svg>
+        </div>
+      </div>
+      <div class="ans-body">
+        <p>Each major energy transition — from biomass to coal, coal to oil, oil to modern energy — brought a new surge in economic growth. For developing countries, energy is not just a utility, it is the foundation of development. Without electricity, factories cannot run, hospitals cannot function, and children cannot study at night.</p>
+        <p><strong>Government policy effects on energy use:</strong></p>
+      </div>
+      <ul class="pt-list">
+        <li><strong>Pricing and subsidies</strong> — cheap subsidised energy encourages consumption but wastes resources. Removing subsidies reduces waste but can hurt the poor.</li>
+        <li><strong>Efficiency standards</strong> — mandatory fuel economy for vehicles, efficiency ratings for appliances cut consumption without reducing services.</li>
+        <li><strong>Investment incentives</strong> — tax breaks, feed-in tariffs, and public financing can accelerate clean energy deployment.</li>
+        <li><strong>Rural electrification</strong> — targeted investment in grid extension brings energy access to the poor, driving inclusion.</li>
+        <li><strong>International agreements</strong> — UNFCCC, Paris Agreement shape long-term energy choices of all nations.</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- end unit 1 -->
+
+
+<!-- ═══════════════════ UNIT 2 ═══════════════════ -->
+<div class="unit-content" id="u2">
+
+  <!-- Q1: Industrialisation drives energy demand — 6 papers! -->
+  <div class="qa-card open">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 6 papers</span>
+      <span class="q-text">Factors responsible for increased energy demand / Industrialisation drives energy demand</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Jun-25 Q4a</span><span class="etag">Jun-25 Q5a</span>
+        <span class="etag">Jun-24 Q3b</span><span class="etag">Dec-21 Q1a</span>
+        <span class="etag">Jun-20 Q1a</span><span class="etag">Jun-22 Q2a</span>
+      </div>
+      <div class="rep-note">⚠ Same core answer for all 6 — learn this set of points perfectly</div>
+
+      <div class="ans-section">
+        <div class="ans-label">8 Factors Driving Global Energy Demand</div>
+        <ul class="pt-list">
+          <li><strong>Industrialisation</strong> — factories, steel plants, cement works, chemical industries all consume enormous energy. As countries industrialise, energy demand jumps steeply.</li>
+          <li><strong>Population growth</strong> — more people = more food production, more housing, more transport, more everything. Every additional person adds to the total energy demand.</li>
+          <li><strong>Urbanisation</strong> — cities require roads, buildings, water systems, metro rails and commercial centres — all energy-intensive to build and run.</li>
+          <li><strong>Rising income and living standards</strong> — as people get richer they buy air conditioners, cars, refrigerators, and take flights. Each new appliance adds to electricity demand.</li>
+          <li><strong>Transport expansion</strong> — growing vehicle ownership, aviation growth, and freight logistics all run on petroleum. India imports 85% of its crude oil needs.</li>
+          <li><strong>Agriculture modernisation</strong> — tractors, irrigation pumps, fertiliser production, and cold storage all need energy. India's agricultural sector consumes ~18% of total electricity.</li>
+          <li><strong>Technology adoption</strong> — smartphones, data centres, electric vehicles, and factory automation all consume electricity, often invisibly.</li>
+          <li><strong>Price and income effect</strong> — when energy becomes cheaper or incomes rise, people and businesses use more of it (this is the "rebound effect").</li>
+        </ul>
+      </div>
+
+      <div class="hbox gold">💡 Exam tip: When the question says "population growth and industrialisation," always mention BOTH as primary drivers, then add 3–4 other factors like urbanisation, rising incomes, and transport expansion.</div>
+
+      <div class="ans-section">
+        <div class="ans-label">Energy Demand and Its Response to Price (Jun-25 Q5a)</div>
+        <div class="ans-body">
+          <p>Energy demand is <strong>price inelastic in the short run</strong> — if electricity prices go up 20%, people don't immediately switch to candles. They still need light, heat and cooking. But over the <strong>long run</strong>, demand is more elastic — people buy efficient appliances, insulate their homes, and shift to alternatives.</p>
+          <p><strong>Price elasticity</strong> = % change in quantity demanded ÷ % change in price. For energy this is typically between -0.2 and -0.7 (inelastic). This means a 10% price rise reduces consumption by only 2–7% in the short run.</p>
+          <p>This is why <strong>carbon taxes and energy pricing are important</strong> — they send a signal to consumers and businesses to be more efficient, even if the response is gradual.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2: Commercial sector energy activities — 4 papers -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 4 papers</span>
+      <span class="q-text">Energy activities and services in the commercial sector in India</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-25 Q4b</span><span class="etag">Jun-24 Q4a</span>
+        <span class="etag">Dec-22 Q5a</span><span class="etag">Jun-21 Q3a</span>
+      </div>
+      <div class="ans-body">
+        <p>The commercial sector includes offices, hotels, hospitals, shopping malls, restaurants, banks, schools, IT parks and government buildings. It is the <strong>fastest growing electricity consumer</strong> in India.</p>
+      </div>
+      <div class="ans-section">
+        <div class="ans-label">Key Energy-Using Activities</div>
+        <ul class="pt-list">
+          <li><strong>Air conditioning and ventilation (HVAC)</strong> — largest energy consumer in commercial buildings, especially in India's hot climate. Can be 40–60% of total building energy use.</li>
+          <li><strong>Lighting</strong> — offices and malls use extensive artificial lighting. Shift to LED has cut this significantly.</li>
+          <li><strong>Computers, servers and data centres</strong> — IT-intensive businesses and data centres run 24×7, consuming large amounts of electricity for computing and cooling.</li>
+          <li><strong>Lifts and escalators</strong> — tall commercial buildings have many elevators running continuously.</li>
+          <li><strong>Water heating and pumping</strong> — hotels and hospitals are heavy hot water users.</li>
+          <li><strong>Cooking and food preparation</strong> — restaurants and institutional kitchens use LPG and electricity heavily.</li>
+          <li><strong>Refrigeration</strong> — cold storage, walk-in freezers in supermarkets, medicine storage in hospitals.</li>
+        </ul>
+      </div>
+      <div class="hbox blue">Why developed countries use more than developing? Larger commercial floor space per person, more automation, older (inefficient) buildings, more air conditioning, more IT equipment, and 24-hour operations are common in rich nations vs developing countries where much commercial activity is still informal and low-energy.</div>
+    </div>
+  </div>
+
+  <!-- Q3: Agricultural and rural energy -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 3 papers</span>
+      <span class="q-text">Energy use in agricultural / rural / industrial sectors in India</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-22 Q4b</span><span class="etag">Dec-22 Q5a</span><span class="etag">Jun-19 Q5a</span>
+      </div>
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title">🌾 Agricultural Sector</div>
+          <ul class="pt-list">
+            <li><strong>Irrigation pumps</strong> — 25M+ pump sets, mostly electric or diesel. Consume ~18% of India's electricity.</li>
+            <li><strong>Tractors and machinery</strong> — diesel fuel for tilling, harvesting, threshing</li>
+            <li><strong>Fertiliser production</strong> — natural gas-based; energy-intensive chemical process</li>
+            <li><strong>Cold storage</strong> — electricity for post-harvest storage of vegetables/fruits</li>
+            <li><strong>Challenges</strong> — free/subsidised electricity leads to wasteful pump use; no metering = no incentive to conserve</li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="col-title">🏭 Industrial Sector</div>
+          <ul class="pt-list">
+            <li>Largest consumer — ~50% of commercial energy in India</li>
+            <li><strong>Iron and steel</strong> — coke (coal-derived) + electricity for blast furnaces</li>
+            <li><strong>Cement</strong> — coal for kiln heating; releases CO₂ both from fuel AND from limestone reaction</li>
+            <li><strong>Aluminium</strong> — one of most electricity-intensive industries</li>
+            <li><strong>Textiles, chemicals, paper</strong> — all energy-intensive</li>
+            <li><strong>Challenge</strong> — India's industry has high specific energy consumption vs global benchmarks</li>
+          </ul>
+        </div>
+      </div>
+      <div class="hbox green">Rural energy use beyond agriculture: cooking on biomass (firewood/dung), kerosene for lighting, diesel for local transport and grain mills. Energy poverty in rural India means 4–8 hours of electricity supply daily even in "electrified" villages.</div>
+    </div>
+  </div>
+
+  <!-- Q4: Energy saving measures -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 3 papers</span>
+      <span class="q-text">Measures to save energy in household appliances / buildings / sectors</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Jun-21 Q1d</span><span class="etag">Jun-21 Q2a</span><span class="etag">Dec-22 Q1a (fridge/WM)</span>
+      </div>
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title">🏠 Household Appliances</div>
+          <ul class="pt-list">
+            <li>Replace all bulbs with <strong>LED lights</strong> (80% less energy)</li>
+            <li>Buy <strong>BEE 5-star rated</strong> fridge, AC, washing machine</li>
+            <li>Set AC at <strong>24°C</strong> (BEE recommended) — each degree lower costs 6% more energy</li>
+            <li>Fridge: keep full, coils clean, door seal tight, keep away from heat sources</li>
+            <li>Washing machine: always <strong>full loads</strong>, cold water wash, air dry</li>
+            <li>Unplug devices on <strong>standby</strong> — standby can be 10% of home energy</li>
+            <li>Use <strong>solar water heater</strong> instead of electric geyser</li>
+            <li>Use <strong>pressure cooker</strong> — cooks 3× faster = 3× less energy</li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="col-title">🏢 Buildings (5 ways)</div>
+          <ul class="pt-list">
+            <li><strong>Passive solar design</strong> — orient building to use daylight, reduce artificial lighting need</li>
+            <li><strong>Roof and wall insulation</strong> — keeps heat out in summer, heat in during winter</li>
+            <li><strong>Double-glazed windows</strong> — reduce heat transfer by 50%</li>
+            <li><strong>Efficient HVAC with variable speed drives</strong> — automatically reduce cooling when rooms are cool</li>
+            <li><strong>Motion sensor lights</strong> — corridors, parking areas automatically switch off</li>
+          </ul>
+          <div class="hbox green" style="margin-top:8px;font-size:0.78rem;">India: GRIHA and LEED green building ratings guide energy-efficient construction. ECBC (Energy Conservation Building Code) is now mandatory for large commercial buildings.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5: World energy demand analysis -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">Terminal + SAQ</span>
+      <span class="q-text">World energy demand by fuel type and region / IEO2004 projections</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="ans-section">
+        <div class="ans-label">By Fuel Type (~2001 data)</div>
+        <ul class="pt-list">
+          <li><strong>Oil — 36%</strong> of world primary energy. Dominant for transport. Reserves concentrated in Middle East.</li>
+          <li><strong>Coal — 26%</strong>. Main fuel for electricity generation in China, India, USA. Worst carbon emitter.</li>
+          <li><strong>Natural gas — 23%</strong>. Fastest growing fossil fuel. Cleaner than coal. Used for power and heating.</li>
+          <li><strong>Nuclear — 7%</strong>. Large share in France (75%), USA, Japan. Near-zero CO₂ in operation.</li>
+          <li><strong>Hydropower — 3%</strong>. Major in Brazil, Canada, China, Norway.</li>
+          <li><strong>Traditional biomass — ~10%</strong>. Firewood, dung — used by 2.4 billion poor people but not counted in "commercial" energy statistics.</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-label">By Region</div>
+        <ul class="pt-list">
+          <li><strong>North America</strong> — 29% of world consumption. Highest per capita. Oil, gas, coal dominant.</li>
+          <li><strong>China</strong> — 10% in 2001, now world's largest. Coal-heavy. Manufacturing-driven demand.</li>
+          <li><strong>India</strong> — 3% in 2001. Growing rapidly. Coal + biomass dominant. 85% crude oil imported.</li>
+          <li><strong>Africa and rural South Asia</strong> — very low per capita commercial energy but massive biomass dependence.</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-label">IEO2004 Projections to 2025</div>
+        <ul class="pt-list">
+          <li>World energy demand to grow from <strong>404 → 623 quadrillion Btu</strong> (+54%) by 2025</li>
+          <li>Oil demand: 77 → 119 million barrels/day</li>
+          <li>CO₂ emissions: 24 → 38 billion tonnes</li>
+          <li>Fossil fuels remain <strong>85%+</strong> of total even in 2025</li>
+          <li><strong>Developing world drives growth</strong> — China and India together account for a large share of new demand</li>
+        </ul>
+      </div>
+      <div class="hbox gold">Key conclusion: Fossil fuel dominance, massive inequality (rich 20% use 80% of energy), and rising demand from Asia make the current trajectory unsustainable — a clean energy transition is inevitable.</div>
+    </div>
+  </div>
+
+</div><!-- end unit 2 -->
+
+
+<!-- ═══════════════════ UNIT 3 ═══════════════════ -->
+<div class="unit-content" id="u3">
+
+  <!-- Q1: Coal thermal plant — 4 papers, DIAGRAM REQUIRED -->
+  <div class="qa-card open">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 4 papers — DIAGRAM REQUIRED</span>
+      <span class="q-text">How electricity is produced in a coal-based thermal power plant — with diagram</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Jun-25 Q1b</span><span class="etag">Jun-24 Q1b</span>
+        <span class="etag">Dec-23 Q4b</span><span class="etag">Jun-19 Q1a</span>
+      </div>
+      <div class="rep-note">⚠ All 4 papers say "with suitable diagram" — always draw the flow diagram in exam</div>
+
+      <div class="diag-wrap">
+        <svg viewBox="0 0 720 100" xmlns="http://www.w3.org/2000/svg" width="100%">
+          <rect width="720" height="100" fill="#161b27" rx="6"/>
+          <defs>
+            <marker id="ga" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto">
+              <polygon points="0 0,8 2.5,0 5" fill="#fbbf24"/>
+            </marker>
+          </defs>
+          <!-- Boxes -->
+          <rect x="5" y="25" width="80" height="50" rx="4" fill="#292524" stroke="#f59e0b" stroke-width="1.5"/>
+          <text x="45" y="47" fill="#fcd34d" font-size="8" font-weight="bold" text-anchor="middle">COAL</text>
+          <text x="45" y="59" fill="#fcd34d" font-size="8" font-weight="bold" text-anchor="middle">BOILER</text>
+          <text x="45" y="87" fill="#64748b" font-size="7" text-anchor="middle">Burns coal</text>
+          <text x="45" y="97" fill="#64748b" font-size="7" text-anchor="middle">makes steam</text>
+          <line x1="86" y1="50" x2="106" y2="50" stroke="#fbbf24" stroke-width="2" marker-end="url(#ga)"/>
+          <text x="96" y="44" fill="#fbbf24" font-size="7" text-anchor="middle">steam</text>
+
+          <polygon points="108,22 198,32 198,68 108,78" fill="#1e2d40" stroke="#3b82f6" stroke-width="1.5"/>
+          <text x="153" y="52" fill="#7dd3fc" font-size="8" font-weight="bold" text-anchor="middle">STEAM</text>
+          <text x="153" y="63" fill="#7dd3fc" font-size="8" font-weight="bold" text-anchor="middle">TURBINE</text>
+          <text x="153" y="87" fill="#64748b" font-size="7" text-anchor="middle">steam spins blades</text>
+          <line x1="199" y1="50" x2="219" y2="50" stroke="#6ee7b7" stroke-width="2" marker-end="url(#ga)"/>
+          <text x="209" y="44" fill="#6ee7b7" font-size="7" text-anchor="middle">shaft</text>
+
+          <ellipse cx="248" cy="50" rx="28" ry="28" fill="#0d2b1e" stroke="#10b981" stroke-width="1.5"/>
+          <text x="248" y="47" fill="#6ee7b7" font-size="8" font-weight="bold" text-anchor="middle">GENE-</text>
+          <text x="248" y="59" fill="#6ee7b7" font-size="8" font-weight="bold" text-anchor="middle">RATOR</text>
+          <text x="248" y="87" fill="#64748b" font-size="7" text-anchor="middle">makes AC electricity</text>
+          <line x1="277" y1="50" x2="297" y2="50" stroke="#7dd3fc" stroke-width="2" marker-end="url(#ga)"/>
+
+          <rect x="298" y="25" width="80" height="50" rx="4" fill="#1e1e3a" stroke="#a855f7" stroke-width="1.5"/>
+          <text x="338" y="47" fill="#f0abfc" font-size="8" font-weight="bold" text-anchor="middle">STEP-UP</text>
+          <text x="338" y="59" fill="#f0abfc" font-size="8" font-weight="bold" text-anchor="middle">TRANSFORMER</text>
+          <text x="338" y="87" fill="#64748b" font-size="7" text-anchor="middle">11kV → 400kV</text>
+          <line x1="379" y1="50" x2="399" y2="50" stroke="#7dd3fc" stroke-width="2" marker-end="url(#ga)"/>
+
+          <rect x="400" y="25" width="90" height="50" rx="4" fill="#162032" stroke="#06b6d4" stroke-width="1.5"/>
+          <text x="445" y="47" fill="#67e8f9" font-size="8" font-weight="bold" text-anchor="middle">CONDENSER</text>
+          <text x="445" y="87" fill="#64748b" font-size="7" text-anchor="middle">steam→water loop</text>
+          <line x1="491" y1="50" x2="511" y2="50" stroke="#7dd3fc" stroke-width="2" marker-end="url(#ga)"/>
+
+          <rect x="512" y="25" width="95" height="50" rx="4" fill="#1e2330" stroke="#7dd3fc" stroke-width="1.5"/>
+          <text x="559" y="47" fill="#7dd3fc" font-size="8" font-weight="bold" text-anchor="middle">TRANSMISSION</text>
+          <text x="559" y="59" fill="#7dd3fc" font-size="8" font-weight="bold" text-anchor="middle">&amp; DISTRIBUTION</text>
+          <text x="559" y="87" fill="#64748b" font-size="7" text-anchor="middle">400kV → homes</text>
+          <line x1="608" y1="50" x2="628" y2="50" stroke="#7dd3fc" stroke-width="2" marker-end="url(#ga)"/>
+
+          <rect x="629" y="25" width="85" height="50" rx="4" fill="#0d2b1e" stroke="#4ade80" stroke-width="1.5"/>
+          <text x="671" y="47" fill="#4ade80" font-size="8" font-weight="bold" text-anchor="middle">CONSUMERS</text>
+          <text x="671" y="87" fill="#64748b" font-size="7" text-anchor="middle">Homes, industry</text>
+        </svg>
+        <div class="diag-label">Coal Thermal Plant — 6-step process</div>
+      </div>
+
+      <div class="chain">
+        <span class="chain-item">Chemical Energy<br><small>(coal)</small></span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">Heat Energy<br><small>(boiler)</small></span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">Kinetic Energy<br><small>(steam turbine)</small></span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">Mechanical<br><small>(shaft rotation)</small></span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">Electrical Energy<br><small>(generator)</small></span>
+      </div>
+
+      <div class="ans-body" style="margin-top:10px;">
+        <p><strong>Step-by-step:</strong> Coal is pulverised to powder and burned in a furnace at 1300–1500°C. The heat turns water in the boiler into high-pressure steam (about 540°C, 150 bar). This steam is piped to the turbine where it hits angled blades at high velocity, making the turbine spin at 3000 RPM. The turbine shaft is connected to a generator — rotating coils of wire inside a magnetic field produce AC electricity by electromagnetic induction. The electricity is stepped up to high voltage (400 kV) in a transformer for long-distance transmission. At the destination, step-down transformers reduce voltage for safe use in homes and industry. The exhaust steam from the turbine is cooled back to water in the condenser (using river/sea water) and pumped back to the boiler — a closed loop.</p>
+        <p><strong>Efficiency:</strong> Subcritical plants — 33–37%. Supercritical — 42–45%. Ultra-supercritical — 46–48%.</p>
+        <p><strong>Pollution outputs:</strong> CO₂, SO₂, NOₓ, particulate matter (PM2.5), fly ash. The condenser also causes thermal pollution in the receiving water body.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2: Demand side vs Supply side — 3 papers -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 3 papers</span>
+      <span class="q-text">Demand-side vs supply-side approaches to the energy problem</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-25 Q1d</span><span class="etag">Jun-24 Q4b</span><span class="etag">Jun-23 Q1d</span>
+      </div>
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title">⚡ Supply-Side Approach</div>
+          <p style="font-size:0.8rem;color:#94a3b8;margin-bottom:6px;">Focus: Produce MORE energy</p>
+          <ul class="pt-list">
+            <li>Build more power plants (coal, gas, nuclear, solar)</li>
+            <li>Expand oil and gas exploration</li>
+            <li>Develop large hydropower projects</li>
+            <li>Improve generation efficiency (supercritical coal, CCGT)</li>
+            <li>Reduce transmission losses</li>
+          </ul>
+          <div class="hbox red" style="margin-top:8px;font-size:0.77rem;">Con: High capital cost, environmental impact, long construction time</div>
+        </div>
+        <div class="col-box">
+          <div class="col-title">🔋 Demand-Side Approach</div>
+          <p style="font-size:0.8rem;color:#94a3b8;margin-bottom:6px;">Focus: USE LESS energy for same services</p>
+          <ul class="pt-list">
+            <li>Energy efficiency standards for appliances and buildings</li>
+            <li>Demand Side Management (DSM) — time-of-use tariffs</li>
+            <li>Star labelling — guide consumers to efficient choices</li>
+            <li>Green building codes (ECBC in India)</li>
+            <li>Fuel switching (LPG instead of firewood)</li>
+            <li>Public transport promotion</li>
+          </ul>
+          <div class="hbox green" style="margin-top:8px;font-size:0.77rem;">Pro: Cheapest option per unit. A unit saved = a unit not generated.</div>
+        </div>
+      </div>
+      <div class="hbox gold">💡 Key exam answer: Both approaches are needed together. Demand-side first (cheapest and fastest) + supply expansion for remaining needs. The "end-use energy services" approach focuses on what people actually NEED — light, heat, mobility — not on energy quantity.</div>
+    </div>
+  </div>
+
+  <!-- Q3: Nuclear hazards — 2 papers -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 2 papers</span>
+      <span class="q-text">Nuclear hazards / Principle of electricity generation in nuclear plant <span class="wc">(250 words)</span></span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-23 Q4a — nuclear hazards 250 words</span>
+        <span class="etag">Dec-25 Q6b — principle short note</span>
+        <span class="etag">Jun-20 Q1c — role of nuclear plant</span>
+      </div>
+
+      <div class="ans-section">
+        <div class="ans-label">Principle of Nuclear Electricity Generation</div>
+        <div class="chain">
+          <span class="chain-item">Uranium-235<br>fission</span>
+          <span class="chain-arrow">→</span>
+          <span class="chain-item">Immense Heat<br>(nuclear)</span>
+          <span class="chain-arrow">→</span>
+          <span class="chain-item">Steam<br>(boiler)</span>
+          <span class="chain-arrow">→</span>
+          <span class="chain-item">Turbine<br>spins</span>
+          <span class="chain-arrow">→</span>
+          <span class="chain-item">Generator<br>→ Electricity</span>
+        </div>
+        <div class="ans-body" style="margin-top:8px;">
+          <p>When a neutron hits a U-235 nucleus it splits (fissions) into smaller atoms plus 3 new neutrons plus enormous heat energy (~200 MeV per fission). Those 3 neutrons hit 3 more U-235 atoms — a chain reaction. The controlled heat converts water to steam, which spins a turbine connected to a generator — exactly like a coal plant, just nuclear heat instead of coal heat.</p>
+          <p>India's reactor types: PHWR (Pressurised Heavy Water Reactor, CANDU-based at Tarapur, Rajasthan, Kaiga) + Prototype Fast Breeder Reactor (PFBR) at Kalpakkam.</p>
+        </div>
+      </div>
+
+      <div class="ans-section">
+        <div class="ans-label">Nuclear Hazards (Dec-23 Q4a — 250 words)</div>
+        <ul class="pt-list">
+          <li><strong>Radioactive waste — the biggest problem</strong>. High-level waste (HLW) from spent fuel remains dangerously radioactive for thousands to hundreds of thousands of years. No country has a permanent underground repository yet. Most spent fuel sits in temporary cooling ponds at reactor sites.</li>
+          <li><strong>Risk of accidents</strong>. Chernobyl (1986, Ukraine) — reactor explosion contaminated a huge area; 30 km exclusion zone still exists. Fukushima (2011, Japan) — tsunami caused meltdown, 154,000 people evacuated. Three Mile Island (1979, USA) — partial meltdown.</li>
+          <li><strong>Radioactive water contamination</strong>. Routine low-level releases of tritium and strontium-90 from nuclear plants bioaccumulate in aquatic food chains. Uranium mining produces radioactive tailings that contaminate groundwater.</li>
+          <li><strong>Thermal pollution</strong>. Nuclear plants use enormous volumes of river or sea water for cooling. Heated discharge raises water temperature, reducing dissolved oxygen — kills fish and disrupts aquatic ecosystems.</li>
+          <li><strong>Radon gas</strong>. Natural decay product of uranium in rock; carcinogenic when inhaled; hazard for miners and nearby populations.</li>
+          <li><strong>Nuclear proliferation risk</strong>. Enriched uranium and plutonium (from reprocessing) can potentially be diverted for nuclear weapons.</li>
+          <li><strong>High capital cost and long construction time</strong> — not an environmental hazard per se, but makes nuclear a risky investment compared to now-cheaper solar and wind.</li>
+        </ul>
+        <div class="hbox blue">CO₂: Nuclear is actually very low-carbon — ~12 g CO₂/kWh (life cycle), vs coal ~820 g CO₂/kWh. The hazards are qualitatively different from fossil fuels — long timescales, potential for catastrophic release, requires perpetual oversight.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4: Fossil fuels — chemical energy & CO2 impact -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 3 papers</span>
+      <span class="q-text">Chemical energy in fossil fuels / Global impact of fossil fuel CO₂ emissions / 5 sources of fossil energy</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Jun-23 Q6a — chemical energy</span>
+        <span class="etag">Jun-25 Q4b — global CO₂ impact</span>
+        <span class="etag">Jun-21 Q1a — 5 sources</span>
+        <span class="etag">Jun-20 Q1b — role of chemical energy</span>
+      </div>
+      <div class="ans-section">
+        <div class="ans-label">What is Chemical Energy in Fossil Fuels?</div>
+        <div class="ans-body">
+          <p>Fossil fuels (coal, oil, gas) are essentially stored chemical energy — the sun's energy that was captured by ancient plants and marine organisms millions of years ago, then compressed and transformed underground into carbon-rich compounds. The chemical energy is locked in the bonds between carbon and hydrogen atoms (C–H bonds and C–C bonds).</p>
+          <p>When we burn fossil fuels, we break these bonds in a reaction with oxygen (combustion). Energy is released as heat. Carbon combines with oxygen to form CO₂:</p>
+        </div>
+        <ul class="pt-list">
+          <li>Coal (mostly carbon): <strong>C + O₂ → CO₂ + heat</strong></li>
+          <li>Oil (octane): <strong>C₈H₁₈ + O₂ → CO₂ + H₂O + heat</strong></li>
+          <li>Gas (methane): <strong>CH₄ + 2O₂ → CO₂ + 2H₂O + heat</strong></li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-label">5 Sources of Energy Based on Fossil Fuels (Jun-21 Q1a)</div>
+        <ul class="pt-list">
+          <li><strong>Coal</strong> — formed from compressed plant matter over 300 million years. Provides electricity in thermal power plants. Highest CO₂ emitter.</li>
+          <li><strong>Crude oil (petroleum)</strong> — from marine organisms. Refined into petrol, diesel, aviation fuel, LPG, kerosene.</li>
+          <li><strong>Natural gas</strong> — mainly methane (CH₄). Found above oil reservoirs. Used for cooking, electricity, heating.</li>
+          <li><strong>Oil shale</strong> — rock containing kerogen (waxy organic matter). Can be processed into synthetic oil but very energy-intensive and expensive.</li>
+          <li><strong>Coal bed methane (CBM)</strong> — methane trapped in coal seams. Extracted by drilling and pressure reduction. Used as natural gas.</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-label">Global Impact of Fossil Fuel CO₂ Emissions (Jun-25 Q4b)</div>
+        <ul class="pt-list">
+          <li>Global CO₂ emissions from fossil fuels: ~37 billion tonnes per year (2023)</li>
+          <li><strong>Power sector contributes ~41%</strong> of energy-related CO₂ — coal plants are the single largest source</li>
+          <li>Transport contributes ~24% — petrol and diesel vehicles</li>
+          <li>Atmospheric CO₂ has risen from 280 ppm (pre-industrial) to over <strong>420 ppm today</strong></li>
+          <li>This has raised global average temperature by <strong>+1.1°C</strong> above pre-industrial levels (IPCC 2021)</li>
+          <li>Consequences: sea level rise, extreme weather, glacier melt, crop yield changes, ocean acidification</li>
+          <li>Paris Agreement target: limit warming to <strong>1.5–2°C</strong> → requires net-zero CO₂ by ~2050</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5: CCGT short note -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">1 paper</span>
+      <span class="q-text">Short note: Role of CCGT (Combined Cycle Gas Turbine) in energy efficiency improvement</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Jun-23 Q6b</span></div>
+      <div class="ans-section">
+        <div class="ans-label">What is CCGT and why is it efficient?</div>
+        <div class="chain">
+          <span class="chain-item">Gas burns<br>in turbine</span>
+          <span class="chain-arrow">→</span>
+          <span class="chain-item">Generator 1<br>~35% efficiency</span>
+          <span class="chain-arrow">→</span>
+          <span class="chain-item">Hot exhaust<br>600°C waste heat</span>
+          <span class="chain-arrow">→</span>
+          <span class="chain-item">HRSG boils<br>water to steam</span>
+          <span class="chain-arrow">→</span>
+          <span class="chain-item">Steam turbine<br>+ Generator 2</span>
+          <span class="chain-arrow">→</span>
+          <span class="chain-item">TOTAL: 55–60%</span>
+        </div>
+        <div class="ans-body" style="margin-top:10px;">
+          <p>A simple gas turbine burns natural gas to spin a turbine and generate electricity — but wastes 60% of the fuel's energy as hot exhaust gas (600°C). A CCGT plants a second cycle on top: the hot exhaust passes through a <strong>Heat Recovery Steam Generator (HRSG)</strong> which boils water to steam. That steam drives a second (steam) turbine and generator. The wasted heat becomes useful electricity.</p>
+          <p><strong>Simple gas turbine:</strong> ~35% efficiency. <strong>CCGT:</strong> 55–60% efficiency — nearly double. For the same amount of gas, CCGT produces 60% more electricity.</p>
+          <p><strong>CO₂ impact:</strong> Natural gas already emits ~50% less CO₂ per kWh than coal. CCGT's higher efficiency cuts CO₂ further. Result: CCGT emits roughly 350–400 g CO₂/kWh vs coal's 820–1050 g CO₂/kWh.</p>
+          <p>CCGT is also fast to start and stop — making it ideal for balancing variable solar and wind energy on the grid.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q6: Energy Storage -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 3 papers</span>
+      <span class="q-text">Modern energy storage technologies — two key elements / hydrogen fuel cells / devices</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-21 Q1b</span><span class="etag">Jun-21 Q1b</span><span class="etag">Jun-20 Q1d — hydrogen fuel cells</span>
+      </div>
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title">🔋 Lithium-Ion Battery</div>
+          <ul class="pt-list">
+            <li>Lithium ions move between anode (graphite) and cathode (LiCoO₂) through an electrolyte</li>
+            <li>Charging stores energy; discharging releases it</li>
+            <li>Efficiency: 90–95% round-trip</li>
+            <li>Scale: kW (phones/EVs) to MW (grid storage)</li>
+            <li>Cost fell <strong>97% since 1991</strong> — now cheaper than gas peakers for short storage</li>
+            <li>Use: Electric vehicles, mobile phones, grid storage</li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="col-title">🌊 Pumped Hydro Storage</div>
+          <ul class="pt-list">
+            <li>Off-peak surplus electricity pumps water UP to an upper reservoir</li>
+            <li>During peak demand, water flows DOWN through turbines</li>
+            <li>Efficiency: 70–80% round-trip</li>
+            <li>Scale: GW — largest storage technology in world</li>
+            <li>Accounts for <strong>90%+ of all installed storage globally</strong></li>
+            <li>Duration: hours to days</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ans-section" style="margin-top:12px;">
+        <div class="ans-label">Hydrogen as Fuel Cell (Jun-20 Q1d)</div>
+        <div class="ans-body">
+          <p>In a hydrogen fuel cell, hydrogen (H₂) and oxygen (O₂) react electrochemically — without combustion — to produce electricity, with water as the only byproduct. H₂ is fed to the anode: <strong>H₂ → 2H⁺ + 2e⁻</strong>. Electrons flow through an external circuit (electricity). H⁺ ions cross a membrane to the cathode where: <strong>O₂ + 2H⁺ + 2e⁻ → H₂O</strong>.</p>
+          <p>Fuel cells are 40–60% efficient and produce zero emissions at the point of use. The challenge is producing clean hydrogen — today most H₂ comes from natural gas (grey hydrogen). <strong>Green hydrogen</strong> — made by electrolysis using renewable electricity — is the clean version India is targeting (5 MT/yr by 2030 under National Green Hydrogen Mission).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end unit 3 -->
+
+</div><!-- container -->
+
+<script>
+function showUnit(id) {
+  document.querySelectorAll('.unit-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.unit-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const idx = {u1:0,u2:1,u3:2}[id];
+  document.querySelectorAll('.unit-tab')[idx].classList.add('active');
+  window.scrollTo({top: 0, behavior:'smooth'});
+}
+
+function toggle(header) {
+  const card = header.closest('.qa-card');
+  card.classList.toggle('open');
+}
+</script>
+</body>
+</html>
