@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MED-003 Study Guide — Units 4, 5 &amp; 6</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f1117; color: #e2e8f0; line-height: 1.65; }
+  .container { max-width: 960px; margin: 0 auto; padding: 24px 20px; }
+  h1 { color: #7dd3fc; font-size: 1.5rem; text-align: center; padding: 20px 0 6px; }
+  .tagline { text-align: center; color: #94a3b8; font-size: 0.85rem; margin-bottom: 28px; }
+
+  .unit-tabs { display: flex; gap: 10px; margin-bottom: 28px; flex-wrap: wrap; }
+  .unit-tab { padding: 10px 22px; border-radius: 24px; cursor: pointer; font-size: 0.85rem; font-weight: 600;
+    background: #1e2330; border: 2px solid #2d3748; color: #94a3b8; transition: all .2s; }
+  .unit-tab.active { background: #1e3a5f; border-color: #3b82f6; color: #7dd3fc; }
+  .unit-content { display: none; }
+  .unit-content.active { display: block; }
+
+  .qa-card { background: #1e2330; border-radius: 10px; margin-bottom: 16px; border: 1px solid #2d3748; overflow: hidden; }
+  .qa-header { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; cursor: pointer; user-select: none; }
+  .qa-header:hover { background: #252d3d; }
+  .q-badge { flex-shrink: 0; background: #1e3a5f; color: #7dd3fc; font-size: 0.7rem; font-weight: 700;
+    padding: 3px 8px; border-radius: 10px; margin-top: 2px; white-space: nowrap; }
+  .q-badge.rep { background: #2d1b4e; color: #f0abfc; }
+  .q-text { font-weight: 600; color: #f1f5f9; font-size: 0.92rem; flex: 1; }
+  .expand-icon { color: #4b5563; font-size: 1rem; margin-top: 2px; transition: transform .2s; flex-shrink:0; }
+  .qa-card.open .expand-icon { transform: rotate(90deg); }
+  .qa-body { display: none; padding: 0 16px 18px 16px; }
+  .qa-card.open .qa-body { display: block; }
+
+  .exam-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .etag { background: #162032; color: #67e8f9; font-size: 0.7rem; padding: 2px 8px; border-radius: 8px; border: 1px solid #1e3a5f; }
+
+  .ans-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: #fbbf24; margin: 12px 0 5px; }
+  .ans-body { color: #cbd5e1; font-size: 0.88rem; }
+  .ans-body p { margin-bottom: 8px; }
+
+  .chain { display: flex; flex-wrap: wrap; gap: 0; margin: 8px 0; align-items: center; }
+  .chain-item { background: #162032; color: #93c5fd; font-size: 0.77rem; padding: 5px 10px;
+    border: 1px solid #1e3a5f; font-weight: 600; text-align:center; }
+  .chain-arrow { color: #fbbf24; font-size: 1rem; padding: 0 4px; }
+
+  .pt-list { list-style: none; margin: 6px 0; }
+  .pt-list li { padding: 3px 0 3px 16px; position: relative; font-size: 0.87rem; color: #cbd5e1; }
+  .pt-list li::before { content: '•'; position: absolute; left: 0; color: #fbbf24; }
+  .pt-list li strong { color: #f1f5f9; }
+
+  .num-list { list-style: none; margin: 6px 0; counter-reset: num; }
+  .num-list li { padding: 4px 0 4px 26px; position: relative; font-size: 0.87rem; color: #cbd5e1; counter-increment: num; }
+  .num-list li::before { content: counter(num); position: absolute; left: 0; background: #1e3a5f;
+    color: #7dd3fc; font-size: 0.7rem; font-weight: 700; width: 18px; height: 18px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center; top: 5px; }
+  .num-list li strong { color: #f1f5f9; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 8px 0; }
+  .col-box { background: #161b27; border-radius: 6px; padding: 10px 12px; border: 1px solid #2d3748; }
+  .col-box .col-title { font-size: 0.75rem; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; }
+
+  .hbox { border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 0.85rem; }
+  .hbox.gold { background: #1a1200; border-left: 3px solid #fbbf24; color: #fcd34d; }
+  .hbox.green { background: #0d1a10; border-left: 3px solid #4ade80; color: #6ee7b7; }
+  .hbox.red { background: #1a0a0a; border-left: 3px solid #f87171; color: #fca5a5; }
+  .hbox.blue { background: #0a1020; border-left: 3px solid #3b82f6; color: #93c5fd; }
+  .hbox.purple { background: #1a0a2a; border-left: 3px solid #a855f7; color: #f0abfc; }
+
+  .diag-wrap { background: #161b27; border-radius: 8px; padding: 12px; margin: 12px 0; overflow-x: auto; }
+  .diag-label { font-size: 0.75rem; color: #64748b; margin-top: 6px; text-align: center; }
+
+  .rep-note { font-size: 0.75rem; color: #f0abfc; background: #1a0a2a; border-radius: 4px;
+    padding: 3px 8px; margin-bottom: 8px; display: inline-block; }
+  .wc { font-size: 0.68rem; color: #64748b; margin-left: 6px; }
+
+  .kv-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; margin: 8px 0; }
+  .kv-table th { background: #1e3a5f; color: #7dd3fc; padding: 6px 10px; text-align: left; font-size: 0.78rem; }
+  .kv-table td { padding: 5px 10px; border-bottom: 1px solid #1e2a3a; color: #cbd5e1; }
+  .kv-table tr:nth-child(even) td { background: #161b27; }
+
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>MED-003 — Quick Exam Study Guide</h1>
+<p class="tagline">Units 4 · 5 · 6 &nbsp;|&nbsp; Every exam question answered &nbsp;|&nbsp; Plain English · Exam-ready</p>
+
+<div class="unit-tabs">
+  <div class="unit-tab active" onclick="showUnit('u4')">Unit 4 — Energy &amp; Environment</div>
+  <div class="unit-tab" onclick="showUnit('u5')">Unit 5 — North-South Debate</div>
+  <div class="unit-tab" onclick="showUnit('u6')">Unit 6 — Energy Policy</div>
+</div>
+
+<!-- ═══════════════════════════════ UNIT 4 ═══════════════════════════════ -->
+<div class="unit-content active" id="u4">
+
+  <!-- Q1: CO2 emissions / rising carbon in India — 3 papers -->
+  <div class="qa-card open">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 3 papers</span>
+      <span class="q-text">Sources of CO₂ emissions / Reasons for rising carbon emissions in India <span class="wc">250 words</span></span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Jun-23 Q3a</span><span class="etag">Dec-23 Q3a — 250 words</span><span class="etag">Dec-21 Q3a</span>
+      </div>
+
+      <div class="ans-label">Sources of CO₂ Emissions (globally)</div>
+      <ul class="pt-list">
+        <li><strong>Power generation — 41%</strong> Coal and gas plants burning fuel to make electricity. Coal is the single biggest source of energy-related CO₂.</li>
+        <li><strong>Transport — 24%</strong> Petrol and diesel engines in cars, trucks, ships and aircraft.</li>
+        <li><strong>Industry — 19%</strong> Cement production (limestone + heat → CO₂), steel, chemicals, aluminium.</li>
+        <li><strong>Buildings — 10%</strong> Gas and oil heating, cooking.</li>
+        <li><strong>Agriculture — 6%</strong> Fertiliser production (natural gas), machinery fuel, rice paddies (methane).</li>
+      </ul>
+
+      <div class="ans-label">Why CO₂ is Rising in India (7 reasons)</div>
+      <ol class="num-list">
+        <li><strong>Coal dominates electricity</strong> — over 70% of India's power comes from coal thermal plants. Every unit of electricity generates ~820 g CO₂.</li>
+        <li><strong>Rapid industrialisation</strong> — cement, steel, chemicals, and fertiliser industries are growing fast. Cement alone releases CO₂ both from fuel AND from the limestone-to-lime chemical reaction.</li>
+        <li><strong>Transport motorisation</strong> — vehicle ownership growing rapidly. India imports 85% of its crude oil needs. More vehicles = more petrol/diesel burned.</li>
+        <li><strong>Deforestation</strong> — forests absorb CO₂. When trees are cut (for fuelwood, farming, development), stored carbon is released AND the carbon sink is destroyed.</li>
+        <li><strong>Rising living standards</strong> — more air conditioners, refrigerators, and electronics being purchased. Each new appliance adds to electricity demand from the coal grid.</li>
+        <li><strong>Population growth</strong> — more people = more energy demand = more emissions overall.</li>
+        <li><strong>Agriculture expansion</strong> — more fertiliser production (natural gas intensive), more paddy fields (methane from flooded fields).</li>
+      </ol>
+
+      <div class="hbox gold">💡 Exam tip: Structure as — Global sources first (5 sectors with %) → then India-specific reasons (7 points). Always mention coal's dominance in India's power sector as the #1 factor.</div>
+    </div>
+  </div>
+
+  <!-- Q2: Carbon sequestration -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">2 papers</span>
+      <span class="q-text">Carbon sequestration — one way of cleaning up fossil technologies / mitigating carbon emissions</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-23 Q5a — justify statement</span><span class="etag">Jun-19 Q8a — describe one method</span>
+      </div>
+      <div class="ans-label">What is Carbon Sequestration?</div>
+      <div class="ans-body"><p>Carbon sequestration means capturing CO₂ and storing it so it does not reach the atmosphere. Two main routes:</p></div>
+
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title" style="color:#4ade80;">🌳 Biological Sequestration</div>
+          <ul class="pt-list">
+            <li><strong>Afforestation / Reforestation</strong> — plant trees. Forests are the world's biggest natural carbon sinks.</li>
+            <li><strong>Soil carbon</strong> — organic farming practices build carbon in agricultural soils</li>
+            <li><strong>Ocean fertilisation</strong> — iron seeding promotes algae growth which absorbs CO₂ (experimental)</li>
+            <li><strong>Wetland/peatland restoration</strong> — peat stores enormous carbon; draining it releases CO₂</li>
+            <li>India's NDC: Create a <strong>2.5–3 billion tonne CO₂ sink</strong> through forests by 2030</li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="col-title" style="color:#f0abfc;">⛏ Geological CCS (Carbon Capture &amp; Storage)</div>
+          <ul class="pt-list">
+            <li>CO₂ captured at the <strong>exhaust of power plants</strong> or factories</li>
+            <li>Compressed to liquid form and <strong>pumped deep underground</strong></li>
+            <li>Stored in depleted oil/gas reservoirs or deep saline aquifers at 800m+ depth</li>
+            <li>Geologically stable formations hold it for thousands of years</li>
+            <li>High cost (~$50–100/tonne CO₂), not yet widely deployed</li>
+            <li>Norway's Sleipner project — world's first commercial CCS since 1996</li>
+          </ul>
+        </div>
+      </div>
+      <div class="hbox gold">Justifying the statement: Fossil fuels will continue being used for decades during the energy transition. CCS allows us to use fossil fuels while drastically cutting the CO₂ that reaches the atmosphere — hence "cleaning up" fossil technologies. It buys time for renewable energy to scale up.</div>
+    </div>
+  </div>
+
+  <!-- Q3: Deforestation — 3 papers -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 3 papers</span>
+      <span class="q-text">Deforestation — causes, consequences, and relation to hydrological cycle / biodiversity</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-20 Q1b — hydrological cycle</span>
+        <span class="etag">Jun-22 Q5a — biodiversity</span>
+        <span class="etag">Jun-19 Q7b — 3 factors, 2 consequences</span>
+      </div>
+
+      <div class="diag-wrap">
+        <svg viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg" width="100%">
+          <rect width="700" height="120" fill="#161b27" rx="6"/>
+          <!-- Healthy side -->
+          <rect x="8" y="8" width="320" height="104" fill="#0d1a10" rx="5" stroke="#4ade80" stroke-width="1"/>
+          <text x="168" y="24" fill="#4ade80" font-size="10" font-weight="bold" text-anchor="middle">✅ HEALTHY FOREST — Water Cycle</text>
+          <polygon points="30,90 50,60 70,90" fill="#15803d"/>
+          <polygon points="65,90 82,62 99,90" fill="#16a34a"/>
+          <polygon points="100,90 118,58 136,90" fill="#15803d"/>
+          <text x="82" y="108" fill="#64748b" font-size="8" text-anchor="middle">Trees present</text>
+          <ellipse cx="240" cy="35" rx="40" ry="18" fill="#94a3b8" opacity="0.6"/>
+          <line x1="228" y1="53" x2="226" y2="65" stroke="#3b82f6" stroke-width="1.5"/>
+          <line x1="240" y1="55" x2="238" y2="67" stroke="#3b82f6" stroke-width="1.5"/>
+          <line x1="252" y1="53" x2="250" y2="65" stroke="#3b82f6" stroke-width="1.5"/>
+          <text x="240" y="80" fill="#3b82f6" font-size="8" text-anchor="middle">Steady rainfall</text>
+          <text x="240" y="92" fill="#3b82f6" font-size="8" text-anchor="middle">Groundwater recharge</text>
+          <line x1="80" y1="62" x2="170" y2="38" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="4,2"/>
+          <text x="115" y="46" fill="#67e8f9" font-size="7">Evapotranspiration↑</text>
+          <!-- Deforested side -->
+          <rect x="372" y="8" width="320" height="104" fill="#1a0a0a" rx="5" stroke="#f87171" stroke-width="1"/>
+          <text x="532" y="24" fill="#f87171" font-size="10" font-weight="bold" text-anchor="middle">❌ DEFORESTED — Disrupted Cycle</text>
+          <rect x="395" y="72" width="14" height="22" fill="#78350f"/>
+          <ellipse cx="402" cy="72" rx="13" ry="5" fill="#92400e"/>
+          <rect x="420" y="68" width="14" height="26" fill="#78350f"/>
+          <ellipse cx="427" cy="68" rx="13" ry="5" fill="#92400e"/>
+          <text x="415" y="108" fill="#64748b" font-size="8" text-anchor="middle">Only stumps</text>
+          <text x="590" y="50" fill="#f87171" font-size="8" text-anchor="middle">No evapotranspiration</text>
+          <text x="590" y="63" fill="#f87171" font-size="8" text-anchor="middle">→ less rainfall</text>
+          <text x="590" y="80" fill="#f87171" font-size="8" text-anchor="middle">Flash floods</text>
+          <text x="590" y="93" fill="#f87171" font-size="8" text-anchor="middle">Soil erosion</text>
+          <text x="590" y="106" fill="#f87171" font-size="8" text-anchor="middle">No groundwater</text>
+        </svg>
+        <div class="diag-label">Trees are nature's water pumps — they pull water from soil and release it to the atmosphere, feeding rainfall cycles</div>
+      </div>
+
+      <div class="ans-label">Causes of Deforestation (in developing countries)</div>
+      <ul class="pt-list">
+        <li><strong>Energy poverty / fuelwood demand</strong> — most important cause in India and Africa. 700+ million people collect firewood as their primary cooking fuel. India uses ~200 million tonnes of firewood per year.</li>
+        <li><strong>Agricultural expansion</strong> — shifting cultivation, cash crop plantations (palm oil), clearing for food production.</li>
+        <li><strong>Commercial logging</strong> — timber for construction, furniture, paper/pulp mills.</li>
+        <li><strong>Infrastructure development</strong> — roads, dams, mining operations, townships.</li>
+        <li><strong>Population pressure</strong> — more people need more land for settlement and farming.</li>
+      </ul>
+
+      <div class="ans-label">Consequences</div>
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title" style="color:#f87171;">❌ Environmental</div>
+          <ul class="pt-list">
+            <li>Disrupts water cycle → less rainfall, dry streams</li>
+            <li>Soil erosion → landslides, sedimentation of rivers</li>
+            <li>CO₂ release → stored forest carbon enters atmosphere</li>
+            <li>Flash floods → bare soil cannot absorb rain</li>
+            <li>Desertification → soil moisture lost permanently</li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="col-title" style="color:#f87171;">❌ Biodiversity</div>
+          <ul class="pt-list">
+            <li>Habitat destruction → species extinction</li>
+            <li>India's Western Ghats (a biodiversity hotspot) under severe pressure</li>
+            <li>Endemic species — found nowhere else on Earth — lost forever</li>
+            <li>Food web disruption → collapse of dependent species</li>
+            <li>Loss of medicinal plants and genetic diversity</li>
+          </ul>
+        </div>
+      </div>
+      <div class="hbox green">Energy–deforestation link: The fastest way to reduce deforestation in rural India is to provide clean cooking fuel (LPG, biogas) so people stop collecting firewood. Pradhan Mantri Ujjwala Yojana — 90 million LPG connections to BPL families — is the most significant deforestation-prevention programme India has ever run.</div>
+    </div>
+  </div>
+
+  <!-- Q4: Water and land pollution from energy -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">1 paper</span>
+      <span class="q-text">Main sources of water and land pollution from the energy sector</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Dec-24 Q5b</span></div>
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title" style="color:#3b82f6;">💧 Water Pollution</div>
+          <ul class="pt-list">
+            <li><strong>Coal ash ponds</strong> — fly ash leachate contains arsenic, mercury, cadmium → groundwater contamination. India generates ~150 million tonnes fly ash/year.</li>
+            <li><strong>Oil spills</strong> — petroleum hydrocarbons coat seawater, kill marine life, contaminate beaches.</li>
+            <li><strong>Thermal pollution</strong> — nuclear and thermal plants discharge heated cooling water into rivers → dissolved oxygen drops → fish die.</li>
+            <li><strong>Mining acid drainage</strong> — sulphide minerals in coal mines oxidise → sulphuric acid flows into rivers.</li>
+            <li><strong>Nuclear plant leaks</strong> — tritium and strontium-90 enter groundwater near plant sites.</li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="col-title" style="color:#84cc16;">🏔 Land Pollution</div>
+          <ul class="pt-list">
+            <li><strong>Coal mining overburden</strong> — huge waste dumps of rock and soil scar the landscape permanently.</li>
+            <li><strong>Fly ash disposal sites</strong> — occupy thousands of hectares of agricultural/forest land near plants.</li>
+            <li><strong>Oil field contamination</strong> — drilling waste, produced water, pipeline leaks contaminate soil.</li>
+            <li><strong>Uranium mine tailings</strong> — radioactive fine powder left after uranium extraction; contaminates land for decades.</li>
+            <li><strong>Transmission line corridors</strong> — strip land of vegetation, fragment wildlife habitat.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5: Hydropower — flora fauna impact -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">1 paper</span>
+      <span class="q-text">Environmental impact on flora and fauna from hydropower project development <span class="wc">250 words</span></span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Jun-23 Q2a — 250 words</span></div>
+      <div class="ans-label">Upstream (Reservoir Zone)</div>
+      <ul class="pt-list">
+        <li><strong>Forest and farmland submergence</strong> — the reservoir floods everything. Sardar Sarovar Dam submerged 37,690 hectares including dense forest.</li>
+        <li><strong>Loss of terrestrial biodiversity</strong> — unique riparian (riverside) forests and their endemic species destroyed permanently.</li>
+        <li><strong>Methane emissions</strong> — rotting submerged vegetation in tropical reservoirs produces significant methane — a greenhouse gas 25× more potent than CO₂.</li>
+      </ul>
+      <div class="ans-label">Downstream</div>
+      <ul class="pt-list">
+        <li><strong>Fish migration blocked</strong> — dams are walls across rivers. Migratory fish (like mahseer, hilsa) cannot reach upstream spawning grounds → population collapses. Without fish ladders, entire populations die out.</li>
+        <li><strong>Sediment starvation</strong> — dam traps 80–90% of sediment normally carried downstream. River delta shrinks → coastal erosion → saltwater intrusion into agricultural land.</li>
+        <li><strong>Altered flood pulse</strong> — natural annual floods replenish floodplain soil nutrients and trigger fish spawning. Dam eliminates these pulses → floodplain farming and riverside biodiversity collapse.</li>
+        <li><strong>Reduced downstream flow</strong> — during dry seasons, less water flows downstream → riverine species that depend on minimum flows are stressed or die.</li>
+        <li><strong>Endangered species</strong> — Gangetic dolphin, gharial (fish-eating crocodile), and many endemic freshwater fish are threatened directly by dams on Indian rivers.</li>
+        <li><strong>Riparian vegetation loss</strong> — gallery forests along the river banks dry out as water table drops downstream.</li>
+      </ul>
+      <div class="hbox gold">💡 Case study to mention: Sardar Sarovar Dam, Narmada River — 37,690 ha submerged, 2–3 lakh people displaced, Narmada delta shrinking, fisheries severely declined. The World Commission on Dams (2000) concluded large dams often cause unacceptable social and environmental costs.</div>
+    </div>
+  </div>
+
+  <!-- Q6: Energy sector affecting environment — greenhouse effect -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">Terminal + SAQ</span>
+      <span class="q-text">How the energy sector affects the environment and global climate / greenhouse effect</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-20 Q1d</span><span class="etag">Terminal Q1</span><span class="etag">SAQ 1</span>
+      </div>
+
+      <div class="diag-wrap">
+        <svg viewBox="0 0 700 110" xmlns="http://www.w3.org/2000/svg" width="100%">
+          <rect width="700" height="110" fill="#0a0f1e" rx="6"/>
+          <!-- Atmosphere -->
+          <rect x="0" y="18" width="700" height="50" fill="#1e3a5f" opacity="0.25"/>
+          <text x="350" y="32" fill="#7dd3fc" font-size="9" font-weight="bold" text-anchor="middle">ATMOSPHERE — CO₂ · CH₄ · N₂O · H₂O (Greenhouse Gases)</text>
+          <!-- GHG molecules -->
+          <circle cx="120" cy="48" r="7" fill="#ef4444" opacity="0.8"/>
+          <text x="120" y="52" fill="white" font-size="6" text-anchor="middle">CO₂</text>
+          <circle cx="260" cy="42" r="7" fill="#f97316" opacity="0.8"/>
+          <text x="260" y="46" fill="white" font-size="6" text-anchor="middle">CH₄</text>
+          <circle cx="420" cy="50" r="7" fill="#eab308" opacity="0.8"/>
+          <text x="420" y="54" fill="white" font-size="6" text-anchor="middle">N₂O</text>
+          <circle cx="580" cy="44" r="7" fill="#06b6d4" opacity="0.8"/>
+          <text x="580" y="48" fill="white" font-size="6" text-anchor="middle">H₂O</text>
+          <!-- Sun -->
+          <circle cx="30" cy="14" r="12" fill="#fbbf24" opacity="0.9"/>
+          <text x="30" y="18" fill="#1f2937" font-size="7" font-weight="bold" text-anchor="middle">SUN</text>
+          <!-- Solar in -->
+          <line x1="40" y1="20" x2="280" y2="88" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <text x="130" y="50" fill="#fbbf24" font-size="7">Short-wave solar (passes through)</text>
+          <!-- Earth surface -->
+          <rect x="0" y="88" width="700" height="22" fill="#14532d" opacity="0.5"/>
+          <!-- IR up from earth -->
+          <line x1="200" y1="88" x2="200" y2="65" stroke="#f87171" stroke-width="1.5"/>
+          <line x1="350" y1="88" x2="350" y2="65" stroke="#f87171" stroke-width="1.5"/>
+          <line x1="500" y1="88" x2="500" y2="65" stroke="#f87171" stroke-width="1.5"/>
+          <text x="560" y="80" fill="#f87171" font-size="7">↑ Long-wave IR emitted by Earth</text>
+          <!-- Bounce back -->
+          <path d="M 200 65 Q 230 50 260 70" fill="none" stroke="#f87171" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <text x="350" y="56" fill="#f87171" font-size="7" text-anchor="middle">GHGs trap &amp; re-radiate heat → WARMING</text>
+          <!-- Sources on earth -->
+          <text x="120" y="103" fill="#9ca3af" font-size="7" text-anchor="middle">Coal plant (CO₂)</text>
+          <text x="280" y="103" fill="#9ca3af" font-size="7" text-anchor="middle">Transport (CO₂)</text>
+          <text x="430" y="103" fill="#9ca3af" font-size="7" text-anchor="middle">Industry (CO₂)</text>
+          <text x="580" y="103" fill="#9ca3af" font-size="7" text-anchor="middle">Deforestation (CO₂)</text>
+        </svg>
+        <div class="diag-label">Enhanced Greenhouse Effect — human energy use adds CO₂ to atmosphere → more heat trapped → global warming</div>
+      </div>
+
+      <div class="ans-label">How Energy Sector Affects Climate</div>
+      <ul class="pt-list">
+        <li><strong>Fossil fuel combustion</strong> — power plants, vehicles, industries burn coal/oil/gas → CO₂ released → greenhouse effect strengthened → global temperature rises</li>
+        <li><strong>Methane from coal mines</strong> — underground coal seams release CH₄ (25× more potent than CO₂ over 100 years) when mining starts</li>
+        <li><strong>Gas pipeline leaks</strong> — fugitive methane from oil/gas infrastructure worsens greenhouse effect</li>
+        <li><strong>Deforestation for energy</strong> — fuelwood collection destroys forests that absorb CO₂; releases stored carbon</li>
+        <li><strong>Consequences</strong> — global temp +1.1°C already; sea level rise; glacier melt; extreme weather; ocean acidification; crop zone shifts</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q7: Charcoal production stages -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">1 paper</span>
+      <span class="q-text">Major stages in production of charcoal <span class="wc">250 words</span></span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Dec-23 Q6a — 250 words</span></div>
+      <div class="chain">
+        <span class="chain-item">1. Wood<br>Collection</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">2. Kiln<br>Stacking</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">3. Pyrolysis<br>250–500°C</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">4. Sealing &amp;<br>Cooling</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">5. Extraction<br>&amp; Grading</span>
+      </div>
+      <div class="ans-body" style="margin-top:10px;">
+        <p><strong>Stage 1 — Wood Collection:</strong> Hardwood trees (teak, acacia, sal) are selected and cut. Hardwoods produce better quality charcoal with higher carbon content than softwoods.</p>
+        <p><strong>Stage 2 — Kiln Stacking:</strong> Cut logs are stacked inside a kiln — traditionally an earth mound kiln (logs covered with soil and leaves) or a brick kiln. The structure is sealed except for a few air vents at the base.</p>
+        <p><strong>Stage 3 — Carbonisation (Pyrolysis):</strong> A small fire is started inside. The vents are partially closed to allow very limited oxygen — just enough to sustain the smouldering, not enough for full combustion. At 250–500°C, the wood undergoes pyrolysis — heat drives off water vapour, carbon dioxide, methane and other volatile gases. What remains is mostly pure carbon (charcoal). This takes 3–7 days.</p>
+        <p><strong>Stage 4 — Cooling and Sealing:</strong> All vents are sealed completely. Without oxygen, the charcoal cannot catch fire. It cools slowly inside the sealed kiln over 2–4 days.</p>
+        <p><strong>Stage 5 — Extraction and Grading:</strong> The kiln is opened. Charcoal is removed, sorted by size, and bagged for sale.</p>
+        <p><strong>Key facts:</strong> Charcoal has a calorific value of 29–35 MJ/kg (nearly double firewood at 15–19 MJ/kg). It burns cleaner and hotter. However, 7–9 tonnes of green wood are needed to produce 1 tonne of charcoal — making it a major driver of deforestation.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q8: Biological processing of biomass -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">1 paper</span>
+      <span class="q-text">Short note: Biological processing to derive energy from biomass</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Dec-20 Q5b</span></div>
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title" style="color:#4ade80;">① Anaerobic Digestion → Biogas</div>
+          <ul class="pt-list">
+            <li>Organic waste (cattle dung, kitchen waste, sewage) fed into sealed tank</li>
+            <li>Bacteria break it down <strong>without oxygen</strong> over 30–60 days</li>
+            <li>Produces <strong>biogas (~60% methane, 40% CO₂)</strong></li>
+            <li>Used for cooking and electricity generation</li>
+            <li>Leftover digestate = excellent organic fertiliser</li>
+            <li>India: 50 lakh family biogas plants (NBMMP programme)</li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="col-title" style="color:#7dd3fc;">② Fermentation → Bioethanol</div>
+          <ul class="pt-list">
+            <li>Sugar/starch crops (sugarcane, corn, damaged grain) → yeast fermentation</li>
+            <li>Yeast converts sugars to <strong>ethanol (C₂H₅OH)</strong> + CO₂</li>
+            <li>Ethanol distilled, dehydrated, blended with petrol</li>
+            <li>India's target: <strong>20% ethanol blending</strong> in petrol by 2025 (E20)</li>
+            <li>Brazil: world leader — 40%+ of vehicle fuel is sugarcane ethanol</li>
+            <li>Both routes are carbon-neutral if feedstock is sustainably grown</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end unit 4 -->
+
+<!-- ═══════════════════════════════ UNIT 5 ═══════════════════════════════ -->
+<div class="unit-content" id="u5">
+
+  <!-- Q1: North-South Debate — 2 papers -->
+  <div class="qa-card open">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 2 papers</span>
+      <span class="q-text">North-South debate related to energy subsidies / all 4 dimensions</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Jun-25 Q1c</span><span class="etag">Dec-24 Q2b</span><span class="etag">SAQ 2</span>
+      </div>
+
+      <div class="ans-label">The Core Divide</div>
+      <div class="ans-body"><p>The North (rich industrialised countries) and South (developing nations) disagree on who is responsible for the global energy and climate crisis, and who should pay to fix it. This is the North-South debate.</p></div>
+
+      <table class="kv-table">
+        <tr>
+          <th>Dimension</th>
+          <th>NORTH argues</th>
+          <th>SOUTH argues</th>
+        </tr>
+        <tr>
+          <td><strong>Energy &amp; Environment</strong></td>
+          <td>All countries must cut emissions now. Carbon taxes should apply globally.</td>
+          <td>North caused most historical emissions (CBDR). South's per capita is tiny — 2.2 t/person in India vs 14.5 t in USA.</td>
+        </tr>
+        <tr>
+          <td><strong>Energy Subsidies</strong></td>
+          <td>Remove fossil fuel subsidies — they distort markets and waste resources.</td>
+          <td>Subsidies are essential — the poor cannot afford market-rate electricity or LPG. North has its own hidden subsidies too.</td>
+        </tr>
+        <tr>
+          <td><strong>Production &amp; Consumption</strong></td>
+          <td>South must leapfrog coal and invest in clean energy from the start.</td>
+          <td>North used coal to get rich. South has the same right. Rich 20% use 80% of world energy — reduce your over-consumption first.</td>
+        </tr>
+        <tr>
+          <td><strong>Energy Security</strong></td>
+          <td>South should not depend on fossil imports — build renewables instead.</td>
+          <td>Renewables need upfront capital the South doesn't have. Access to cheap energy is a development right.</td>
+        </tr>
+      </table>
+
+      <div class="hbox gold">Resolution: The UNFCCC's CBDR principle — Common But Differentiated Responsibilities — acknowledges that all nations share the responsibility but in different degrees based on historical emissions and financial capacity.</div>
+    </div>
+  </div>
+
+  <!-- Q2: Liberalisation and privatisation — 3 papers -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 3 papers</span>
+      <span class="q-text">Impact of liberalisation and privatisation of energy sector on developing countries</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-25 Q2b</span><span class="etag">Dec-23 Q3b</span><span class="etag">Terminal Q2</span>
+      </div>
+      <div class="ans-label">What it means</div>
+      <div class="ans-body"><p>From the 1980s, the IMF and World Bank pressured developing countries to break up state electricity monopolies, allow private/foreign investment in power, remove subsidies, and let market prices set electricity tariffs. The results were mixed.</p></div>
+
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title" style="color:#4ade80;">✅ Positive Impacts</div>
+          <ol class="num-list">
+            <li><strong>New investment</strong> — private capital funded power plants that cash-strapped governments couldn't afford</li>
+            <li><strong>Better efficiency</strong> — private utilities reduced transmission losses and improved maintenance</li>
+            <li><strong>Modern technology</strong> — foreign investors brought CCGT and advanced systems</li>
+            <li><strong>Lower fiscal burden</strong> — removing subsidies freed government money for health and education</li>
+            <li><strong>India success:</strong> Competitive solar auctions → tariffs fell from ₹10/unit (2010) to ₹2.14/unit (2021) — world record low</li>
+          </ol>
+        </div>
+        <div class="col-box">
+          <div class="col-title" style="color:#f87171;">❌ Negative Impacts</div>
+          <ol class="num-list">
+            <li><strong>Price shocks</strong> — when subsidies removed, poor families cannot afford electricity or LPG</li>
+            <li><strong>Rural exclusion</strong> — private utilities serve profitable urban zones only; remote villages abandoned</li>
+            <li><strong>Profit repatriation</strong> — foreign companies take profits out of the country in dollars</li>
+            <li><strong>Expensive PPAs</strong> — Power Purchase Agreements in US dollars become debt traps when rupee falls</li>
+            <li><strong>India failure:</strong> Enron/Dabhol Power Project, Maharashtra — unaffordable tariffs, project collapsed, India paid billions in settlement</li>
+          </ol>
+        </div>
+      </div>
+      <div class="hbox gold">Key conclusion: Privatisation needs a strong independent regulator, social protection for the poor, and explicit rural electrification mandates. Without these safeguards, markets exclude the poor and create costly debt for governments.</div>
+    </div>
+  </div>
+
+  <!-- Q3: UN Conferences timeline -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">1 paper</span>
+      <span class="q-text">Highlights of major United Nations Conferences in the 1990s related to energy</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Jun-25 Q1d</span></div>
+      <ol class="num-list">
+        <li><strong>IPCC Established — 1988</strong> (WMO + UNEP). Intergovernmental Panel on Climate Change. Set up to assess climate science, not do new research. First Assessment Report 1990 — confirmed human-caused warming. This built the scientific basis for all subsequent climate agreements.</li>
+        <li><strong>Earth Summit (UNCED) — Rio de Janeiro, June 1992</strong>. The watershed event. 172 nations, 108 heads of state. Produced: <strong>UNFCCC</strong> (Framework Convention on Climate Change — stabilise GHG concentrations); <strong>Convention on Biological Diversity</strong>; <strong>Agenda 21</strong> (action plan for sustainable development). Established the principle of CBDR.</li>
+        <li><strong>UNFCCC enters force — March 1994</strong>. 197 parties eventually ratified it. Established annual Conference of Parties (COP) meetings — COP1 was in Berlin 1995. The Berlin Mandate agreed to negotiate a binding protocol with emission targets.</li>
+        <li><strong>Kyoto Protocol — COP3, Kyoto, December 1997</strong> ⭐ Most important. First binding international agreement requiring specific emission cuts. Annex I (developed) countries committed to cut emissions by an average 5.2% below 1990 levels by 2008–2012. Three mechanisms: CDM (Clean Development Mechanism), Joint Implementation (JI), Emissions Trading. USA signed but never ratified. India and China were exempt as developing nations. Entered into force 2005.</li>
+        <li><strong>WSSD — Johannesburg, 2002 (Rio+10)</strong>. World Summit on Sustainable Development. Reviewed progress since Rio. Set targets for clean water, sanitation, and energy access for the poor. Emphasised renewable energy without setting a specific global target.</li>
+      </ol>
+      <div class="hbox gold">Exam tip: Always mention Kyoto Protocol in detail — it is the #1 most important item. Then Earth Summit 1992 (UNFCCC established). These two are what examiners want to see.</div>
+    </div>
+  </div>
+
+  <!-- Q4: CO2 rising in developing vs industrialised -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">1 paper</span>
+      <span class="q-text">CO₂ emissions increasing in developing and industrialised nations in the 21st century</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Dec-24 Q4a</span></div>
+      <table class="kv-table">
+        <tr>
+          <th>Country/Region</th>
+          <th>CO₂ 2000</th>
+          <th>CO₂ 2023</th>
+          <th>Trend</th>
+        </tr>
+        <tr><td>China</td><td>~3 Bn t</td><td>~13 Bn t</td><td style="color:#f87171;">↑↑↑ +330%</td></tr>
+        <tr><td>India</td><td>~1 Bn t</td><td>~3 Bn t</td><td style="color:#f87171;">↑↑ +200%</td></tr>
+        <tr><td>USA</td><td>~6 Bn t</td><td>~4.9 Bn t</td><td style="color:#4ade80;">↓ -18%</td></tr>
+        <tr><td>EU</td><td>~4 Bn t</td><td>~2.6 Bn t</td><td style="color:#4ade80;">↓↓ -35%</td></tr>
+        <tr><td>World Total</td><td>~24 Bn t</td><td>~37 Bn t</td><td style="color:#f87171;">↑ +54%</td></tr>
+      </table>
+      <div class="ans-label">Why developing nations' emissions are rising</div>
+      <ul class="pt-list">
+        <li>China's manufacturing boom — world's factory → massive coal power expansion</li>
+        <li>India's rapid industrialisation + coal-based electricity (70% of power)</li>
+        <li>Transport motorisation — hundreds of millions buying first vehicles</li>
+        <li>Rising middle class consuming more appliances, food, travel</li>
+      </ul>
+      <div class="ans-label">Why industrialised nations' emissions are declining</div>
+      <ul class="pt-list">
+        <li>Energy efficiency improvements — better buildings, cars, appliances</li>
+        <li>Shift from coal to gas and renewables (UK closed last coal plant 2024)</li>
+        <li>De-industrialisation — heavy manufacturing outsourced to China/India (the carbon didn't disappear, it moved!)</li>
+        <li>Carbon pricing in EU, UK, parts of Canada</li>
+      </ul>
+      <div class="hbox blue">South's key argument: India's per capita CO₂ is 2.2 t/person vs USA's 14.5 t/person. Judging by total instead of per capita lets rich nations off the hook for their historical over-consumption.</div>
+    </div>
+  </div>
+
+  <!-- Q5: SAARC / WORGEN -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 2 papers</span>
+      <span class="q-text">SAARC energy policies / WORGEN five recommendations</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-21 Q4a — WORGEN 5 recommendations</span>
+        <span class="etag">Dec-20 Q2a — SAARC energy policies</span>
+      </div>
+      <div class="ans-label">WORGEN — 5 Recommendations for SAARC Region</div>
+      <div class="ans-body"><p>WORGEN = Working Group on Energy — the energy cooperation body of SAARC (South Asian Association for Regional Cooperation, 8 member nations).</p></div>
+      <ol class="num-list">
+        <li><strong>Regional Power Grid Interconnection</strong> — cross-border electricity trade. Nepal's surplus hydro to India and Bangladesh. Bhutan already exports hydro to India successfully. SAARC Energy Centre (SEC) in Islamabad coordinates this.</li>
+        <li><strong>Renewable Energy Development</strong> — exploit solar (India, Pakistan), hydro (Nepal, Bhutan), wind (India, Sri Lanka) to reduce coal dependence region-wide.</li>
+        <li><strong>Energy Efficiency Standards Harmonisation</strong> — common appliance labelling, building codes and vehicle standards across all 8 SAARC nations to reduce wasteful consumption.</li>
+        <li><strong>Natural Gas Pipeline Network</strong> — develop regional gas pipeline infrastructure to make cleaner gas available across the region (Iran-Pakistan-India pipeline discussed for years).</li>
+        <li><strong>Energy Access for Rural Poor</strong> — off-grid solar, improved cookstoves and biogas as priority for the hundreds of millions in SAARC nations without reliable clean energy.</li>
+        <li><strong>Technology Transfer and Capacity Building</strong> (bonus point) — share clean energy know-how across member states; train engineers and regulators.</li>
+        <li><strong>Joint Energy Research Institute</strong> — SAARC Energy Centre (Islamabad, operational since 2006) as hub for coordination and research.</li>
+      </ol>
+      <div class="hbox gold">Exam: List any FIVE from the above seven. Always mention SAARC Energy Centre (SEC) in Islamabad — it shows you know the institutional detail.</div>
+    </div>
+  </div>
+
+  <!-- Q6: India's position + Framework -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">Terminal</span>
+      <span class="q-text">India's position on climate change / Framework for developing countries' concerns</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Terminal Q1 — India's position</span><span class="etag">Terminal Q3 — framework</span><span class="etag">SAQ 3</span>
+      </div>
+      <div class="ans-label">India's Position — 5 Pillars</div>
+      <ol class="num-list">
+        <li><strong>CBDR — Common But Differentiated Responsibilities</strong>. North caused most cumulative emissions over 150 years of industrialisation. India's per capita CO₂ is 2.2 t vs USA's 14.5 t. Shared problem, different obligations.</li>
+        <li><strong>Right to Development</strong>. 300 million Indians still without reliable electricity. Energy access is a human right. India cannot sacrifice development to fix a problem it didn't primarily cause.</li>
+        <li><strong>Climate Finance Demand</strong>. Developed nations promised $100 billion/year (Copenhagen 2009) — not fulfilled. India wants Green Climate Fund (GCF) access, concessional loans, and grants for clean energy.</li>
+        <li><strong>Technology Transfer</strong>. IP rights on solar panels, batteries and EVs are held by developed-country companies. India wants affordable access or compulsory licensing for climate-critical technologies.</li>
+        <li><strong>Adaptation Priority</strong>. India's 7,500 km coastline threatened by sea level rise. Himalayan glaciers feeding rivers for 600 million people are melting. Adaptation funding must equal mitigation funding.</li>
+      </ol>
+      <div class="ans-label">India's NDC Commitments (Paris Agreement, updated 2022)</div>
+      <ul class="pt-list">
+        <li>Reduce <strong>GDP emission intensity by 45%</strong> by 2030 vs 2005 levels</li>
+        <li><strong>50% of installed electricity capacity</strong> from non-fossil fuels by 2030</li>
+        <li>Create <strong>2.5–3 billion tonne CO₂ sink</strong> through forests by 2030</li>
+        <li><strong>Net-zero emissions by 2070</strong></li>
+        <li>500 GW renewable energy capacity by 2030</li>
+        <li>Co-founded <strong>International Solar Alliance (ISA)</strong> with France in 2015 — 120+ nations</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- end unit 5 -->
+
+<!-- ═══════════════════════════════ UNIT 6 ═══════════════════════════════ -->
+<div class="unit-content" id="u6">
+
+  <!-- Q1: Energy Policy Objectives — 8+ papers -->
+  <div class="qa-card open">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 8+ papers</span>
+      <span class="q-text">Key objectives / concerns / factors of sustainable energy policy of a nation</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-25 Q1a</span><span class="etag">Dec-24 Q1a</span><span class="etag">Jun-24 Q6b</span>
+        <span class="etag">Jun-23 Q1a</span><span class="etag">Dec-23 Q2b</span><span class="etag">Dec-22 Q1b</span>
+        <span class="etag">Jun-21 Q5a</span><span class="etag">Jun-20 Q3b</span><span class="etag">Jun-19 Q5b</span>
+      </div>
+      <div class="rep-note">⚠ Appears in EVERY paper — master this answer cold</div>
+
+      <div class="ans-label">7 Key Objectives of Energy Policy</div>
+      <ol class="num-list">
+        <li><strong>Energy Security</strong> — reliable, uninterrupted supply; reduce dependence on energy imports; build strategic reserves. India imports 85% of its crude oil — a major security vulnerability.</li>
+        <li><strong>Affordability</strong> — energy at prices people and businesses can actually pay. Without this, industries cannot compete and poor households go without light and cooking fuel.</li>
+        <li><strong>Environmental Sustainability</strong> — transition to low-carbon energy; reduce CO₂, SO₂, and particulate pollution; protect ecosystems. Aligned with Paris Agreement and NDC commitments.</li>
+        <li><strong>Energy Access and Equity</strong> — universal access to modern energy, especially for the rural poor. India's Saubhagya scheme electrified 99%+ of households by 2019.</li>
+        <li><strong>Energy Efficiency</strong> — do more with less. BEE's PAT scheme, UJALA LED programme, and ECBC building code are India's main efficiency policy tools.</li>
+        <li><strong>Economic Growth Support</strong> — provide adequate, affordable energy to power industry, agriculture and services. Energy shortage is a direct brake on GDP growth.</li>
+        <li><strong>Technology and Innovation</strong> — invest in clean energy R&amp;D; facilitate technology transfer from advanced nations; build domestic manufacturing capability (PLI scheme for solar panels).</li>
+      </ol>
+
+      <div class="ans-label">Factors to Consider When Formulating Energy Policy (Dec-23 Q7b — 300 words)</div>
+      <ul class="pt-list">
+        <li><strong>Domestic resource endowment</strong> — what fuels does the country have? India has coal, solar, wind potential but limited oil and gas.</li>
+        <li><strong>Economic development stage</strong> — a least-developed country needs energy access first; a middle-income country needs efficiency and clean transition.</li>
+        <li><strong>Population growth and urbanisation rate</strong> — determines future energy demand trajectory.</li>
+        <li><strong>Environmental constraints and climate commitments</strong> — NDCs under Paris Agreement, national air quality standards.</li>
+        <li><strong>Financial capacity</strong> — can the country afford nuclear or offshore wind? Or does it need the cheapest option (solar)?</li>
+        <li><strong>Technology availability</strong> — what can be manufactured domestically vs imported?</li>
+        <li><strong>Geopolitical context</strong> — relations with energy-supplying nations, sanctions, trade agreements.</li>
+        <li><strong>Social equity</strong> — energy policy must address the poorest segments; cannot just serve industry.</li>
+        <li><strong>International obligations</strong> — UNFCCC, Kyoto Protocol, Paris Agreement, bilateral energy agreements.</li>
+      </ul>
+      <div class="hbox gold">💡 India exam angle: Key concerns for India's energy policy = energy security (85% oil import), coal dependence (70% power), rural energy access (quality not just connection), climate commitments (NDC 2022), and affordability for the poor.</div>
+    </div>
+  </div>
+
+  <!-- Q2: CDM — 6 papers -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 6 papers</span>
+      <span class="q-text">Clean Development Mechanism (CDM) — what it is, advantages, limitations</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Jun-24 Q1c</span><span class="etag">Jun-23 Q2b</span>
+        <span class="etag">Dec-22 Q8b</span><span class="etag">Dec-21 Q3b</span>
+        <span class="etag">Jun-21 Q6b</span><span class="etag">Jun-19 Q6a</span>
+      </div>
+      <div class="rep-note">⚠ 6 exam appearances — learn advantages and limitations as a set</div>
+
+      <div class="ans-label">What is CDM?</div>
+      <div class="ans-body"><p>CDM (Article 12 of the Kyoto Protocol) is a market mechanism that allows developed (Annex I) countries to fund emission-reduction projects in developing countries and count the resulting carbon credits (CERs — Certified Emission Reductions) toward their own national targets. 1 CER = 1 tonne of CO₂ avoided. It is a win-win: North cuts its compliance cost; South gets investment and technology.</p></div>
+
+      <div class="diag-wrap">
+        <svg viewBox="0 0 680 70" xmlns="http://www.w3.org/2000/svg" width="100%">
+          <rect width="680" height="70" fill="#161b27" rx="6"/>
+          <defs><marker id="dc" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto"><polygon points="0 0,8 2.5,0 5" fill="#fbbf24"/></marker></defs>
+          <rect x="8" y="10" width="155" height="50" rx="4" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+          <text x="86" y="32" fill="#7dd3fc" font-size="9" font-weight="bold" text-anchor="middle">ANNEX I COUNTRY</text>
+          <text x="86" y="46" fill="#94a3b8" font-size="8" text-anchor="middle">USA / EU / Japan</text>
+          <text x="86" y="58" fill="#64748b" font-size="7" text-anchor="middle">Has binding targets</text>
+          <line x1="163" y1="30" x2="218" y2="30" stroke="#fbbf24" stroke-width="2" marker-end="url(#dc)"/>
+          <text x="190" y="25" fill="#fbbf24" font-size="7" text-anchor="middle">💰 Finance</text>
+          <line x1="218" y1="46" x2="163" y2="46" stroke="#4ade80" stroke-width="2" marker-end="url(#dc)"/>
+          <text x="190" y="58" fill="#4ade80" font-size="7" text-anchor="middle">🌿 CERs back</text>
+          <rect x="219" y="10" width="230" height="50" rx="4" fill="#292524" stroke="#f59e0b" stroke-width="1.5"/>
+          <text x="334" y="30" fill="#fcd34d" font-size="9" font-weight="bold" text-anchor="middle">CDM PROJECT</text>
+          <text x="334" y="44" fill="#94a3b8" font-size="8" text-anchor="middle">Wind · Solar · Biogas · Efficient stoves</text>
+          <text x="334" y="58" fill="#64748b" font-size="7" text-anchor="middle">In a developing country</text>
+          <line x1="449" y1="35" x2="503" y2="35" stroke="#fbbf24" stroke-width="2" marker-end="url(#dc)"/>
+          <rect x="504" y="10" width="168" height="50" rx="4" fill="#0d2b1e" stroke="#10b981" stroke-width="1.5"/>
+          <text x="588" y="30" fill="#4ade80" font-size="9" font-weight="bold" text-anchor="middle">DEVELOPING COUNTRY</text>
+          <text x="588" y="44" fill="#94a3b8" font-size="8" text-anchor="middle">India / China / Brazil</text>
+          <text x="588" y="58" fill="#64748b" font-size="7" text-anchor="middle">Gets investment + technology</text>
+        </svg>
+        <div class="diag-label">CDM flow: Finance goes South → CERs go North → both benefit</div>
+      </div>
+
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title" style="color:#4ade80;">✅ Advantages</div>
+          <ul class="pt-list">
+            <li><strong>Win-win mechanism</strong> — developed countries meet targets at lower cost; developing countries receive clean investment</li>
+            <li><strong>Technology transfer</strong> — modern wind turbines, solar systems, efficient technologies flow to South</li>
+            <li><strong>Sustainable development</strong> — CDM projects create jobs, reduce local pollution, and provide clean energy</li>
+            <li><strong>Catalyses renewable energy</strong> in countries that couldn't otherwise afford it</li>
+            <li>India attracted billions in CDM investment (2nd largest CDM host after China)</li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="col-title" style="color:#f87171;">❌ Limitations</div>
+          <ul class="pt-list">
+            <li><strong>Additionality problem</strong> — hard to prove the project would not have happened anyway. Some credits issued for dubious reductions.</li>
+            <li><strong>Unequal distribution</strong> — China and India got most CDM investment; poorest nations (Africa) got little</li>
+            <li><strong>High transaction costs</strong> — complex verification and certification process discourages small projects</li>
+            <li><strong>Carbon market volatility</strong> — CER price collapsed to near zero after 2012 when USA didn't ratify Kyoto</li>
+            <li>Allows North to <strong>delay domestic action</strong> by buying cheap credits instead of cutting own emissions</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3: No-Regrets Policy — 5 papers -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 5 papers</span>
+      <span class="q-text">Main features of the No-Regrets Policy</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Jun-25 Q1a</span><span class="etag">Jun-23 Q6c</span>
+        <span class="etag">Dec-24 Q6b</span><span class="etag">Dec-23 Q8b</span><span class="etag">Dec-21 Q5a</span>
+      </div>
+      <div class="rep-note">⚠ Asked in 5 different papers — must know this answer perfectly</div>
+
+      <div class="ans-label">Definition</div>
+      <div class="ans-body"><p>A no-regrets policy is any action that is <strong>worth doing regardless of whether climate change turns out to be as serious as scientists predict</strong>. Even if there were no climate problem at all, these actions make economic sense on their own merits. You will NEVER regret taking them.</p></div>
+
+      <div class="ans-label">Main Features</div>
+      <ol class="num-list">
+        <li><strong>Net economic benefit even without climate concern</strong> — energy efficiency saves money. LED lights save 80% on lighting bills. 5-star ACs reduce electricity consumption — the savings pay for the investment.</li>
+        <li><strong>Multiple co-benefits</strong> — they improve air quality, create jobs, reduce energy imports, and improve health — benefits that exist regardless of climate outcomes.</li>
+        <li><strong>Low or negative net cost</strong> — many no-regrets measures actually save more money than they cost to implement. India's UJALA LED programme saved ₹18,000 crore/year in electricity bills.</li>
+        <li><strong>Technology-neutral</strong> — not tied to any specific energy technology. The criterion is economic and social benefit, not carbon-reduction target alone.</li>
+        <li><strong>Win at any scenario</strong> — whether climate change happens or not, whether international agreements succeed or fail, these actions remain beneficial.</li>
+      </ol>
+
+      <div class="ans-label">Examples (always give 4–5)</div>
+      <ul class="pt-list">
+        <li><strong>Energy efficiency</strong> — LED lights, 5-star appliances, insulated buildings. Save money + cut emissions.</li>
+        <li><strong>Fuel switching</strong> — LPG instead of firewood for cooking. Saves forests + cuts indoor air pollution (kills 500,000 Indians/year) + reduces CO₂.</li>
+        <li><strong>Solar water heaters</strong> — replace electric geysers. Save electricity bills + reduce grid load + cut CO₂.</li>
+        <li><strong>Afforestation</strong> — plant trees. Absorbs CO₂ + prevents soil erosion + increases rainfall + provides timber and livelihoods.</li>
+        <li><strong>Improved cookstoves (ICS)</strong> — reduce firewood by 30–50% + cut indoor smoke + reduce deforestation.</li>
+        <li><strong>Public transport</strong> — metro and BRT reduce traffic + cut fuel bills + reduce air pollution.</li>
+      </ul>
+      <div class="hbox gold">💡 One-line exam definition: "No-regrets policies are actions that are justified on economic and social grounds regardless of the degree of climate change — you never regret taking them."</div>
+    </div>
+  </div>
+
+  <!-- Q4: Technology Transfer — 3 papers -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 3 papers</span>
+      <span class="q-text">Technology transfer — considerations, impediments, and how to ensure success</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Jun-24 Q1d — main considerations</span>
+        <span class="etag">Jun-22 Q2b — impediments + how to ensure</span>
+        <span class="etag">Jun-19 Q8b — impediments, 3 points</span>
+      </div>
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title" style="color:#7dd3fc;">📋 Main Considerations (Jun-24 Q1d)</div>
+          <ol class="num-list">
+            <li><strong>Technical appropriateness</strong> — technology must suit local climate, skill levels and infrastructure</li>
+            <li><strong>Economic viability</strong> — cost must be within reach via concessional finance or grants</li>
+            <li><strong>Local capacity building</strong> — train local engineers and operators; technology without knowledge is unsustainable</li>
+            <li><strong>IP rights</strong> — patents often held by Northern companies; compulsory licensing may be needed</li>
+            <li><strong>Political will</strong> — both source and recipient nations must actively facilitate transfer</li>
+          </ol>
+        </div>
+        <div class="col-box">
+          <div class="col-title" style="color:#f87171;">🚧 Impediments (Jun-22 Q2b / Jun-19 Q8b)</div>
+          <ol class="num-list">
+            <li><strong>Intellectual Property (IP) protection</strong> — patents prevent free sharing of solar, battery and EV technology</li>
+            <li><strong>High commercial price</strong> — market rate too expensive for developing nations without financial support</li>
+            <li><strong>Lack of absorptive capacity</strong> — weak R&amp;D, shortage of engineers, poor infrastructure</li>
+            <li><strong>Political/export barriers</strong> — some technologies restricted for security reasons</li>
+            <li><strong>Insufficient climate finance</strong> — $100 billion/year promise not fulfilled by developed nations</li>
+          </ol>
+        </div>
+      </div>
+      <div class="ans-label">How to Ensure Successful Transfer</div>
+      <ul class="pt-list">
+        <li>IP flexibilities in <strong>WTO-TRIPS</strong> for climate-critical technologies</li>
+        <li>Multilateral climate funds — <strong>Green Climate Fund (GCF)</strong> for concessional financing</li>
+        <li><strong>South-South cooperation</strong> — India's International Solar Alliance (ISA) shares solar know-how with 120+ nations</li>
+        <li>Technology demonstration programmes with joint ventures and shared benefits</li>
+        <li>Bilateral agreements with specific technology-sharing clauses</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q5: Rebound Effect — 2 papers -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 2 papers</span>
+      <span class="q-text">Short note: Rebound effect in the supply of energy</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Jun-25 Q6a</span><span class="etag">Jun-23 Q6d</span>
+      </div>
+      <div class="ans-label">Definition</div>
+      <div class="ans-body"><p>The rebound effect (also called the <strong>Jevons Paradox</strong>, first observed in 1865) is the phenomenon where energy efficiency improvements lead to <strong>more energy being used</strong> rather than less — the expected savings are "rebounded" through increased consumption.</p></div>
+
+      <div class="ans-label">Three Types</div>
+      <ol class="num-list">
+        <li><strong>Direct rebound</strong> — efficient car uses half the fuel per km → driver travels twice as far. Efficient AC → room kept cooler and longer. LED lights → more rooms lit all night.</li>
+        <li><strong>Indirect rebound</strong> — money saved on electricity bills → spent on buying a new TV or taking a flight. Savings get rebounded into other energy-consuming activities.</li>
+        <li><strong>Economy-wide (backfire)</strong> — Jevons' original observation: more efficient steam engines made coal cheaper → MORE industries adopted steam power → coal consumption increased nationally, not decreased.</li>
+      </ol>
+
+      <div class="ans-label">Magnitude</div>
+      <ul class="pt-list">
+        <li>0–30% rebound = partial (efficiency still helps)</li>
+        <li>30–70% = moderate concern</li>
+        <li>70–100% = large rebound (efficiency measures almost futile alone)</li>
+        <li>&gt;100% = backfire (energy use actually increases)</li>
+      </ul>
+
+      <div class="ans-label">How to Limit It</div>
+      <ul class="pt-list">
+        <li><strong>Carbon taxes / energy pricing</strong> — if energy has a real price, saved money is less likely to be rebounded into more energy use</li>
+        <li><strong>Regulatory caps</strong> — efficiency standards alone are not enough; caps on total consumption needed</li>
+        <li><strong>Behaviour change campaigns</strong> — awareness that using less is the actual goal, not just using efficiently</li>
+      </ul>
+      <div class="hbox gold">Short note format: Define → give 3 types with one example each → magnitude → 2 solutions. That's a complete 5-mark answer.</div>
+    </div>
+  </div>
+
+  <!-- Q6: Governance and Finance -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 2 papers</span>
+      <span class="q-text">Governance and finance for sustainable energy / Five good governance actions</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-25 Q3b — importance of governance and finance</span>
+        <span class="etag">Jun-24 Q1a — 5 governance actions</span>
+      </div>
+      <div class="ans-label">5 Good Governance Actions to Mobilise Energy Investment</div>
+      <ol class="num-list">
+        <li><strong>Transparent and stable regulatory framework</strong> — independent energy regulator (like CERC in India) with clear rules, predictable tariffs, and stable policies. Investors need certainty that they will be paid fairly.</li>
+        <li><strong>Feed-in tariffs / competitive auctions</strong> — guaranteed purchase price for renewable energy output (feed-in tariff) or competitive reverse auctions to drive prices down. India's solar auctions brought tariffs to ₹2.14/unit — the world's cheapest.</li>
+        <li><strong>Public financial institutions</strong> — development banks like IREDA (Indian Renewable Energy Development Agency), ADB, and World Bank provide low-cost concessional loans that commercial banks won't offer to clean energy projects.</li>
+        <li><strong>Remove fossil fuel subsidies</strong> — levels the playing field for renewables. Globally, fossil fuels receive $7 trillion/year in subsidies (IMF 2023 estimate including externalities). Redirecting even a fraction to clean energy transforms the market.</li>
+        <li><strong>Carbon pricing / carbon tax</strong> — puts a price on CO₂ emissions so fossil fuels bear their true environmental cost. Revenue can be recycled to fund clean energy investment or rebated to the poor.</li>
+      </ol>
+      <div class="hbox blue">Why governance matters for finance: Poor governance = high political risk = investors demand 15–20% returns. Good governance = low risk = investors accept 6–8% returns. This difference can make a solar project viable or unviable. Good governance IS a financial instrument.</div>
+    </div>
+  </div>
+
+  <!-- Q7: WEC Scenarios -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 2 papers</span>
+      <span class="q-text">Short note: Various scenarios of future energy use (WEC)</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-25 Q6d</span><span class="etag">Dec-24 Q6a</span>
+      </div>
+      <div class="ans-label">What are WEC Scenarios?</div>
+      <div class="ans-body"><p>The <strong>World Energy Council (WEC)</strong> is an international body that publishes energy scenarios — possible pictures of what global energy could look like in the future depending on policy choices, technology progress and economic growth. They are not predictions — they are structured "what if" stories to help planners prepare for different futures.</p></div>
+
+      <div class="ans-label">Key Scenario Dimensions</div>
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title" style="color:#4ade80;">Scenario A — Ecologically Driven</div>
+          <ul class="pt-list">
+            <li>Strong government intervention and regulation</li>
+            <li>Mandatory shift to renewables enforced by policy</li>
+            <li>Carbon taxes and strict emission standards</li>
+            <li>Outcome: <strong>Lowest emissions, highest sustainability</strong></li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="col-title" style="color:#7dd3fc;">Scenario B — Market-Led</div>
+          <ul class="pt-list">
+            <li>Minimal government intervention</li>
+            <li>Fast technology progress driven by markets</li>
+            <li>Renewables compete and win on price alone</li>
+            <li>Outcome: <strong>Moderate emissions, high efficiency</strong></li>
+          </ul>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title" style="color:#f87171;">Scenario C — Fossil Intensive</div>
+          <ul class="pt-list">
+            <li>Low intervention, slow technology change</li>
+            <li>Fossil fuels dominate global energy</li>
+            <li>Business-as-usual continues</li>
+            <li>Outcome: <strong>Highest emissions, least sustainable</strong></li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="col-title" style="color:#f0abfc;">Scenario D — Balanced/Mixed</div>
+          <ul class="pt-list">
+            <li>Moderate intervention and mixed technology</li>
+            <li>Gradual energy transition over decades</li>
+            <li>Nuclear and gas as bridge fuels</li>
+            <li>Outcome: <strong>Moderate emissions, transition in progress</strong></li>
+          </ul>
+        </div>
+      </div>
+      <div class="hbox gold">Key WEC conclusion: No single scenario is inevitable. The path taken depends entirely on policy choices, technology investment and international cooperation made TODAY. This is the core message for any exam answer on future energy scenarios.</div>
+    </div>
+  </div>
+
+  <!-- Q8: Renewable energy — role of two resources -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 3 papers</span>
+      <span class="q-text">Role of any two renewable / non-hydro renewable energy resources in meeting India's energy needs</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-25 Q2a</span><span class="etag">Dec-21 Q4b</span><span class="etag">Jun-20 Q3a</span>
+      </div>
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title" style="color:#fbbf24;">☀ Solar Energy</div>
+          <ul class="pt-list">
+            <li>India receives 5–6 kWh/m²/day solar radiation — one of the best in the world</li>
+            <li>Installed capacity: ~190 GW (2024), target 500 GW by 2030</li>
+            <li>Pavagada (Karnataka) — 2050 MW; Bhadla (Rajasthan) — 2245 MW — world's largest parks</li>
+            <li>Rooftop solar under PM Surya Ghar scheme — 1 crore homes</li>
+            <li>Solar pumps replacing diesel irrigation pumps (PM-KUSUM — 35 lakh farmers)</li>
+            <li>Cost: ₹2.14/unit — world record low; cheaper than coal</li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="col-title" style="color:#3b82f6;">💨 Wind Energy</div>
+          <ul class="pt-list">
+            <li>Installed capacity: ~47 GW (2024); potential ~700 GW onshore + offshore</li>
+            <li>Key states: Tamil Nadu (coastal), Gujarat, Rajasthan, Karnataka, Andhra Pradesh</li>
+            <li>India is 4th largest wind power producer globally</li>
+            <li>Wind + solar hybrid parks being developed for more consistent output</li>
+            <li>Offshore wind: India's west coast has strong potential; Gujarat exploring</li>
+            <li>Provides employment to thousands in turbine manufacturing and maintenance</li>
+          </ul>
+        </div>
+      </div>
+      <div class="hbox green">Also mention for non-hydro: Biomass power (~11 GW installed, potential 25 GW from agricultural residues) and small hydropower (~5 GW installed, 21 GW potential from Himalayan and Ghats streams).</div>
+    </div>
+  </div>
+
+  <!-- Q9: Energy in relation to sustainability / environmental economics -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 2 papers</span>
+      <span class="q-text">Energy in relation to sustainability / Energy policy vis-à-vis environment and development</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-20 Q3a — energy and sustainability</span>
+        <span class="etag">Dec-20 Q3b — energy policy vis-à-vis environment</span>
+        <span class="etag">Jun-20 Q4 — environmental economics (10M)</span>
+      </div>
+      <div class="ans-label">Energy and Sustainability — the Core Tension</div>
+      <div class="ans-body">
+        <p>Energy and sustainability pull in opposite directions with conventional fuels. Economic growth needs more energy. More energy from fossil fuels = more pollution and climate change. The Brundtland Commission (1987) defined sustainable development as "development that meets the needs of the present without compromising the ability of future generations to meet their own needs." For energy, this means:</p>
+      </div>
+      <ul class="pt-list">
+        <li><strong>Economic dimension</strong> — energy must be affordable and reliable enough to power economic development, especially in developing nations where billions still lack access</li>
+        <li><strong>Environmental dimension</strong> — energy production and use must not destroy the natural systems (climate, water, forests, biodiversity) that future generations depend on</li>
+        <li><strong>Social dimension</strong> — energy access must be equitable; the poor must not be left behind in the transition to clean energy</li>
+      </ul>
+      <div class="ans-label">Energy Policy vis-à-vis Environment</div>
+      <ul class="pt-list">
+        <li>Energy policy historically focused only on <strong>supply security and economic growth</strong> — environment was an afterthought</li>
+        <li>Post-UNFCCC (1992) and Kyoto (1997), environmental constraints became central to energy policy</li>
+        <li>Now a good energy policy must simultaneously achieve: <strong>security + affordability + sustainability (the "energy trilemma")</strong></li>
+        <li>Instruments: carbon taxes, renewable portfolio standards, efficiency mandates, phasing out coal subsidies, emissions trading schemes</li>
+        <li>India's NAPCC (2008) integrated environment and energy for the first time — 8 national missions covering solar, efficiency, water, forests</li>
+      </ul>
+      <div class="hbox blue">Environmental economics applies economic tools to environmental problems: pricing pollution (carbon tax), valuing ecosystem services, cost-benefit analysis of clean energy vs fossil fuels, and internalising externalities (making polluters pay for damage they cause).</div>
+    </div>
+  </div>
+
+  <!-- Q10: Demand substitution -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">1 paper</span>
+      <span class="q-text">Demand substitution among energy commodities</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Jun-19 Q3a</span></div>
+      <div class="ans-body">
+        <p>Demand substitution means switching from one energy commodity to another that can provide the same service — often triggered by a change in relative prices, technology, or policy.</p>
+      </div>
+      <ul class="pt-list">
+        <li><strong>Coal → Natural gas</strong> for electricity generation. When gas becomes cheaper or carbon pricing makes coal expensive, power plants switch. Gas emits 50% less CO₂.</li>
+        <li><strong>Firewood → LPG or biogas</strong> for cooking. As incomes rise and LPG becomes available, households substitute away from biomass. This is the most impactful substitution in India's energy transition.</li>
+        <li><strong>Petrol/diesel → Electricity (EVs)</strong> for transport. Electric vehicles substitute fossil fuel demand with electricity demand — net benefit if electricity comes from renewables.</li>
+        <li><strong>Oil → Natural gas</strong> for industrial heating. Many industries switch between oil and gas based on price signals.</li>
+        <li><strong>Kerosene → Solar lanterns</strong> for lighting. Off-grid solar directly substitutes kerosene demand in rural India.</li>
+      </ul>
+      <div class="hbox gold">Key concept: Demand substitution is driven by relative prices (cross-price elasticity of demand), technology availability, and government policy (taxes on coal/petrol, subsidies on LPG/EVs). It is one of the most powerful tools for clean energy transition without sacrificing energy services.</div>
+    </div>
+  </div>
+
+</div><!-- end unit 6 -->
+
+</div><!-- container -->
+
+<script>
+function showUnit(id) {
+  document.querySelectorAll('.unit-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.unit-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const idx = {u4:0, u5:1, u6:2}[id];
+  document.querySelectorAll('.unit-tab')[idx].classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function toggle(header) {
+  header.closest('.qa-card').classList.toggle('open');
+}
+</script>
+</body>
+</html>
