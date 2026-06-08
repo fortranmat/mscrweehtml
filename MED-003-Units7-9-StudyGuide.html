@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MED-003 Study Guide — Units 7, 8 &amp; 9</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f1117; color: #e2e8f0; line-height: 1.65; }
+  .container { max-width: 960px; margin: 0 auto; padding: 24px 20px; }
+  h1 { color: #7dd3fc; font-size: 1.5rem; text-align: center; padding: 20px 0 6px; }
+  .tagline { text-align: center; color: #94a3b8; font-size: 0.85rem; margin-bottom: 28px; }
+  .unit-tabs { display: flex; gap: 10px; margin-bottom: 28px; flex-wrap: wrap; }
+  .unit-tab { padding: 10px 22px; border-radius: 24px; cursor: pointer; font-size: 0.85rem; font-weight: 600;
+    background: #1e2330; border: 2px solid #2d3748; color: #94a3b8; transition: all .2s; }
+  .unit-tab.active { background: #1e3a5f; border-color: #3b82f6; color: #7dd3fc; }
+  .unit-content { display: none; }
+  .unit-content.active { display: block; }
+  .qa-card { background: #1e2330; border-radius: 10px; margin-bottom: 16px; border: 1px solid #2d3748; overflow: hidden; }
+  .qa-header { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; cursor: pointer; user-select: none; }
+  .qa-header:hover { background: #252d3d; }
+  .q-badge { flex-shrink: 0; background: #1e3a5f; color: #7dd3fc; font-size: 0.7rem; font-weight: 700;
+    padding: 3px 8px; border-radius: 10px; margin-top: 2px; white-space: nowrap; }
+  .q-badge.rep { background: #2d1b4e; color: #f0abfc; }
+  .q-text { font-weight: 600; color: #f1f5f9; font-size: 0.92rem; flex: 1; }
+  .expand-icon { color: #4b5563; font-size: 1rem; margin-top: 2px; transition: transform .2s; flex-shrink: 0; }
+  .qa-card.open .expand-icon { transform: rotate(90deg); }
+  .qa-body { display: none; padding: 0 16px 18px; }
+  .qa-card.open .qa-body { display: block; }
+  .exam-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .etag { background: #162032; color: #67e8f9; font-size: 0.7rem; padding: 2px 8px; border-radius: 8px; border: 1px solid #1e3a5f; }
+  .ans-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: #fbbf24; margin: 12px 0 5px; }
+  .ans-body { color: #cbd5e1; font-size: 0.88rem; }
+  .ans-body p { margin-bottom: 8px; }
+  .chain { display: flex; flex-wrap: wrap; gap: 0; margin: 8px 0; align-items: center; }
+  .chain-item { background: #162032; color: #93c5fd; font-size: 0.77rem; padding: 5px 10px;
+    border: 1px solid #1e3a5f; font-weight: 600; text-align: center; }
+  .chain-arrow { color: #fbbf24; font-size: 1rem; padding: 0 4px; }
+  .pt-list { list-style: none; margin: 6px 0; }
+  .pt-list li { padding: 3px 0 3px 16px; position: relative; font-size: 0.87rem; color: #cbd5e1; }
+  .pt-list li::before { content: '•'; position: absolute; left: 0; color: #fbbf24; }
+  .pt-list li strong { color: #f1f5f9; }
+  .num-list { list-style: none; margin: 6px 0; counter-reset: num; }
+  .num-list li { padding: 4px 0 4px 26px; position: relative; font-size: 0.87rem; color: #cbd5e1; counter-increment: num; }
+  .num-list li::before { content: counter(num); position: absolute; left: 0; background: #1e3a5f;
+    color: #7dd3fc; font-size: 0.7rem; font-weight: 700; width: 18px; height: 18px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center; top: 5px; }
+  .num-list li strong { color: #f1f5f9; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 8px 0; }
+  .col-box { background: #161b27; border-radius: 6px; padding: 10px 12px; border: 1px solid #2d3748; }
+  .col-box .col-title { font-size: 0.75rem; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 8px 0; }
+  .hbox { border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 0.85rem; }
+  .hbox.gold { background: #1a1200; border-left: 3px solid #fbbf24; color: #fcd34d; }
+  .hbox.green { background: #0d1a10; border-left: 3px solid #4ade80; color: #6ee7b7; }
+  .hbox.red { background: #1a0a0a; border-left: 3px solid #f87171; color: #fca5a5; }
+  .hbox.blue { background: #0a1020; border-left: 3px solid #3b82f6; color: #93c5fd; }
+  .hbox.purple { background: #1a0a2a; border-left: 3px solid #a855f7; color: #f0abfc; }
+  .diag-wrap { background: #161b27; border-radius: 8px; padding: 12px; margin: 12px 0; overflow-x: auto; }
+  .diag-label { font-size: 0.75rem; color: #64748b; margin-top: 6px; text-align: center; }
+  .rep-note { font-size: 0.75rem; color: #f0abfc; background: #1a0a2a; border-radius: 4px;
+    padding: 3px 8px; margin-bottom: 8px; display: inline-block; }
+  .wc { font-size: 0.68rem; color: #64748b; margin-left: 6px; }
+  .kv-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; margin: 8px 0; }
+  .kv-table th { background: #1e3a5f; color: #7dd3fc; padding: 6px 10px; text-align: left; font-size: 0.78rem; }
+  .kv-table td { padding: 5px 10px; border-bottom: 1px solid #1e2a3a; color: #cbd5e1; vertical-align: top; }
+  .kv-table tr:nth-child(even) td { background: #161b27; }
+  @media (max-width: 600px) { .two-col, .three-col { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>MED-003 — Quick Exam Study Guide</h1>
+<p class="tagline">Units 7 · 8 · 9 &nbsp;|&nbsp; Every exam question answered &nbsp;|&nbsp; Plain English · Exam-ready</p>
+
+<div class="unit-tabs">
+  <div class="unit-tab active" onclick="showUnit('u7')">Unit 7 — Energy Planning</div>
+  <div class="unit-tab" onclick="showUnit('u8')">Unit 8 — India Energy Scenario</div>
+  <div class="unit-tab" onclick="showUnit('u9')">Unit 9 — Economic Approach</div>
+</div>
+
+<!-- ════════════════════════════ UNIT 7 ════════════════════════════ -->
+<div class="unit-content active" id="u7">
+
+  <!-- Q1: Energy Planning definition, aims, benefits — 7 papers -->
+  <div class="qa-card open">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 7 papers</span>
+      <span class="q-text">What is Energy Planning? — Definition, aims, benefits, relevance <span class="wc">200 words</span></span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-22 Q4a</span><span class="etag">Dec-20 Q2b</span>
+        <span class="etag">Jun-22 Q1a</span><span class="etag">Jun-21 Q3b</span>
+        <span class="etag">Jun-19 Q1b</span><span class="etag">Terminal Q1</span><span class="etag">Terminal Q5</span>
+      </div>
+      <div class="rep-note">⚠ Appears in every second paper — learn definition + 3 aims + 5 benefits cold</div>
+
+      <div class="ans-label">Definition</div>
+      <div class="ans-body"><p>Energy planning is a <strong>systematic process of analysing current energy use, forecasting future demand, assessing available resources, and formulating strategies</strong> to meet those needs reliably, affordably and sustainably. It applies across scales — household, city, state, national, and global.</p></div>
+
+      <div class="ans-label">The 6-Step Planning Cycle</div>
+      <div class="diag-wrap">
+        <svg viewBox="0 0 700 80" xmlns="http://www.w3.org/2000/svg" width="100%">
+          <rect width="700" height="80" fill="#161b27" rx="6"/>
+          <defs><marker id="pc" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto">
+            <polygon points="0 0,8 2.5,0 5" fill="#7dd3fc"/></marker></defs>
+          <rect x="5"   y="15" width="100" height="50" rx="4" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+          <text x="55"  y="37" fill="#7dd3fc" font-size="8" font-weight="bold" text-anchor="middle">① SITUATION</text>
+          <text x="55"  y="49" fill="#7dd3fc" font-size="8" font-weight="bold" text-anchor="middle">ANALYSIS</text>
+          <text x="55"  y="62" fill="#64748b" font-size="7" text-anchor="middle">Current energy audit</text>
+          <line x1="106" y1="40" x2="121" y2="40" stroke="#7dd3fc" stroke-width="1.5" marker-end="url(#pc)"/>
+          <rect x="122" y="15" width="100" height="50" rx="4" fill="#0d2b1e" stroke="#10b981" stroke-width="1.5"/>
+          <text x="172" y="37" fill="#6ee7b7" font-size="8" font-weight="bold" text-anchor="middle">② DEMAND</text>
+          <text x="172" y="49" fill="#6ee7b7" font-size="8" font-weight="bold" text-anchor="middle">FORECASTING</text>
+          <text x="172" y="62" fill="#64748b" font-size="7" text-anchor="middle">Project future needs</text>
+          <line x1="223" y1="40" x2="238" y2="40" stroke="#7dd3fc" stroke-width="1.5" marker-end="url(#pc)"/>
+          <rect x="239" y="15" width="100" height="50" rx="4" fill="#1a1020" stroke="#a855f7" stroke-width="1.5"/>
+          <text x="289" y="37" fill="#f0abfc" font-size="8" font-weight="bold" text-anchor="middle">③ RESOURCE</text>
+          <text x="289" y="49" fill="#f0abfc" font-size="8" font-weight="bold" text-anchor="middle">ASSESSMENT</text>
+          <text x="289" y="62" fill="#64748b" font-size="7" text-anchor="middle">Map available options</text>
+          <line x1="340" y1="40" x2="355" y2="40" stroke="#7dd3fc" stroke-width="1.5" marker-end="url(#pc)"/>
+          <rect x="356" y="15" width="100" height="50" rx="4" fill="#292524" stroke="#f59e0b" stroke-width="1.5"/>
+          <text x="406" y="37" fill="#fcd34d" font-size="8" font-weight="bold" text-anchor="middle">④ STRATEGY</text>
+          <text x="406" y="49" fill="#fcd34d" font-size="8" font-weight="bold" text-anchor="middle">FORMULATION</text>
+          <text x="406" y="62" fill="#64748b" font-size="7" text-anchor="middle">Select best energy mix</text>
+          <line x1="457" y1="40" x2="472" y2="40" stroke="#7dd3fc" stroke-width="1.5" marker-end="url(#pc)"/>
+          <rect x="473" y="15" width="100" height="50" rx="4" fill="#1a0a0a" stroke="#ef4444" stroke-width="1.5"/>
+          <text x="523" y="37" fill="#fca5a5" font-size="8" font-weight="bold" text-anchor="middle">⑤ IMPLEMEN-</text>
+          <text x="523" y="49" fill="#fca5a5" font-size="8" font-weight="bold" text-anchor="middle">TATION</text>
+          <text x="523" y="62" fill="#64748b" font-size="7" text-anchor="middle">Execute programmes</text>
+          <line x1="574" y1="40" x2="589" y2="40" stroke="#7dd3fc" stroke-width="1.5" marker-end="url(#pc)"/>
+          <rect x="590" y="15" width="105" height="50" rx="4" fill="#162032" stroke="#06b6d4" stroke-width="1.5"/>
+          <text x="642" y="37" fill="#67e8f9" font-size="8" font-weight="bold" text-anchor="middle">⑥ MONITOR</text>
+          <text x="642" y="49" fill="#67e8f9" font-size="8" font-weight="bold" text-anchor="middle">&amp; REVIEW</text>
+          <text x="642" y="62" fill="#64748b" font-size="7" text-anchor="middle">Track, revise, repeat</text>
+        </svg>
+        <div class="diag-label">Energy Planning Cycle — iterative, not one-time</div>
+      </div>
+
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title" style="color:#fbbf24;">📌 Aims of Energy Planning</div>
+          <ul class="pt-list">
+            <li><strong>Ensure reliable supply</strong> to all sectors — households, industry, agriculture, services</li>
+            <li><strong>Minimise environmental impact</strong> — reduce pollution, shift to clean sources</li>
+            <li><strong>Promote efficiency</strong> — do more with less energy everywhere</li>
+            <li><strong>Achieve energy security</strong> — reduce vulnerability to import disruptions or price shocks</li>
+            <li><strong>Ensure equitable access</strong> — rural electrification, affordable tariffs for the poor</li>
+            <li><strong>Support economic growth</strong> — adequate energy for industry and job creation</li>
+            <li><strong>Meet climate commitments</strong> — align with NDCs and Paris Agreement</li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="col-title" style="color:#4ade80;">✅ Benefits of Good Energy Planning</div>
+          <ul class="pt-list">
+            <li><strong>Avoids overcapacity and shortage</strong> — no expensive stranded assets, no blackouts</li>
+            <li><strong>Lower energy costs</strong> — efficient planning reduces total system cost for consumers</li>
+            <li><strong>Attracts private investment</strong> — clear long-term plan gives investors confidence</li>
+            <li><strong>Reduces emissions</strong> — planned renewable rollout displaces coal systematically</li>
+            <li><strong>Improves energy security</strong> — diverse sources reduce import dependence</li>
+            <li><strong>Universal access</strong> — planned rural electrification reaches the poorest last-mile</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ans-label">Drawbacks of Faulty Planning (Terminal Q5)</div>
+      <ul class="pt-list">
+        <li>Power shortages and blackouts — under-estimation of future demand</li>
+        <li>Stranded assets — over-built capacity that cannot be economically used (e.g. thermal plants becoming unviable as solar prices fall)</li>
+        <li>Environmental damage — poorly sited projects destroy forests, rivers, communities</li>
+        <li>High consumer prices — inefficient planning passes costs to end users</li>
+        <li>Rural exclusion — remote areas remain without reliable supply for decades</li>
+        <li>Import dependency — failure to develop domestic resources leaves the country exposed to global price shocks</li>
+      </ul>
+
+      <div class="ans-label">Relevance for Developing Countries (Terminal Q1)</div>
+      <div class="ans-body"><p>Energy planning is MORE critical in developing nations than in developed ones because: (a) capital is scarce — wrong investments are catastrophic; (b) energy demand is growing fastest; (c) millions lack basic access — planning must prioritise equity; (d) weak institutional capacity means mistakes persist longer; (e) climate vulnerability is highest — transition to clean energy is both urgent and essential for survival.</p></div>
+    </div>
+  </div>
+
+  <!-- Q2: Land use planning + Infrastructure guidelines — 4 papers -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 4 papers</span>
+      <span class="q-text">Energy infrastructure planning / Land use planning / 5 guidelines for urban energy infrastructure</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-25 Q1b</span><span class="etag">Jun-23 Q1b</span>
+        <span class="etag">Dec-24 Q1c</span><span class="etag">SAQ 4 · SAQ 5</span>
+      </div>
+
+      <div class="ans-label">What is Energy Infrastructure Planning?</div>
+      <div class="ans-body"><p>It means designing cities and buildings from the start so they use as little energy as possible — through smart location of buildings, transport links, green spaces, and utility networks. Good planning reduces energy demand permanently; bad planning locks in waste for 50–100 years.</p></div>
+
+      <div class="ans-label">7 Guidelines for Energy-Efficient Land Use Planning</div>
+      <ol class="num-list">
+        <li><strong>Mixed-use zoning</strong> — put homes, shops, offices and services in the same neighbourhood so people walk or cycle instead of driving. Less transport energy = less fuel burned.</li>
+        <li><strong>Compact urban form</strong> — dense, connected city blocks rather than sprawling suburbs. Shorter distances → less transport energy; shared walls → less heating/cooling energy.</li>
+        <li><strong>Transit-Oriented Development (TOD)</strong> — cluster high-density housing and commercial uses around metro stations and bus hubs. People naturally use public transport → massive transport energy savings.</li>
+        <li><strong>District heating and cooling networks</strong> — a centralised CHP (Combined Heat and Power) plant supplies waste heat through insulated pipes to multiple buildings. Far more efficient than every building heating itself separately.</li>
+        <li><strong>Solar-ready site orientation</strong> — orient buildings so roofs face south (in India) to maximise solar panel output. Passive solar design — large south-facing windows allow winter sun to heat rooms naturally.</li>
+        <li><strong>Building Energy Codes (ECBC)</strong> — make energy efficiency standards mandatory for all new commercial buildings above a certain size. India's ECBC (Energy Conservation Building Code) is now enforceable.</li>
+        <li><strong>Green corridors and urban forests</strong> — trees and parks reduce the urban heat island effect → less air conditioning needed across the entire city.</li>
+      </ol>
+
+      <div class="ans-label">Benefits of Urban Energy Planning (Dec-24 Q6c)</div>
+      <ul class="pt-list">
+        <li>Reduces peak electricity demand → smaller, cheaper power infrastructure needed</li>
+        <li>Lower energy bills for residents and businesses</li>
+        <li>Cleaner air from less vehicle and building emissions</li>
+        <li>More resilient to energy price shocks — efficient city uses less fuel</li>
+        <li>Supports climate commitments — planned cities are the fastest route to net-zero</li>
+      </ul>
+      <div class="hbox gold">India examples: Smart Cities Mission (100 cities), Delhi Metro (40% energy from solar), Amaravati planned city, GIFT City (Gujarat) — all use energy planning principles.</div>
+    </div>
+  </div>
+
+  <!-- Q3: Fridge and Washing Machine savings — 3 papers -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 3 papers</span>
+      <span class="q-text">Measures to save energy using refrigerator and washing machine</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-24 Q1d</span><span class="etag">Dec-22 Q1a</span><span class="etag">SAQ 6</span>
+      </div>
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title" style="color:#67e8f9;">🧊 REFRIGERATOR — Energy Saving Tips</div>
+          <ol class="num-list">
+            <li><strong>Buy 5-star BEE rated model</strong> — uses 30–40% less electricity than 2-star</li>
+            <li><strong>Keep it away from heat sources</strong> — ovens, direct sunlight force compressor to work harder</li>
+            <li><strong>Set temperature correctly</strong> — 3–5°C for fridge, -18°C for freezer. Every degree colder = 5% more energy</li>
+            <li><strong>Keep it full</strong> — full fridge retains cold better when door opens; use water bottles to fill gaps</li>
+            <li><strong>Check door seal regularly</strong> — a leaking seal makes the compressor run continuously</li>
+            <li><strong>Let hot food cool before putting in</strong> — hot food forces the motor to work extra</li>
+            <li><strong>Clean condenser coils</strong> — dusty coils reduce efficiency by 25%</li>
+            <li><strong>Defrost regularly</strong> — ice build-up reduces efficiency significantly</li>
+          </ol>
+        </div>
+        <div class="col-box">
+          <div class="col-title" style="color:#6ee7b7;">🫧 WASHING MACHINE — Energy Saving Tips</div>
+          <ol class="num-list">
+            <li><strong>Always use full loads</strong> — half-load uses almost the same energy as full load; wait and combine</li>
+            <li><strong>Wash in cold water</strong> — 90% of washing machine energy goes to heating water; cold wash works fine for most laundry</li>
+            <li><strong>Choose front-loading machines</strong> — use 60% less water and 40% less energy than top-loaders</li>
+            <li><strong>Use eco/quick mode</strong> — shorter cycles for lightly soiled clothes</li>
+            <li><strong>Air dry instead of tumble drying</strong> — tumble dryer uses as much electricity as the washing cycle</li>
+            <li><strong>Wash at off-peak hours</strong> — time-of-use tariffs make electricity cheaper at night</li>
+            <li><strong>Buy 5-star BEE rated model</strong> — significant savings over 10-year life of machine</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4: Home Energy Audit — 2 papers -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 2 papers</span>
+      <span class="q-text">Home Energy Audit — what it is, aspects of conservation, issues and solutions</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Jun-22 Q6d — issues and solutions</span>
+        <span class="etag">Jun-21 Q2b — different aspects of conservation</span>
+      </div>
+
+      <div class="ans-label">What is a Home Energy Audit?</div>
+      <div class="ans-body"><p>A home energy audit is a <strong>systematic inspection of a house to identify where energy is being wasted</strong> and what measures will be most cost-effective to fix it. It is like a health check-up for your house's energy use. It looks at every system — building envelope, heating/cooling, lighting, appliances, and hot water — and produces a prioritised action list with estimated savings and payback periods.</p></div>
+
+      <div class="ans-label">8 Aspects of Conservation Checked in a Home Audit</div>
+      <ol class="num-list">
+        <li><strong>Building envelope</strong> — roof insulation, wall insulation, floor insulation. Is heat escaping in winter? Is it entering in summer? Thermal imaging cameras reveal hot spots.</li>
+        <li><strong>Windows and doors</strong> — single vs double glazing, gaps in door frames, quality of seals. Gaps cause "invisible" energy losses of 15–25%.</li>
+        <li><strong>Lighting</strong> — are all bulbs LED? Are lights left on in empty rooms? Motion sensors and timers can cut lighting energy 40–60%.</li>
+        <li><strong>Appliances</strong> — age and star rating of fridge, AC, washing machine, water heater, TV. Replacing a 10-year-old 2-star fridge with a 5-star model pays back within 3 years.</li>
+        <li><strong>Heating and cooling (HVAC)</strong> — AC efficiency rating (ISEER), thermostat settings, duct leaks, filter cleanliness. AC is typically 40–50% of the electricity bill.</li>
+        <li><strong>Water heating</strong> — electric geyser vs solar water heater. Solar pays back in 3–5 years in most Indian cities.</li>
+        <li><strong>Standby loads</strong> — TVs, chargers, set-top boxes left on standby consume 10% of home energy silently. A power strip with a master switch eliminates this.</li>
+        <li><strong>Renewable energy potential</strong> — roof area and orientation for solar panels, estimate of generation vs consumption.</li>
+      </ol>
+
+      <div class="ans-label">Issues and Solutions (Jun-22 Q6d)</div>
+      <table class="kv-table">
+        <tr><th>Issue</th><th>Solution</th></tr>
+        <tr><td>Lack of awareness — people don't know how much each appliance costs</td><td>Smart meters and disaggregated energy bills showing cost per appliance</td></tr>
+        <tr><td>High upfront cost of efficient appliances</td><td>EMI schemes, subsidy for BEE 5-star, financing through utility companies (on-bill financing)</td></tr>
+        <tr><td>Renter vs owner problem — tenant pays bills but owner buys appliances</td><td>Policy mandates minimum efficiency for rental housing</td></tr>
+        <tr><td>Split incentive in commercial buildings — developer builds cheaply, occupant pays bills</td><td>Building codes (ECBC) mandate efficiency at construction stage</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Q5: DSM short note -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">1 paper</span>
+      <span class="q-text">Short note: Demand-Side Management (DSM)</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Dec-21 Q6b</span><span class="etag">SAQ 2</span></div>
+      <div class="ans-label">Definition</div>
+      <div class="ans-body"><p>DSM is the <strong>planning, implementation and monitoring of activities by utilities and governments to influence WHEN and HOW MUCH electricity customers use</strong>. The goal is to flatten the demand curve — reduce peaks and fill valleys — so less generation capacity is needed overall.</p></div>
+
+      <div class="ans-label">Why DSM?</div>
+      <div class="ans-body"><p>The electricity grid must be built for PEAK demand — but peak lasts only a few hours per day. A power plant sitting idle 20 hours/day to serve 4 hours of peak is hugely wasteful. DSM shifts demand away from peaks → smaller grid needed → lower investment → cheaper electricity.</p></div>
+
+      <div class="ans-label">5 Key DSM Strategies</div>
+      <ol class="num-list">
+        <li><strong>Time-of-Use (TOU) tariffs</strong> — electricity is cheaper at night and expensive in peak hours. Consumers shift washing machines, EV charging, and industrial operations to off-peak times.</li>
+        <li><strong>Energy efficiency standards</strong> — mandatory minimum efficiency for appliances, buildings, and motors removes the least efficient products from the market permanently.</li>
+        <li><strong>Smart meters</strong> — real-time consumption data helps consumers see and respond to their energy use. Utilities can remotely manage loads during grid emergencies.</li>
+        <li><strong>Load shedding programmes</strong> — large industrial consumers voluntarily reduce load during peaks in exchange for lower tariffs (interruptible supply contracts).</li>
+        <li><strong>Energy audit programmes</strong> — professional audits identify waste in homes and commercial buildings; result in efficiency investments that permanently reduce demand.</li>
+      </ol>
+      <div class="hbox gold">Key point: DSM is the cheapest MW — "negawatt" (a megawatt of demand that never needs to be generated) is always cheaper than building a new power plant. India's BEE runs the PAT scheme and UJALA as the country's main DSM programmes.</div>
+    </div>
+  </div>
+
+  <!-- Q6: Government roles in energy planning — 3 papers -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 3 papers</span>
+      <span class="q-text">Role of national/state government in energy planning process</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-23 Q2a — national govt</span>
+        <span class="etag">Jun-25 Q6c — state govt</span>
+        <span class="etag">Jun-24 Q6c — state govt</span>
+      </div>
+      <div class="diag-wrap">
+        <svg viewBox="0 0 700 100" xmlns="http://www.w3.org/2000/svg" width="100%">
+          <rect width="700" height="100" fill="#161b27" rx="6"/>
+          <!-- National -->
+          <rect x="5" y="10" width="210" height="80" rx="5" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+          <text x="110" y="28" fill="#7dd3fc" font-size="9" font-weight="bold" text-anchor="middle">🏛 NATIONAL GOVT</text>
+          <text x="110" y="42" fill="#94a3b8" font-size="8" text-anchor="middle">Set national energy policy + NDCs</text>
+          <text x="110" y="54" fill="#94a3b8" font-size="8" text-anchor="middle">CERC (Central Electricity Regulatory</text>
+          <text x="110" y="64" fill="#94a3b8" font-size="8" text-anchor="middle">Commission) sets wholesale tariffs</text>
+          <text x="110" y="76" fill="#94a3b8" font-size="8" text-anchor="middle">Fund rural electrification nationally</text>
+          <text x="110" y="88" fill="#64748b" font-size="7" text-anchor="middle">Electricity Act 2003 | MoP | BEE</text>
+          <!-- Arrow -->
+          <line x1="215" y1="50" x2="240" y2="50" stroke="#7dd3fc" stroke-width="1.5"/>
+          <polygon points="238,46 248,50 238,54" fill="#7dd3fc"/>
+          <!-- State -->
+          <rect x="249" y="10" width="210" height="80" rx="5" fill="#0d2b1e" stroke="#10b981" stroke-width="1.5"/>
+          <text x="354" y="28" fill="#6ee7b7" font-size="9" font-weight="bold" text-anchor="middle">🏢 STATE GOVT</text>
+          <text x="354" y="42" fill="#94a3b8" font-size="8" text-anchor="middle">SERC (State Electricity Regulatory</text>
+          <text x="354" y="54" fill="#94a3b8" font-size="8" text-anchor="middle">Commission) sets retail tariffs</text>
+          <text x="354" y="66" fill="#94a3b8" font-size="8" text-anchor="middle">Manage DISCOM (distribution utility)</text>
+          <text x="354" y="78" fill="#94a3b8" font-size="8" text-anchor="middle">Enforce ECBC, rural electrification</text>
+          <text x="354" y="88" fill="#64748b" font-size="7" text-anchor="middle">State Nodal Agency for energy efficiency</text>
+          <!-- Arrow -->
+          <line x1="459" y1="50" x2="484" y2="50" stroke="#7dd3fc" stroke-width="1.5"/>
+          <polygon points="482,46 492,50 482,54" fill="#7dd3fc"/>
+          <!-- Local -->
+          <rect x="493" y="10" width="200" height="80" rx="5" fill="#162032" stroke="#f59e0b" stroke-width="1.5"/>
+          <text x="593" y="28" fill="#fcd34d" font-size="9" font-weight="bold" text-anchor="middle">🏘 LOCAL / ULB</text>
+          <text x="593" y="42" fill="#94a3b8" font-size="8" text-anchor="middle">Urban Local Body enforces</text>
+          <text x="593" y="54" fill="#94a3b8" font-size="8" text-anchor="middle">building permits (passive solar)</text>
+          <text x="593" y="66" fill="#94a3b8" font-size="8" text-anchor="middle">Street lighting → LED (50% savings)</text>
+          <text x="593" y="78" fill="#94a3b8" font-size="8" text-anchor="middle">Water pumping efficiency</text>
+          <text x="593" y="88" fill="#64748b" font-size="7" text-anchor="middle">Panchayat: village biogas, solar</text>
+        </svg>
+        <div class="diag-label">India's three-tier energy governance: National → State → Local</div>
+      </div>
+
+      <div class="ans-label">Role of State Government specifically (Jun-25 Q6c / Jun-24 Q6c)</div>
+      <ol class="num-list">
+        <li><strong>SERC (State Electricity Regulatory Commission)</strong> — independent body that sets retail electricity tariffs, issues licences to DISCOMs, and adjudicates disputes between generators, utilities and consumers</li>
+        <li><strong>DISCOM management</strong> — state government is the majority owner of distribution companies; ensures T&D losses are reduced (India average 20%, target 10%)</li>
+        <li><strong>Renewable energy development</strong> — allocate land for solar parks and wind farms; create state RE policy (solar rooftop subsidies, net metering)</li>
+        <li><strong>Rural electrification</strong> — implement PM-KUSUM, PM Surya Ghar, and last-mile grid extension to remote villages</li>
+        <li><strong>Energy efficiency enforcement</strong> — enforce ECBC for buildings; implement PAT scheme for large industrial units; promote LED street lighting</li>
+        <li><strong>State energy plan</strong> — develop 5-year energy plans aligned with national policy but adapted to state's specific resource base</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Q7: Multi-use building + waste heat + infrastructure efficiency -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 2 papers</span>
+      <span class="q-text">Multi-use building concept / Waste heat utilisation / Infrastructure efficiency strategies</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Jun-20 Q2a — infrastructure efficiency</span>
+        <span class="etag">Jun-20 Q2b — multi-use building + waste heat</span>
+      </div>
+
+      <div class="ans-label">Multi-Use Building Concept</div>
+      <div class="ans-body"><p>A multi-use (mixed-use) building combines offices, residences, retail and services in one structure. Energy benefit: each use has a <strong>different peak demand time</strong> — offices peak at 9–5, residences at 6–11pm, restaurants at 12–2pm and 7–10pm. Combined, the load curve is <strong>flatter throughout the day</strong> — so the building needs smaller HVAC equipment and draws less peak power from the grid. Shared infrastructure (elevators, parking, HVAC, solar panels) also reduces energy per square metre compared to separate buildings.</p></div>
+
+      <div class="ans-label">Waste Heat Utilisation (CHP — Combined Heat and Power)</div>
+      <div class="chain">
+        <span class="chain-item">Gas/biomass<br>fuel input</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">CHP engine<br>+ generator</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">Electricity<br>~35%</span>
+        <span class="chain-arrow">+</span>
+        <span class="chain-item">Exhaust heat<br>600°C waste</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">Heat Recovery<br>Unit (HRU)</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">District<br>heating/cooling</span>
+      </div>
+      <div class="ans-body" style="margin-top:8px;"><p>Simple gas turbine: 35% efficiency. With waste heat recovery (CHP): <strong>up to 85–90% efficiency</strong>. The "waste" heat that would be vented to atmosphere is instead captured and piped to nearby buildings for space heating, hot water, or fed to an absorption chiller for cooling. This is the most energy-efficient way to use any fuel.</p></div>
+
+      <div class="ans-label">Infrastructure Efficiency Strategies (Jun-20 Q2a)</div>
+      <ol class="num-list">
+        <li><strong>Power supply</strong> — reduce T&D (transmission and distribution) losses; India average is 20%, world best practice is 5–6%. Smart grid technology monitors losses in real time.</li>
+        <li><strong>Water supply</strong> — energy-efficient pumps, leak detection (30–40% of treated water is lost to leaks in India), gravity flow designs to reduce pumping energy. Water pumping is often the biggest electricity cost for municipalities.</li>
+        <li><strong>Wastewater</strong> — biogas from sewage treatment plants (sewage sludge ferments to methane); India's Namami Gange programme includes biogas recovery from sewage.</li>
+        <li><strong>Recycled water</strong> — treated effluent used for industrial cooling towers reduces freshwater demand AND pumping energy.</li>
+        <li><strong>Solid waste</strong> — waste-to-energy plants convert municipal solid waste (MSW) to electricity; India generates 1.5 lakh tonnes MSW/day — largely wasted potential.</li>
+        <li><strong>Smart grid</strong> — real-time monitoring, automated fault detection, and integration of distributed solar generation all reduce system losses and improve resilience.</li>
+      </ol>
+    </div>
+  </div>
+
+</div><!-- end unit 7 -->
+
+
+<!-- ════════════════════════════ UNIT 8 ════════════════════════════ -->
+<div class="unit-content" id="u8">
+
+  <!-- Q1: India's energy sources + problems + GHG efforts -->
+  <div class="qa-card open">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ All 3 exam questions</span>
+      <span class="q-text">India's major energy sources, problems with their use, and GHG policy efforts</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Jun-22 Q1c — sources + problems + 4 GHG efforts</span>
+        <span class="etag">Jun-19 Q3b — measures to meet energy policy goals</span>
+        <span class="etag">Jun-19 Q4a — Indian Biomass Production Programme</span>
+      </div>
+
+      <div class="ans-label">India's Major Energy Sources and Their Problems</div>
+      <table class="kv-table">
+        <tr><th>Source</th><th>Current Status</th><th>Key Problem</th></tr>
+        <tr><td><strong>Coal</strong></td><td>~230 GW installed, 70% of electricity</td><td>Largest CO₂ source; SO₂, fly ash; mining displacement; water pollution from ash ponds</td></tr>
+        <tr><td><strong>Crude Oil</strong></td><td>85% imported (~$130 Bn/yr forex outgo)</td><td>Energy security risk; price volatility; transport emissions; import dependency</td></tr>
+        <tr><td><strong>Traditional Biomass</strong></td><td>70%+ rural households for cooking</td><td>Indoor air pollution (kills ~500,000 Indians/yr); deforestation; time burden on women</td></tr>
+        <tr><td><strong>Natural Gas</strong></td><td>Limited domestic; LNG imported</td><td>Expensive LNG imports; limited pipeline network; seasonal supply gaps</td></tr>
+        <tr><td><strong>Nuclear</strong></td><td>~7.5 GW (slow addition)</td><td>Long construction time; uranium import needed; public safety perception</td></tr>
+        <tr><td><strong>Kerosene</strong></td><td>Being phased out (replaced by LPG/solar)</td><td>Polluting; adulterated as diesel; health hazard; subsidised → fiscal drain</td></tr>
+      </table>
+
+      <div class="ans-label">India's GHG Policy Efforts — 8 Key Programmes (Jun-22 Q1c — pick any 4)</div>
+      <ol class="num-list">
+        <li><strong>National Solar Mission (NSM)</strong> — target 500 GW renewable energy by 2030. World's largest solar parks at Pavagada (2050 MW, Karnataka) and Bhadla (2245 MW, Rajasthan).</li>
+        <li><strong>National Action Plan on Climate Change (NAPCC, 2008)</strong> — 8 national missions: Solar, Enhanced Energy Efficiency, Sustainable Habitat, Water, Himalayan Ecosystem, Green India, Sustainable Agriculture, Strategic Knowledge for Climate Change.</li>
+        <li><strong>UJALA and PAT Scheme (BEE)</strong> — UJALA distributed 360 million LEDs, saving 47 Bn kWh/year. PAT (Perform Achieve and Trade) mandates energy efficiency in large industries with tradeable Energy Saving Certificates (ESCerts).</li>
+        <li><strong>International Solar Alliance (ISA)</strong> — co-founded by India and France in 2015. 120+ member nations. Mobilises $1 trillion for solar deployment globally, especially in developing nations.</li>
+        <li><strong>Pradhan Mantri Ujjwala Yojana (PMUY)</strong> — 90 million free LPG connections to BPL households, replacing firewood with clean cooking fuel. Directly reduces indoor air pollution and deforestation.</li>
+        <li><strong>FAME India (Faster Adoption and Manufacturing of EVs)</strong> — subsidises purchase of electric two-wheelers, buses and cars; funds charging infrastructure. Target: 30% EV sales share by 2030.</li>
+        <li><strong>National Green Hydrogen Mission (2023)</strong> — target 5 million tonnes green hydrogen/year by 2030 for industrial use and export. Uses surplus renewable electricity for electrolysis.</li>
+        <li><strong>NDC Commitments (Paris Agreement, updated 2022)</strong> — 45% GDP emission intensity cut, 50% non-fossil electricity capacity, net-zero by 2070.</li>
+      </ol>
+
+      <div class="ans-label">Indian Biomass Production Programme — Key Initiatives (Jun-19 Q4a)</div>
+      <ol class="num-list">
+        <li><strong>National Biomass Cookstoves Initiative (NBCI)</strong> — promotes improved biomass cookstoves (ICS) that use 30–50% less firewood and cut indoor smoke. CDM credits earned.</li>
+        <li><strong>National Biogas and Manure Management Programme (NBMMP)</strong> — 50 lakh family biogas plants installed using cattle dung. Provides clean cooking gas + organic fertiliser.</li>
+        <li><strong>Biomass Power and Co-generation Programme</strong> — utilises agricultural residues (paddy husk, sugarcane bagasse) for electricity. Target: 10 GW biomass power.</li>
+        <li><strong>National Policy on Biofuels (2018)</strong> — 20% ethanol blending in petrol by 2025 (E20). Biodiesel from Jatropha and Karanja for diesel blending.</li>
+        <li><strong>Waste to Energy Programme</strong> — municipal solid waste (MSW) → electricity via gasification, incineration, or landfill gas capture.</li>
+        <li><strong>Biomass Atlas of India</strong> — GIS-based district-wise mapping of biomass availability to guide project investment decisions.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Q2: Unresolved issues + sector-wise requirements -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">Terminal</span>
+      <span class="q-text">Unresolved issues in India's energy sector / Sector-wise sustainable requirements</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Terminal Q2 — unresolved issues</span>
+        <span class="etag">Terminal Q3 — sector-wise requirements</span>
+        <span class="etag">SAQ 3 — holistic view of energy policy</span>
+      </div>
+      <div class="ans-label">Unresolved Issues in India's Energy Sector</div>
+      <ol class="num-list">
+        <li><strong>DISCOM financial stress</strong> — state distribution companies (DISCOMs) owe ₹6+ lakh crore in accumulated losses. They cannot invest in grid upgrades or pay generators on time. Root cause: politically-motivated free/cheap electricity to agriculture.</li>
+        <li><strong>High T&D losses (~20%)</strong> — electricity theft, old equipment and poor metering mean 20% of generated electricity is never billed. World best practice is 5–6%.</li>
+        <li><strong>Unreliable rural supply</strong> — villages are "electrified" on paper but get 4–8 hours of supply daily. Electrification ≠ reliable electricity.</li>
+        <li><strong>Coal logistics bottlenecks</strong> — Coal India supply disruptions, inadequate rail capacity to move coal from mines to power plants → plants run at low capacity factors.</li>
+        <li><strong>Grid integration of renewables</strong> — solar and wind are variable. Old grid infrastructure cannot absorb large shares of renewables without storage and grid flexibility upgrades.</li>
+        <li><strong>Land acquisition delays</strong> — solar parks, wind farms, and transmission lines all face delays due to land rights, forest clearance, and community opposition.</li>
+        <li><strong>Cooking fuel transition</strong> — 60 million+ households received Ujjwala LPG connections but cannot afford refills; revert to firewood. Last-mile affordability remains unsolved.</li>
+      </ol>
+
+      <div class="ans-label">Sector-wise Sustainable Energy Requirements</div>
+      <table class="kv-table">
+        <tr><th>Sector</th><th>Key Need</th><th>Sustainable Measure</th></tr>
+        <tr><td><strong>Residential</strong></td><td>Clean cooking, reliable lighting</td><td>LPG/biogas for cooking · LED + solar · Solar water heater · 5-star appliances</td></tr>
+        <tr><td><strong>Industrial</strong></td><td>Reduce specific energy consumption</td><td>PAT scheme · ISO 50001 · VFDs · Waste heat recovery · Fuel switch to gas/H₂</td></tr>
+        <tr><td><strong>Transport</strong></td><td>Cut oil import dependence</td><td>EVs + FAME scheme · E20 ethanol blending · Metro and BRT · Freight rail modal shift</td></tr>
+        <tr><td><strong>Agriculture</strong></td><td>Reliable affordable irrigation power</td><td>PM-KUSUM solar pumps · Feeder separation · Drip irrigation · Energy-efficient pumps</td></tr>
+        <tr><td><strong>Commercial</strong></td><td>Efficient buildings</td><td>ECBC compliance · GRIHA/LEED green buildings · Rooftop solar · LED + BAS</td></tr>
+      </table>
+
+      <div class="hbox blue">Holistic view: Energy policy cannot be designed in isolation. Subsidised electricity to agriculture wastes water (over-irrigation) AND worsens DISCOM finances AND reduces solar investment signals simultaneously. Every energy policy decision crosses sector boundaries — water, forests, health, climate, finance are all connected.</div>
+    </div>
+  </div>
+
+  <!-- Q3: Rural energy challenges -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">Terminal Q4</span>
+      <span class="q-text">Challenges before rural energy planning in India and how to face them</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Terminal Q4</span><span class="etag">SAQ 5</span></div>
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title" style="color:#f87171;">🚧 Challenges</div>
+          <ol class="num-list">
+            <li><strong>Biomass dependence</strong> — open chulha at 10–15% efficiency; indoor air pollution; women spend 4–6 hours/day collecting wood</li>
+            <li><strong>Unreliable grid</strong> — 4–8 hrs supply/day; voltage fluctuations damage equipment; no reliable power for productive use</li>
+            <li><strong>Last-mile cost</strong> — extending grid to remote/hilly/forest-fringe villages is expensive; Rs.1–2 lakh per connection in difficult terrain</li>
+            <li><strong>Diesel pump sets</strong> — 25 million diesel irrigation pumps; expensive fuel; polluting; no power in fields</li>
+            <li><strong>Kerosene for lighting</strong> — expensive, smoky, fire hazard; being replaced by solar but affordability a barrier</li>
+            <li><strong>Affordability</strong> — even where LPG is available, refill cost is unaffordable for BPL families (₹900+ per cylinder)</li>
+          </ol>
+        </div>
+        <div class="col-box">
+          <div class="col-title" style="color:#4ade80;">✅ Solutions</div>
+          <ol class="num-list">
+            <li><strong>Improved cookstoves (ICS)</strong> + LPG/biogas → replace open biomass burning → cut indoor pollution + deforestation</li>
+            <li><strong>Solar micro-grids</strong> for clusters of 50–500 households where grid extension is uneconomical; proven in Chhattisgarh, Bihar, Odisha</li>
+            <li><strong>PM-KUSUM scheme</strong> — solar pumps for 35 lakh farmers; save Rs.40,000/yr per farmer on diesel; solar surplus sold to grid</li>
+            <li><strong>Solar home systems</strong> — PM Surya Ghar Muft Bijli Yojana — free rooftop solar for 1 crore homes; replaces kerosene for lighting</li>
+            <li><strong>Biogas (NBMMP)</strong> — family biogas plant using 2 cattle heads produces enough gas for cooking; digestate = fertiliser</li>
+            <li><strong>Feeder separation</strong> — separate agricultural and residential feeders → farmers get reliable supply on timer; residential supply 24×7</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end unit 8 -->
+
+
+<!-- ════════════════════════════ UNIT 9 ════════════════════════════ -->
+<div class="unit-content" id="u9">
+
+  <!-- Q1: Energy Economics — factors, definition — 3 papers -->
+  <div class="qa-card open">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 3 papers</span>
+      <span class="q-text">What is Energy Economics? Factors to consider / Price elasticity and inelasticity</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-22 Q3b — factors + price elasticity</span>
+        <span class="etag">Jun-22 Q3b — definition + two factors</span>
+        <span class="etag">Terminal Q1 · SAQ 1</span>
+      </div>
+
+      <div class="ans-label">Definition</div>
+      <div class="ans-body"><p>Energy economics is the <strong>application of economic principles to the production, distribution, consumption and regulation of energy</strong>. It asks: How much energy will be demanded at what price? What is the most efficient energy supply mix? How do we price pollution? How do energy subsidies distort markets? It bridges engineering (how energy is produced) with economics (who pays, how much, and what are the incentives).</p></div>
+
+      <div class="ans-label">Key Concerns / Factors in Energy Economics</div>
+      <ol class="num-list">
+        <li><strong>Energy demand and its response to price</strong> — how much does demand change when price rises? (see price elasticity below)</li>
+        <li><strong>Energy supply costs</strong> — capital cost, operating cost, fuel cost, and externalities (pollution costs) of each energy source</li>
+        <li><strong>Market structure</strong> — is the energy sector a natural monopoly (electricity distribution) or competitive (electricity generation)? Monopolies need regulation.</li>
+        <li><strong>Subsidies and their distortions</strong> — energy subsidies keep prices below cost, encouraging wasteful consumption and discouraging investment in efficiency</li>
+        <li><strong>Environmental externalities</strong> — costs of pollution (health damage, climate change) are not included in market prices; economic instruments (carbon tax, cap-and-trade) are needed to correct this</li>
+        <li><strong>Energy security economics</strong> — the cost of import dependence, price volatility risk, and value of domestic energy sources for national security</li>
+        <li><strong>Investment economics</strong> — long-lived energy infrastructure (power plants, pipelines, grids) needs long-term price certainty; uncertainty kills investment</li>
+      </ol>
+
+      <div class="ans-label">Price Elasticity and Inelasticity of Energy Demand (Dec-22 Q3b)</div>
+      <div class="ans-body"><p><strong>Price elasticity of demand</strong> = (% change in quantity demanded) ÷ (% change in price). If a 10% price rise causes a 5% drop in consumption, elasticity = -0.5 (inelastic).</p></div>
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title" style="color:#f87171;">📌 Price Inelastic (short run)</div>
+          <ul class="pt-list">
+            <li>If electricity prices rise 20%, people still need to cook, heat, run factories</li>
+            <li>Elasticity typically <strong>-0.1 to -0.4</strong> in short run</li>
+            <li>Cannot switch appliances overnight — locked into existing equipment</li>
+            <li>Energy is a necessity — no substitutes in the short run</li>
+            <li>Implication: carbon taxes must be sustained long-term to change behaviour</li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="col-title" style="color:#4ade80;">📌 More Elastic (long run)</div>
+          <ul class="pt-list">
+            <li>Over 5–10 years, people buy efficient appliances, insulate homes, switch fuels</li>
+            <li>Elasticity typically <strong>-0.5 to -1.0</strong> in long run</li>
+            <li>Industries invest in efficient equipment; switch from oil to gas</li>
+            <li>High long-run price signals → innovation in clean technology</li>
+            <li>Oil price spike 1973 → triggered 30 years of energy efficiency innovation in OECD</li>
+          </ul>
+        </div>
+      </div>
+      <div class="hbox gold">💡 Key exam point: Energy demand is a <strong>derived demand</strong> — people don't want energy itself, they want warm rooms, cooked food, light, and mobility. This is the basis of the "end-use energy services approach" — focus on providing services efficiently, not on supplying maximum energy quantity.</div>
+    </div>
+  </div>
+
+  <!-- Q2: Environmental Economics — scope, methods -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 3 papers</span>
+      <span class="q-text">Environmental economics — what it is, scope, two methods, justify the statement</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-23 Q1b — scope</span>
+        <span class="etag">Dec-21 Q2b — compare two methods</span>
+        <span class="etag">Jun-19 Q6b — justify the statement</span>
+        <span class="etag">SAQ 2 · Terminal Q2</span>
+      </div>
+
+      <div class="ans-label">Definition and Scope</div>
+      <div class="ans-body">
+        <p>Environmental economics applies economic tools to understand and solve environmental problems. It studies how economic activity affects the environment and how environmental policies affect the economy. Its central insight: <strong>markets fail on environmental goods</strong> — clean air and a stable climate are not bought and sold in markets, so they get over-used and degraded (the "tragedy of the commons").</p>
+        <p>Scope includes: valuing environmental damage, designing carbon markets, analysing cost-effectiveness of pollution controls, measuring the economics of biodiversity loss, and evaluating environmental policies.</p>
+      </div>
+
+      <div class="ans-label">Two Methods of Environmental Economics (Dec-21 Q2b)</div>
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title" style="color:#7dd3fc;">① Command and Control (CAC)</div>
+          <ul class="pt-list">
+            <li>Government sets <strong>mandatory standards</strong> — emission limits, fuel standards, technology requirements</li>
+            <li>Polluters MUST comply or face fines/shutdown</li>
+            <li>Example: India's emission norms for coal plants (SO₂, NOₓ, particulate limits); vehicle emission standards (BS6)</li>
+            <li><strong>Advantage</strong>: certainty — the standard is achieved if enforced</li>
+            <li><strong>Disadvantage</strong>: one-size-fits-all; no incentive to do better than the standard; expensive to monitor and enforce</li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="col-title" style="color:#4ade80;">② Market-Based Instruments (MBI)</div>
+          <ul class="pt-list">
+            <li>Use <strong>price signals</strong> to change behaviour — make polluting expensive, clean cheap</li>
+            <li><strong>Carbon tax</strong>: polluters pay per tonne of CO₂ → incentive to reduce emissions</li>
+            <li><strong>Cap and Trade</strong>: total pollution capped; permits traded → cheapest reductions happen first (EU Emissions Trading System, ETS)</li>
+            <li><strong>Advantage</strong>: cost-effective — reductions happen where they are cheapest; incentive to innovate beyond standard</li>
+            <li><strong>Disadvantage</strong>: uncertain quantity outcome; politically difficult; can be gamed</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ans-label">Justifying the Statement (Jun-19 Q6b)</div>
+      <div class="ans-body"><p>"Environmental economics undertakes theoretical or empirical studies of the economic effects of national or local environmental policies around the world." This is justified because:</p></div>
+      <ul class="pt-list">
+        <li><strong>Theoretical studies</strong> — develop models of how carbon taxes will shift energy mix, how cap-and-trade markets find equilibrium prices, how subsidy removal affects consumption</li>
+        <li><strong>Empirical studies</strong> — measure actual outcomes: did Europe's ETS reduce emissions? Did India's PAT scheme cut industrial energy intensity? By how much? At what cost?</li>
+        <li><strong>Policy evaluation</strong> — compare effectiveness and cost of different instruments (tax vs standard vs subsidy vs trading) to advise governments on what works best in specific contexts</li>
+        <li><strong>Cross-country comparisons</strong> — what policy mix achieved the best results in Germany, Denmark, China, India? Generalise lessons for other nations</li>
+        <li>Without this analysis, energy and climate policy would be guesswork — environmental economics provides the evidence base for smart decisions</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q3: Economics of demand and supply / poverty and pollution -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">1 paper — 10 marks</span>
+      <span class="q-text">Economics of demand and supply of energy OR Problem of energy in eliminating poverty without polluting</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Dec-20 Q4 — 10M Either/Or</span></div>
+
+      <div class="ans-label">Option A: Economics of Demand and Supply of Energy</div>
+      <div class="ans-body"><p><strong>Demand side:</strong> Energy demand is derived demand — people want services (warmth, light, mobility), not energy itself. Demand is price-inelastic in short run (people can't switch technologies quickly) but more elastic long-term. Demand drivers: income, population, industrialisation, urbanisation, technology. DSM (Demand Side Management) can shift demand away from expensive peaks.</p>
+      <p><strong>Supply side:</strong> Energy supply involves capital-intensive, long-lived assets. Supply economics are determined by: capital cost (CAPEX), operating cost (OPEX), fuel cost, and externalities. The LCOE (Levelised Cost of Energy) allows fair comparison across technologies — solar LCOE in India is now ~₹2–3/kWh, cheaper than new coal. Supply responds slowly to price signals due to long construction lead times.</p>
+      <p><strong>Market equilibrium:</strong> In theory, price equates demand and supply. But energy markets fail because: monopoly power in transmission/distribution; environmental externalities not priced; information asymmetries; long-term investment horizon vs short-term markets. Hence, energy markets always need regulation and policy intervention.</p></div>
+
+      <div class="ans-label">Option B: Problem of Energy in Eliminating Poverty Without Polluting</div>
+      <div class="ans-body">
+        <p>The central dilemma: 700+ million people globally lack reliable electricity; 2.4 billion use dirty biomass for cooking. Lifting them out of poverty requires energy. But the conventional path — coal-based industrialisation — will make climate change catastrophic for the very same poor people, who are most vulnerable to floods, droughts and heat waves.</p>
+        <p><strong>The poverty-pollution-energy nexus:</strong></p>
+      </div>
+      <ul class="pt-list">
+        <li><strong>Energy poverty causes local pollution</strong> — biomass cooking kills 4 million people/year from indoor air pollution, mostly poor women and children in developing nations</li>
+        <li><strong>Development needs energy</strong> — no hospital can function without electricity; no cold chain for vaccines; no irrigation without pumps; no factory without power</li>
+        <li><strong>Clean energy is the solution, not the obstacle</strong> — solar home systems, biogas, and mini-grids can deliver clean energy to the rural poor often cheaper than grid extension</li>
+        <li><strong>Leapfrogging</strong> — developing nations can skip the dirty coal phase entirely, as mobile phones skipped landlines. Bangladesh built solar home systems for 6 million households without ever having grid electricity.</li>
+        <li><strong>Finance is the missing link</strong> — clean energy technology exists; the gap is affordable upfront capital. Climate finance ($100 billion/year promised but not delivered by North) and green bonds can close this gap.</li>
+      </ul>
+      <div class="hbox green">Key argument: The choice is NOT "poverty OR clean environment." Distributed renewable energy can deliver both — clean, affordable, reliable energy to the poor AND meet climate targets. The Sustainable Development Goal 7 (SDG7) — Affordable and Clean Energy for All — makes this the explicit global commitment.</div>
+    </div>
+  </div>
+
+  <!-- Q4: End-use energy services approach -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">Terminal Q3</span>
+      <span class="q-text">Demand-side, end-use oriented, energy-services approach in energy economics</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Terminal Q3</span><span class="etag">SAQ 4</span></div>
+      <div class="ans-label">What is the Energy Services Approach?</div>
+      <div class="ans-body">
+        <p>Traditional energy planning asked: "How much energy will we need?" The end-use energy services approach asks instead: <strong>"What services do people actually need, and what is the least-energy way to deliver them?"</strong></p>
+        <p>People don't want kilowatt-hours — they want:
+        <ul class="pt-list" style="margin-top:4px;">
+          <li><strong>Warmth</strong> — can be provided by less heating energy if the house is well-insulated</li>
+          <li><strong>Light</strong> — 10W LED gives same light as 100W incandescent bulb</li>
+          <li><strong>Cooked food</strong> — pressure cooker uses 3× less energy than open pot</li>
+          <li><strong>Cold storage</strong> — 5-star refrigerator uses 40% less energy for same cooling</li>
+          <li><strong>Mobility</strong> — metro system moves 40,000 people/hr on electricity; same as 20,000 cars but 1/10th the energy</li>
+        </ul>
+        </p>
+      </div>
+      <div class="ans-label">Why This Approach Matters</div>
+      <ul class="pt-list">
+        <li>Shifts focus from <strong>supply maximisation to service delivery</strong> — government doesn't need to build more plants if demand can be met with efficiency</li>
+        <li>Identifies the <strong>cheapest route</strong> to the same outcome — insulating a building is always cheaper than generating extra heating electricity</li>
+        <li>Breaks the assumed link between <strong>GDP growth and energy consumption growth</strong> — a service economy can grow rapidly with modest energy growth if efficiency improves fast enough</li>
+        <li>Supports the <strong>"negawatt" concept</strong> — a megawatt of demand that is permanently reduced by efficiency is worth more than a megawatt of new supply, because it keeps reducing costs forever</li>
+      </ul>
+      <div class="hbox gold">💡 Example: India's UJALA programme replaced 360 million incandescent bulbs with LEDs. Same light service, 80% less electricity. This "created" ~20,000 MW of virtual generation capacity — equivalent to 20 large power plants — without building a single generator.</div>
+    </div>
+  </div>
+
+  <!-- Q5: Imperatives for sustainable development -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">Terminal Q4</span>
+      <span class="q-text">Imperatives of energy economics for sustainable development</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Terminal Q4</span><span class="etag">SAQ 3 — indirect empirical methodologies</span></div>
+      <div class="ans-label">4 Economic Imperatives for Sustainable Energy Development</div>
+      <ol class="num-list">
+        <li><strong>Price environmental externalities</strong> — fossil fuels must reflect their true cost including health damage, climate damage and ecosystem destruction. IMF estimates global fossil fuel subsidies (including unpriced externalities) at $7 trillion/year. Until pollution is priced, markets will always choose the dirtiest cheapest option. Carbon tax or cap-and-trade corrects this market failure.</li>
+        <li><strong>Invest in long-term infrastructure</strong> — sustainable energy systems require patient capital. Solar parks last 25 years, grids 40 years, nuclear plants 50 years. Short-term financial thinking (quarterly profits) is incompatible with sustainable energy investment. Development banks, sovereign wealth funds, and green bonds provide the long-term capital that energy sustainability requires.</li>
+        <li><strong>Energy access as economic development</strong> — energy economics for sustainable development must treat energy access for the poor not as charity but as productive investment. Every Rs.1 spent on rural electrification generates Rs.4–6 in economic activity through agriculture, small businesses, healthcare and education. The economic case for universal energy access is overwhelming.</li>
+        <li><strong>Decouple economic growth from energy consumption</strong> — sustainable development requires growing GDP without proportionally growing energy use. This is achieved through efficiency (energy intensity declining), structural shift to services (less energy-intensive than manufacturing), and clean technology. Germany's GDP grew 25% while energy consumption fell 15% between 2000–2020 — proof that decoupling is achievable.</li>
+      </ol>
+
+      <div class="ans-label">Indirect Empirical Methodologies (SAQ 3)</div>
+      <div class="ans-body"><p>When environmental damage cannot be directly observed or priced, economists use indirect methods to estimate its value:</p></div>
+      <ul class="pt-list">
+        <li><strong>Hedonic pricing</strong> — house prices near a polluted power plant are lower; the price difference reveals the economic cost people assign to living near pollution</li>
+        <li><strong>Travel cost method</strong> — how much do people spend travelling to clean natural areas? Reveals their willingness to pay for clean environment</li>
+        <li><strong>Contingent valuation</strong> — survey people: "How much would you pay to prevent this pollution?" Measures stated preferences even for non-market goods</li>
+        <li><strong>Damage cost approach</strong> — calculate actual health costs, crop losses, and infrastructure damage caused by specific pollution sources (coal plant SO₂ → hospital admissions → cost per tonne SO₂)</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- end unit 9 -->
+
+</div><!-- container -->
+
+<script>
+function showUnit(id) {
+  document.querySelectorAll('.unit-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.unit-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const idx = {u7:0, u8:1, u9:2}[id];
+  document.querySelectorAll('.unit-tab')[idx].classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function toggle(header) {
+  header.closest('.qa-card').classList.toggle('open');
+}
+</script>
+</body>
+</html>
