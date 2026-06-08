@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MED-003 Study Guide — Units 13, 14 &amp; 15</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f1117; color: #e2e8f0; line-height: 1.65; }
+  .container { max-width: 960px; margin: 0 auto; padding: 24px 20px; }
+  h1 { color: #7dd3fc; font-size: 1.5rem; text-align: center; padding: 20px 0 6px; }
+  .tagline { text-align: center; color: #94a3b8; font-size: 0.85rem; margin-bottom: 28px; }
+  .unit-tabs { display: flex; gap: 10px; margin-bottom: 28px; flex-wrap: wrap; }
+  .unit-tab { padding: 10px 22px; border-radius: 24px; cursor: pointer; font-size: 0.85rem; font-weight: 600;
+    background: #1e2330; border: 2px solid #2d3748; color: #94a3b8; transition: all .2s; }
+  .unit-tab.active { background: #1e3a5f; border-color: #3b82f6; color: #7dd3fc; }
+  .unit-content { display: none; }
+  .unit-content.active { display: block; }
+  .qa-card { background: #1e2330; border-radius: 10px; margin-bottom: 16px; border: 1px solid #2d3748; overflow: hidden; }
+  .qa-header { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; cursor: pointer; user-select: none; }
+  .qa-header:hover { background: #252d3d; }
+  .q-badge { flex-shrink: 0; background: #1e3a5f; color: #7dd3fc; font-size: 0.7rem; font-weight: 700;
+    padding: 3px 8px; border-radius: 10px; margin-top: 2px; white-space: nowrap; }
+  .q-badge.rep { background: #2d1b4e; color: #f0abfc; }
+  .q-text { font-weight: 600; color: #f1f5f9; font-size: 0.92rem; flex: 1; }
+  .expand-icon { color: #4b5563; font-size: 1rem; margin-top: 2px; transition: transform .2s; flex-shrink: 0; }
+  .qa-card.open .expand-icon { transform: rotate(90deg); }
+  .qa-body { display: none; padding: 0 16px 18px; }
+  .qa-card.open .qa-body { display: block; }
+  .exam-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .etag { background: #162032; color: #67e8f9; font-size: 0.7rem; padding: 2px 8px; border-radius: 8px; border: 1px solid #1e3a5f; }
+  .ans-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: #fbbf24; margin: 12px 0 5px; }
+  .ans-body { color: #cbd5e1; font-size: 0.88rem; }
+  .ans-body p { margin-bottom: 8px; }
+  .chain { display: flex; flex-wrap: wrap; gap: 0; margin: 8px 0; align-items: center; }
+  .chain-item { background: #162032; color: #93c5fd; font-size: 0.77rem; padding: 5px 10px; border: 1px solid #1e3a5f; font-weight: 600; text-align: center; }
+  .chain-arrow { color: #fbbf24; font-size: 1rem; padding: 0 4px; }
+  .pt-list { list-style: none; margin: 6px 0; }
+  .pt-list li { padding: 3px 0 3px 16px; position: relative; font-size: 0.87rem; color: #cbd5e1; }
+  .pt-list li::before { content: '•'; position: absolute; left: 0; color: #fbbf24; }
+  .pt-list li strong { color: #f1f5f9; }
+  .num-list { list-style: none; margin: 6px 0; counter-reset: num; }
+  .num-list li { padding: 4px 0 4px 26px; position: relative; font-size: 0.87rem; color: #cbd5e1; counter-increment: num; }
+  .num-list li::before { content: counter(num); position: absolute; left: 0; background: #1e3a5f; color: #7dd3fc; font-size: 0.7rem; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; top: 5px; }
+  .num-list li strong { color: #f1f5f9; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 8px 0; }
+  .col-box { background: #161b27; border-radius: 6px; padding: 10px 12px; border: 1px solid #2d3748; }
+  .col-box .col-title { font-size: 0.75rem; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; }
+  .hbox { border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 0.85rem; }
+  .hbox.gold { background: #1a1200; border-left: 3px solid #fbbf24; color: #fcd34d; }
+  .hbox.green { background: #0d1a10; border-left: 3px solid #4ade80; color: #6ee7b7; }
+  .hbox.red { background: #1a0a0a; border-left: 3px solid #f87171; color: #fca5a5; }
+  .hbox.blue { background: #0a1020; border-left: 3px solid #3b82f6; color: #93c5fd; }
+  .diag-wrap { background: #161b27; border-radius: 8px; padding: 12px; margin: 12px 0; overflow-x: auto; }
+  .diag-label { font-size: 0.75rem; color: #64748b; margin-top: 6px; text-align: center; }
+  .rep-note { font-size: 0.75rem; color: #f0abfc; background: #1a0a2a; border-radius: 4px; padding: 3px 8px; margin-bottom: 8px; display: inline-block; }
+  .wc { font-size: 0.68rem; color: #64748b; margin-left: 6px; }
+  .kv-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; margin: 8px 0; }
+  .kv-table th { background: #1e3a5f; color: #7dd3fc; padding: 6px 10px; text-align: left; font-size: 0.78rem; }
+  .kv-table td { padding: 5px 10px; border-bottom: 1px solid #1e2a3a; color: #cbd5e1; vertical-align: top; }
+  .kv-table tr:nth-child(even) td { background: #161b27; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>MED-003 — Quick Exam Study Guide</h1>
+<p class="tagline">Units 13 · 14 · 15 &nbsp;|&nbsp; Every exam question answered &nbsp;|&nbsp; Plain English · Exam-ready</p>
+
+<div class="unit-tabs">
+  <div class="unit-tab active" onclick="showUnit('u13')">Unit 13 — Solar Energy</div>
+  <div class="unit-tab" onclick="showUnit('u14')">Unit 14 — Biomass</div>
+  <div class="unit-tab" onclick="showUnit('u15')">Unit 15 — Hydro &amp; Wind</div>
+</div>
+
+<!-- ════════════════════════════ UNIT 13 ════════════════════════════ -->
+<div class="unit-content active" id="u13">
+
+  <!-- Q1: Solar PV — components, applications, benefits — 6 papers -->
+  <div class="qa-card open">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 6 papers</span>
+      <span class="q-text">Solar PV — key components, applications, benefits in India, principle</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-25 Q5a — 5 benefits</span><span class="etag">Jun-24 Q6a — applications</span>
+        <span class="etag">Jun-22 Q4b — SPV + 2 applications</span><span class="etag">Jun-21 Q5b — 2 applications</span>
+        <span class="etag">Jun-19 Q7a — key components</span><span class="etag">Terminal Q2 · Q3 · SAQ 2</span>
+      </div>
+      <div class="rep-note">⚠ Solar PV appears in 6 papers — learn components + applications + benefits as one integrated answer</div>
+
+      <div class="ans-label">Principle of Solar PV (SAQ 2)</div>
+      <div class="ans-body"><p>Solar photovoltaic (PV) cells work on the <strong>photovoltaic effect</strong> — when photons (light particles) from the sun strike a semiconductor material, they knock electrons loose from their atoms, creating a flow of electrons = direct current (DC) electricity. No moving parts, no heat, no combustion.</p>
+      <p>Most common material: <strong>crystalline silicon</strong> (mono-crystalline: 20–22% efficiency; poly-crystalline: 15–17%). Other materials: thin-film (CdTe, CIGS: 10–13%); perovskite (emerging, high efficiency). India uses predominantly mono and poly-crystalline silicon panels.</p></div>
+
+      <div class="ans-label">Key Components of a Solar PV System (Jun-19 Q7a)</div>
+      <div class="diag-wrap">
+        <svg viewBox="0 0 720 90" xmlns="http://www.w3.org/2000/svg" width="100%">
+          <rect width="720" height="90" fill="#161b27" rx="6"/>
+          <defs><marker id="sp" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto">
+            <polygon points="0 0,8 2.5,0 5" fill="#fbbf24"/></marker></defs>
+          <!-- Solar panel -->
+          <rect x="5" y="15" width="120" height="60" rx="4" fill="#1e3a5f" stroke="#fbbf24" stroke-width="1.5"/>
+          <text x="65" y="38" fill="#fcd34d" font-size="9" font-weight="bold" text-anchor="middle">SOLAR PANELS</text>
+          <text x="65" y="52" fill="#94a3b8" font-size="8" text-anchor="middle">PV cells in series/parallel</text>
+          <text x="65" y="64" fill="#94a3b8" font-size="8" text-anchor="middle">Generates DC electricity</text>
+          <text x="65" y="82" fill="#64748b" font-size="7" text-anchor="middle">☀ Sunlight in</text>
+          <line x1="126" y1="45" x2="146" y2="45" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#sp)"/>
+          <!-- Charge controller -->
+          <rect x="147" y="15" width="120" height="60" rx="4" fill="#1a1020" stroke="#a855f7" stroke-width="1.5"/>
+          <text x="207" y="38" fill="#f0abfc" font-size="9" font-weight="bold" text-anchor="middle">CHARGE</text>
+          <text x="207" y="50" fill="#f0abfc" font-size="9" font-weight="bold" text-anchor="middle">CONTROLLER</text>
+          <text x="207" y="65" fill="#94a3b8" font-size="8" text-anchor="middle">Regulates battery charging</text>
+          <text x="207" y="76" fill="#94a3b8" font-size="8" text-anchor="middle">Prevents overcharge</text>
+          <line x1="268" y1="45" x2="288" y2="45" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#sp)"/>
+          <!-- Battery -->
+          <rect x="289" y="15" width="110" height="60" rx="4" fill="#292524" stroke="#f59e0b" stroke-width="1.5"/>
+          <text x="344" y="38" fill="#fcd34d" font-size="9" font-weight="bold" text-anchor="middle">BATTERY</text>
+          <text x="344" y="50" fill="#fcd34d" font-size="9" font-weight="bold" text-anchor="middle">STORAGE</text>
+          <text x="344" y="65" fill="#94a3b8" font-size="8" text-anchor="middle">Stores DC for night/cloudy</text>
+          <text x="344" y="76" fill="#94a3b8" font-size="8" text-anchor="middle">Lead-acid or Li-ion</text>
+          <line x1="400" y1="45" x2="420" y2="45" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#sp)"/>
+          <!-- Inverter -->
+          <rect x="421" y="15" width="120" height="60" rx="4" fill="#162032" stroke="#3b82f6" stroke-width="1.5"/>
+          <text x="481" y="38" fill="#7dd3fc" font-size="9" font-weight="bold" text-anchor="middle">INVERTER</text>
+          <text x="481" y="52" fill="#94a3b8" font-size="8" text-anchor="middle">DC → AC conversion</text>
+          <text x="481" y="65" fill="#94a3b8" font-size="8" text-anchor="middle">230V / 50Hz for appliances</text>
+          <text x="481" y="76" fill="#94a3b8" font-size="8" text-anchor="middle">Grid-tie or off-grid type</text>
+          <line x1="542" y1="45" x2="562" y2="45" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#sp)"/>
+          <!-- Load -->
+          <rect x="563" y="15" width="150" height="60" rx="4" fill="#0d2b1e" stroke="#10b981" stroke-width="1.5"/>
+          <text x="638" y="38" fill="#4ade80" font-size="9" font-weight="bold" text-anchor="middle">LOADS /</text>
+          <text x="638" y="50" fill="#4ade80" font-size="9" font-weight="bold" text-anchor="middle">GRID CONNECTION</text>
+          <text x="638" y="65" fill="#94a3b8" font-size="8" text-anchor="middle">Lights, fans, appliances</text>
+          <text x="638" y="76" fill="#94a3b8" font-size="8" text-anchor="middle">Or export to grid (net meter)</text>
+        </svg>
+        <div class="diag-label">5 key components of a solar PV system — panels → charge controller → battery → inverter → loads</div>
+      </div>
+      <div class="ans-body"><p>Additional components: <strong>mounting structure</strong> (fixed tilt or tracking), <strong>junction box</strong> (where panel strings connect), <strong>net meter</strong> (for grid-connected systems to measure import/export), <strong>DC/AC disconnect switches</strong> for safety.</p></div>
+
+      <div class="ans-label">5 Benefits of Solar PV in India (Dec-25 Q5a)</div>
+      <ol class="num-list">
+        <li><strong>Abundant resource</strong> — India receives 5–6 kWh/m²/day solar irradiation, among the world's best. 300+ sunny days/year in Rajasthan, Gujarat, Karnataka — making solar the obvious primary energy source.</li>
+        <li><strong>Rapidly falling costs</strong> — solar tariffs fell from ₹10/unit (2010) to ₹2.14/unit (2021), now cheaper than new coal. India's competitive auctions drove this price discovery.</li>
+        <li><strong>Energy security</strong> — solar is 100% domestic; reduces India's 85% crude oil import dependency. Every unit of solar electricity displaces imported oil or coal.</li>
+        <li><strong>Rural electrification</strong> — solar home systems and mini-grids can reach villages too remote for grid extension at lower cost. PM Surya Ghar scheme targets 1 crore households.</li>
+        <li><strong>Employment creation</strong> — solar installation, manufacturing, and O&M create local jobs. India aims to be a solar panel exporter (PLI scheme for domestic manufacturing).</li>
+      </ol>
+
+      <div class="ans-label">Applications of Solar PV (Jun-24 Q6a / Jun-21 Q5b)</div>
+      <ul class="pt-list">
+        <li><strong>Rooftop solar for homes and commercial buildings</strong> — PM Surya Ghar, net metering; reduces electricity bills to near zero</li>
+        <li><strong>Utility-scale solar parks</strong> — Pavagada (2050 MW), Bhadla (2245 MW); supplies grid electricity at record low cost</li>
+        <li><strong>Solar irrigation pumps</strong> — PM-KUSUM scheme; 35 lakh farmers get solar pumps replacing diesel; surplus power sold to grid</li>
+        <li><strong>Solar street lights</strong> — standalone poles in rural areas; no grid needed; run automatically at dusk</li>
+        <li><strong>Solar lanterns and home lighting systems</strong> — 5W–100W systems for kerosene replacement in off-grid areas</li>
+        <li><strong>Solar-powered telecom towers</strong> — 6 lakh telecom towers in India; solar + battery replacing diesel generators</li>
+        <li><strong>Space satellites</strong> — virtually all satellites use solar PV as their primary power source</li>
+        <li><strong>Electric vehicle charging</strong> — solar carports and charging stations for EVs</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q2: Solar thermal technologies — 5 papers -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 5 papers</span>
+      <span class="q-text">Solar thermal technologies — flat-plate collectors, types, applications, solar thermal power generation</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Jun-25 Q6d — types of collectors</span><span class="etag">Dec-24 Q6d — types of collectors</span>
+        <span class="etag">Jun-23 Q1c — flat-plate + 2 types</span><span class="etag">Jun-23 Q5b — collectors + solar cookers</span>
+        <span class="etag">Dec-22 Q8a — solar thermal power generation</span><span class="etag">Dec-20 Q5a · Jun-20 Q5a — short notes</span>
+      </div>
+
+      <div class="ans-label">Principle of Solar Thermal</div>
+      <div class="ans-body"><p>Solar thermal devices capture sunlight as <strong>heat</strong> (not electricity). A dark absorber surface absorbs solar radiation, heats a fluid (water, oil, or air), which is then used directly for hot water, cooking, space heating, or to generate steam for electricity. Efficiency is higher than PV for heat applications — up to 70% of solar energy captured as heat vs 20% as electricity.</p></div>
+
+      <div class="ans-label">Types of Solar Thermal Collectors (Jun-25 Q6d / Dec-24 Q6d / Jun-23 Q1c)</div>
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title" style="color:#fbbf24;">① Flat-Plate Collector (FPC)</div>
+          <ul class="pt-list">
+            <li>A box with a dark (black chrome) absorber plate, transparent glass cover, and insulated back</li>
+            <li>Water pipes run through/on the absorber plate</li>
+            <li>Sun heats the absorber → water heated to <strong>40–80°C</strong></li>
+            <li><strong>Use:</strong> domestic hot water, space heating, solar water heaters (India — 10 million installed)</li>
+            <li><strong>Types:</strong> Liquid flat-plate (water pipes) and Air flat-plate (air heated for space/crop drying)</li>
+            <li>Simple, durable, low maintenance</li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="col-title" style="color:#67e8f9;">② Evacuated Tube Collector (ETC)</div>
+          <ul class="pt-list">
+            <li>Glass tubes with vacuum between inner and outer tube — reduces heat loss dramatically</li>
+            <li>Works even on overcast days and in cold climates</li>
+            <li>Reaches <strong>80–120°C</strong> — higher than flat-plate</li>
+            <li><strong>Use:</strong> Industrial process heat, space heating in cold regions (Ladakh), better performance in winter</li>
+            <li>More expensive than FPC but better in low-irradiation conditions</li>
+          </ul>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title" style="color:#4ade80;">③ Concentrating Collectors (for power)</div>
+          <ul class="pt-list">
+            <li><strong>Parabolic Trough</strong> — curved mirrors focus sun onto a tube; reaches <strong>300–400°C</strong>; heats oil which generates steam for turbine</li>
+            <li><strong>Solar Tower (Power Tower)</strong> — hundreds of heliostats (tracking mirrors) focus on central receiver tower; reaches <strong>500–600°C</strong>; molten salt storage enables 24-hour operation</li>
+            <li><strong>Parabolic Dish</strong> — focuses on Stirling engine at focal point; reaches <strong>700–900°C</strong></li>
+            <li><strong>Use:</strong> Large-scale solar thermal power generation (CSP — Concentrated Solar Power)</li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="col-title" style="color:#f0abfc;">④ Solar Box Cooker</div>
+          <ul class="pt-list">
+            <li>Insulated box with reflective interior and glass lid; reflective flaps concentrate sunlight inside</li>
+            <li>Reaches <strong>100–150°C</strong> — enough to cook rice, dal, vegetables</li>
+            <li>No fuel cost; no indoor smoke; no fire risk</li>
+            <li>Cooking takes 2–3× longer than conventional; must face sun; doesn't work at night or in monsoon</li>
+            <li>India: 600,000+ solar cookers distributed through MNRE</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ans-label">Solar Thermal Power Generation (Dec-22 Q8a / Jun-20 Q5a)</div>
+      <div class="chain">
+        <span class="chain-item">Sunlight<br>concentrated</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">Heat fluid<br>300–600°C</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">Generate<br>steam</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">Spin turbine<br>+ generator</span>
+        <span class="chain-arrow">→</span>
+        <span class="chain-item">Electricity<br>to grid</span>
+      </div>
+      <div class="ans-body" style="margin-top:8px;"><p>CSP (Concentrated Solar Power) plants use mirrors or lenses to concentrate sunlight and generate heat, then steam, then electricity — just like a coal plant but with sunlight as the "fuel." Key advantage over solar PV: <strong>thermal energy storage</strong> — molten salt can store heat for 6–12 hours, allowing electricity generation after sunset. CSP plants in Spain (Gemasolar, 15 hours storage) operate nearly 24 hours per day. India's MNRE has a CSP policy; Rajasthan and Gujarat have the best CSP resource.</p></div>
+    </div>
+  </div>
+
+  <!-- Q3: Solar desalination + harnessing sun's light -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">2 papers</span>
+      <span class="q-text">Solar desalination / Harnessing sun's light as clean energy</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-23 Q8a — solar desalination</span>
+        <span class="etag">Dec-20 Q1a — harnessing sun as clean energy</span>
+      </div>
+
+      <div class="ans-label">Solar Desalination (Dec-23 Q8a)</div>
+      <div class="ans-body"><p>Solar desalination converts saline (salty) or brackish water into fresh water using solar energy — providing safe drinking water in coastal or arid areas where freshwater is scarce but sun and seawater are abundant. India's coastline of 7,500 km and island territories (Lakshadweep, Andaman) make this highly relevant.</p></div>
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title" style="color:#fbbf24;">Solar Still (Passive)</div>
+          <ul class="pt-list">
+            <li>Simple glass-covered basin with saline water inside</li>
+            <li>Sun heats water → evaporation → condensation on glass → drips into collection channel</li>
+            <li>Output: 2–5 litres/m²/day — small scale, no moving parts</li>
+            <li>Used in remote islands, disaster relief, rural coastal communities</li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="col-title" style="color:#67e8f9;">Solar-Powered RO (Active)</div>
+          <ul class="pt-list">
+            <li>Solar PV panels power an electric pump that forces seawater through semi-permeable membrane (Reverse Osmosis)</li>
+            <li>Higher output (thousands of litres/day) suitable for community supply</li>
+            <li>More expensive but scalable; batteries allow overnight operation</li>
+            <li>India: MNRE-funded pilot plants in coastal Tamil Nadu, Gujarat</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ans-label">Harnessing Sun's Light as Clean Energy (Dec-20 Q1a)</div>
+      <div class="ans-body"><p>The sun provides energy to Earth equivalent to <strong>10,000 times human annual energy consumption</strong> every single day — free, inexhaustible, and emission-free. Harnessing it as clean energy means capturing this flow without the pollution of fossil fuels:</p></div>
+      <ul class="pt-list">
+        <li><strong>Solar PV</strong> — direct conversion of sunlight to electricity via photovoltaic effect. Now cheapest electricity source in history (India: ₹2.14/unit).</li>
+        <li><strong>Solar thermal</strong> — capture heat for hot water, cooking, industrial processes, and power generation. 70%+ efficiency for direct heat applications.</li>
+        <li><strong>Passive solar design</strong> — orient buildings to use sunlight for natural heating, lighting and cooling without any technology at all.</li>
+        <li><strong>Why clean?</strong> Zero fuel combustion → zero CO₂, SO₂, NOₓ, particulates during operation. Life-cycle emissions only 20–50 g CO₂/kWh vs 820 g for coal.</li>
+        <li>India's potential: if 1% of India's land area were covered with solar panels, it could generate 3× India's total current electricity consumption.</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- end unit 13 -->
+
+
+<!-- ════════════════════════════ UNIT 14 ════════════════════════════ -->
+<div class="unit-content" id="u14">
+
+  <!-- Q1: Biomass definition + 3 feedstock categories — 4 papers -->
+  <div class="qa-card open">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 4 papers</span>
+      <span class="q-text">Define biomass / Three main categories of raw feedstock materials for biomass technologies</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-25 Q3a</span><span class="etag">Jun-24 Q2a</span>
+        <span class="etag">Jun-21 Q1c</span><span class="etag">Jun-20 Q5b — biomass technologies</span>
+      </div>
+      <div class="rep-note">⚠ 4 papers ask same question — definition + 3 feedstock categories is a fixed answer</div>
+
+      <div class="ans-label">Definition</div>
+      <div class="ans-body"><p>Biomass is <strong>any organic material derived from living or recently living organisms</strong> that can be used as an energy source. It includes plants, agricultural residues, animal waste, municipal organic waste, and forest products. Unlike fossil fuels (which are also organic but formed over millions of years), biomass is a <strong>renewable resource</strong> as long as it is harvested sustainably — because plants regrow, reabsorbing the CO₂ released when biomass is burned.</p></div>
+
+      <div class="ans-label">Three Main Categories of Raw Feedstock</div>
+      <div class="diag-wrap">
+        <svg viewBox="0 0 720 110" xmlns="http://www.w3.org/2000/svg" width="100%">
+          <rect width="720" height="110" fill="#161b27" rx="6"/>
+          <!-- Category 1 -->
+          <rect x="8" y="12" width="222" height="88" rx="5" fill="#0d1a10" stroke="#4ade80" stroke-width="1.5"/>
+          <rect x="8" y="12" width="222" height="26" fill="#14532d" rx="5"/>
+          <text x="119" y="29" fill="#4ade80" font-size="10" font-weight="bold" text-anchor="middle">① VIRGIN / DEDICATED BIOMASS</text>
+          <text x="15" y="52" fill="#e2e8f0" font-size="9">Energy crops grown specifically for energy</text>
+          <text x="15" y="66" fill="#94a3b8" font-size="8">• Jatropha, Karanja (biodiesel seeds)</text>
+          <text x="15" y="78" fill="#94a3b8" font-size="8">• Sweet sorghum, sugarcane (ethanol)</text>
+          <text x="15" y="90" fill="#94a3b8" font-size="8">• Short rotation coppice (poplar, willow)</text>
+          <!-- Category 2 -->
+          <rect x="248" y="12" width="222" height="88" rx="5" fill="#1a1020" stroke="#a855f7" stroke-width="1.5"/>
+          <rect x="248" y="12" width="222" height="26" fill="#2d1b4e" rx="5"/>
+          <text x="359" y="29" fill="#f0abfc" font-size="10" font-weight="bold" text-anchor="middle">② AGRICULTURAL RESIDUES</text>
+          <text x="255" y="52" fill="#e2e8f0" font-size="9">Waste from food crop production</text>
+          <text x="255" y="66" fill="#94a3b8" font-size="8">• Rice husk, paddy straw</text>
+          <text x="255" y="78" fill="#94a3b8" font-size="8">• Sugarcane bagasse, cotton stalks</text>
+          <text x="255" y="90" fill="#94a3b8" font-size="8">• Coconut shells, groundnut shells</text>
+          <!-- Category 3 -->
+          <rect x="488" y="12" width="224" height="88" rx="5" fill="#1a0a0a" stroke="#f59e0b" stroke-width="1.5"/>
+          <rect x="488" y="12" width="224" height="26" fill="#292524" rx="5"/>
+          <text x="600" y="29" fill="#fcd34d" font-size="10" font-weight="bold" text-anchor="middle">③ WASTES &amp; RESIDUES</text>
+          <text x="495" y="52" fill="#e2e8f0" font-size="9">Organic waste from households / industry</text>
+          <text x="495" y="66" fill="#94a3b8" font-size="8">• Municipal solid waste (organic fraction)</text>
+          <text x="495" y="78" fill="#94a3b8" font-size="8">• Cattle dung, poultry litter</text>
+          <text x="495" y="90" fill="#94a3b8" font-size="8">• Sewage sludge, food processing waste</text>
+        </svg>
+        <div class="diag-label">Three feedstock categories — exam answer should cover one example from each category</div>
+      </div>
+
+      <div class="ans-label">Biomass Potential and Advantages (Dec-21 Q1c)</div>
+      <ul class="pt-list">
+        <li><strong>India's biomass potential: ~500 million tonnes/year</strong> of agricultural residues alone; additional 400 MT from forests and municipal waste</li>
+        <li><strong>Carbon neutral</strong> — CO₂ released = CO₂ absorbed during plant growth (if sustainably managed)</li>
+        <li><strong>Dispatchable</strong> — unlike solar and wind, biomass power can run on demand, 24×7, as baseload</li>
+        <li><strong>Rural employment</strong> — biomass supply chains (collection, transport, processing) create millions of rural jobs</li>
+        <li><strong>Waste management</strong> — converts agricultural residues that would otherwise be burned in fields (causing severe air pollution — Punjab stubble burning) into useful energy</li>
+        <li><strong>Upgrades existing thermal infrastructure</strong> — coal plants can co-fire biomass with minimal modification (up to 30% biomass co-firing)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q2: Biogas plant — 3 papers — diagram required -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 3 papers — DIAGRAM REQUIRED</span>
+      <span class="q-text">Working of a biogas plant (fixed dome / Indian rural household) — with diagram</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-24 Q3a — simple Indian rural household biogas</span>
+        <span class="etag">Dec-22 Q2a — fixed dome, with diagram</span>
+        <span class="etag">Jun-22 Q3a — biogas plant, with diagram</span>
+      </div>
+
+      <div class="diag-wrap">
+        <svg viewBox="0 0 720 180" xmlns="http://www.w3.org/2000/svg" width="100%">
+          <rect width="720" height="180" fill="#161b27" rx="6"/>
+          <!-- Ground line -->
+          <rect x="0" y="90" width="720" height="8" fill="#374151" opacity="0.5"/>
+          <text x="360" y="105" fill="#64748b" font-size="8" text-anchor="middle">GROUND LEVEL</text>
+          <!-- Digester dome underground -->
+          <ellipse cx="280" cy="85" rx="160" ry="70" fill="#292524" stroke="#f59e0b" stroke-width="2"/>
+          <!-- Dome label -->
+          <text x="280" y="68" fill="#fcd34d" font-size="10" font-weight="bold" text-anchor="middle">DIGESTER (Underground)</text>
+          <text x="280" y="83" fill="#94a3b8" font-size="9" text-anchor="middle">Anaerobic digestion of slurry</text>
+          <text x="280" y="97" fill="#94a3b8" font-size="9" text-anchor="middle">30–40 days residence time</text>
+          <!-- Gas dome at top of digester -->
+          <ellipse cx="280" cy="22" rx="80" ry="22" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+          <text x="280" y="20" fill="#7dd3fc" font-size="9" font-weight="bold" text-anchor="middle">GAS DOME</text>
+          <text x="280" y="33" fill="#94a3b8" font-size="8" text-anchor="middle">Biogas collects here</text>
+          <!-- Inlet pipe -->
+          <rect x="60" y="70" width="60" height="25" rx="3" fill="#162032" stroke="#10b981" stroke-width="1.5"/>
+          <text x="90" y="82" fill="#4ade80" font-size="8" text-anchor="middle">INLET</text>
+          <text x="90" y="93" fill="#64748b" font-size="7" text-anchor="middle">Dung + water slurry</text>
+          <line x1="120" y1="82" x2="140" y2="82" stroke="#10b981" stroke-width="1.5"/>
+          <!-- Outlet/overflow tank -->
+          <rect x="400" y="70" width="70" height="55" rx="3" fill="#162032" stroke="#06b6d4" stroke-width="1.5"/>
+          <text x="435" y="88" fill="#67e8f9" font-size="8" text-anchor="middle">SLURRY</text>
+          <text x="435" y="100" fill="#67e8f9" font-size="8" text-anchor="middle">OUTLET</text>
+          <text x="435" y="115" fill="#64748b" font-size="7" text-anchor="middle">Digestate = fertiliser</text>
+          <line x1="420" y1="88" x2="440" y2="88" stroke="#06b6d4" stroke-width="1.5"/>
+          <!-- Gas pipe -->
+          <line x1="280" y1="0" x2="280" y2="22" stroke="#3b82f6" stroke-width="0"/>
+          <line x1="355" y1="22" x2="550" y2="22" stroke="#3b82f6" stroke-width="2"/>
+          <rect x="550" y="10" width="80" height="30" rx="3" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+          <text x="590" y="24" fill="#7dd3fc" font-size="8" font-weight="bold" text-anchor="middle">GAS PIPE</text>
+          <text x="590" y="35" fill="#94a3b8" font-size="7" text-anchor="middle">To kitchen/genset</text>
+          <!-- Gas composition -->
+          <rect x="540" y="50" width="170" height="45" rx="4" fill="#0f172a"/>
+          <text x="625" y="65" fill="#fbbf24" font-size="9" font-weight="bold" text-anchor="middle">Biogas composition:</text>
+          <text x="625" y="79" fill="#94a3b8" font-size="8" text-anchor="middle">CH₄ ~60% · CO₂ ~38% · H₂S ~2%</text>
+          <text x="625" y="90" fill="#64748b" font-size="7" text-anchor="middle">Calorific value: ~22 MJ/m³</text>
+          <!-- Pressure plate annotation -->
+          <ellipse cx="280" cy="50" rx="40" ry="10" fill="#374151" stroke="#6b7280" stroke-width="1" stroke-dasharray="3,2"/>
+          <text x="335" y="53" fill="#64748b" font-size="7">Gas pressure displaces</text>
+          <text x="335" y="63" fill="#64748b" font-size="7">slurry to outlet tank</text>
+          <!-- Underground label -->
+          <text x="100" y="148" fill="#64748b" font-size="8">Underground construction: brick/RCC dome</text>
+          <text x="100" y="160" fill="#64748b" font-size="8">Volume: 2–4 m³ for family of 5 with 2 cattle</text>
+          <text x="100" y="172" fill="#4ade80" font-size="8">Produces: ~1 m³ biogas/day per cattle head</text>
+        </svg>
+        <div class="diag-label">Fixed dome (Deenbandhu) biogas plant — India's standard rural design since 1984</div>
+      </div>
+
+      <div class="ans-label">How It Works — Step by Step</div>
+      <ol class="num-list">
+        <li><strong>Feeding</strong> — cattle dung mixed with equal volume of water (1:1 ratio) creates a slurry. Fed daily through the inlet pipe. A family with 2–3 cattle generates enough dung.</li>
+        <li><strong>Anaerobic digestion</strong> — in the sealed underground digester, anaerobic bacteria break down organic matter without oxygen over 30–40 days. They produce methane (CH₄) and CO₂ — biogas.</li>
+        <li><strong>Gas accumulation</strong> — biogas rises and collects in the dome above the slurry. As gas pressure builds, it pushes slurry out through the overflow pipe to the collection pit.</li>
+        <li><strong>Gas use</strong> — a pipe from the dome carries biogas to the kitchen for cooking (equivalent to 3–4 kg LPG/month) or to a generator for electricity.</li>
+        <li><strong>Digestate (effluent)</strong> — spent slurry in the collection pit is an excellent organic fertiliser (rich in nitrogen, phosphorus, potassium). Applied to fields → reduces chemical fertiliser cost.</li>
+      </ol>
+      <div class="hbox gold">Double benefit: 1 family biogas plant (2m³) saves ₹4,000/year on LPG + ₹3,000/year on chemical fertiliser = ₹7,000/year total. Payback in 2–3 years. India's NBMMP has installed 50 lakh such plants.</div>
+    </div>
+  </div>
+
+  <!-- Q3: Biomass direct combustion + waste as energy -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 3 papers</span>
+      <span class="q-text">Applications of biomass direct combustion / Waste as an energy resource</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Jun-25 Q2a — direct combustion applications</span>
+        <span class="etag">Dec-20 Q5d · Jun-22 Q6a — waste as energy resource</span>
+        <span class="etag">SAQ 2 — direct combustion + thermo-chemical</span>
+      </div>
+
+      <div class="ans-label">Applications of Biomass Direct Combustion</div>
+      <div class="ans-body"><p>Direct combustion means burning biomass in air to produce heat — the oldest energy technology humanity uses. Modern direct combustion is far more efficient and cleaner than open fires.</p></div>
+      <ol class="num-list">
+        <li><strong>Improved biomass cookstoves (ICS)</strong> — efficient combustion chambers that burn wood or crop residue at 35–45% efficiency (vs open chulha at 10–15%). Reduces fuel consumption 50% and smoke drastically. India's NBCI promotes these.</li>
+        <li><strong>Biomass power plants</strong> — agricultural residues (rice husk, bagasse, cotton stalks) burned in boilers to generate steam for turbines. India has ~11 GW installed biomass power capacity. Punjab's rice husk power plants run 8 months/year.</li>
+        <li><strong>Co-firing with coal</strong> — mixing 5–30% biomass with coal in existing thermal power plants. Reduces coal consumption and net CO₂ with minimal plant modification. Cost-effective de-carbonisation path for India's coal fleet.</li>
+        <li><strong>Industrial process heat</strong> — brick kilns, ceramic units, food processing plants, and tea factories use agricultural residue briquettes as fuel. Replaces coal or diesel.</li>
+        <li><strong>Biomass gasification</strong> — partial combustion of biomass (limited air) produces "producer gas" (CO + H₂ mixture) which runs diesel generator sets or industrial burners. Very efficient for rural power.</li>
+      </ol>
+
+      <div class="ans-label">Waste as an Energy Resource (Dec-20 Q5d / Jun-22 Q6a)</div>
+      <div class="ans-body"><p>India generates <strong>~1.5 lakh tonnes of Municipal Solid Waste (MSW) per day</strong>, most of which goes to open dumping grounds — creating land, water, and methane pollution. Converting this waste to energy solves two problems simultaneously: waste disposal AND electricity generation.</p></div>
+      <ul class="pt-list">
+        <li><strong>Waste-to-Energy (WtE) plants</strong> — MSW burned in specially designed incinerators (mass burn) with heat recovery boiler + turbine → electricity. Delhi's Okhla WtE plant (16 MW), Ghazipur plant (12 MW).</li>
+        <li><strong>Refuse Derived Fuel (RDF)</strong> — high-calorific portions of MSW (plastics, paper, textiles) processed into pellets and co-fired with coal in cement kilns and power plants.</li>
+        <li><strong>Landfill gas capture</strong> — existing landfills generate methane as organic waste decomposes. Pipes extract this gas and use it for electricity. Delhi's Bhalswa landfill has a gas recovery project.</li>
+        <li><strong>Biogas from food waste</strong> — hotels, markets, and institutions generate large amounts of food waste. Biogas plants process this anaerobically → cooking gas + fertiliser. Swachh Bharat Mission promotes this.</li>
+        <li><strong>Sewage gas from wastewater treatment plants</strong> — sewage sludge digestion generates biogas rich in methane. Delhi's sewage treatment plants generate enough gas to power their own operations.</li>
+        <li><strong>Agricultural residue to energy</strong> — rather than Punjab farmers burning 20+ million tonnes of paddy straw in fields (causing severe air pollution over Delhi each October), this residue can power biomass plants.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q4: Major issues of biomass + biomass potential -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">Jun-23</span>
+      <span class="q-text">Major issues pertaining to the use of biomass <span class="wc">200 words</span></span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Jun-23 Q4a — 200 words</span><span class="etag">SAQ 1 — biomass plantations for/against</span></div>
+
+      <div class="ans-label">Major Issues in Use of Biomass</div>
+      <ol class="num-list">
+        <li><strong>Air pollution from combustion</strong> — burning biomass, especially on inefficient open fires, releases PM2.5, CO, and PAHs. WHO estimates indoor air pollution from biomass cooking kills 4 million people/year globally. Even modern biomass power plants emit pollutants requiring scrubbers.</li>
+        <li><strong>Deforestation and land degradation</strong> — when biomass demand exceeds sustainable forest regrowth, it drives deforestation. India uses ~200 million tonnes of firewood/year; forests cannot regenerate at this rate in all regions.</li>
+        <li><strong>Food vs fuel competition</strong> — diverting agricultural land to energy crops (Jatropha, sugarcane for ethanol) competes with food production and can push food prices up, hitting the poor hardest.</li>
+        <li><strong>Water consumption</strong> — energy crops require irrigation, competing with food crops and domestic water supplies in water-stressed regions like Rajasthan and parts of Maharashtra.</li>
+        <li><strong>Carbon debt</strong> — clearing forest to grow biomass energy crops releases far more carbon than the energy crop saves for decades. Biomass is only carbon-neutral if grown on degraded land, not replacing forests.</li>
+        <li><strong>Collection drudgery</strong> — women and children in rural India spend 4–6 hours/day collecting firewood. This is a direct opportunity cost — time lost from education, productive work and rest.</li>
+        <li><strong>Seasonal availability</strong> — agricultural residues are available only after harvest; storing them year-round for power plants requires large storage infrastructure and cost.</li>
+      </ol>
+    </div>
+  </div>
+
+</div><!-- end unit 14 -->
+
+
+<!-- ════════════════════════════ UNIT 15 ════════════════════════════ -->
+<div class="unit-content" id="u15">
+
+  <!-- Q1: Hydropower plant — major components + diagram — 3 papers -->
+  <div class="qa-card open">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 3 papers — DIAGRAM REQUIRED</span>
+      <span class="q-text">Functions of major components of a hydropower plant — with diagram</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-24 Q1b — with diagram</span>
+        <span class="etag">Jun-22 Q1d — with labelled diagram</span>
+        <span class="etag">Dec-21 Q2a · Jun-22 Q4a — small hydropower working</span>
+      </div>
+
+      <div class="diag-wrap">
+        <svg viewBox="0 0 720 160" xmlns="http://www.w3.org/2000/svg" width="100%">
+          <rect width="720" height="160" fill="#161b27" rx="6"/>
+          <defs><marker id="hw" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto">
+            <polygon points="0 0,8 2.5,0 5" fill="#3b82f6"/></marker>
+          <marker id="he" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto">
+            <polygon points="0 0,8 2.5,0 5" fill="#4ade80"/></marker></defs>
+          <!-- Reservoir -->
+          <path d="M 10 30 L 10 100 Q 100 110 130 100 L 130 30 Z" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+          <text x="70" y="60" fill="#7dd3fc" font-size="9" font-weight="bold" text-anchor="middle">RESERVOIR</text>
+          <text x="70" y="74" fill="#94a3b8" font-size="8" text-anchor="middle">Stores water</text>
+          <text x="70" y="86" fill="#94a3b8" font-size="8" text-anchor="middle">(potential energy)</text>
+          <!-- Dam wall -->
+          <rect x="130" y="30" width="18" height="90" fill="#6b7280" stroke="#9ca3af" stroke-width="1"/>
+          <text x="139" y="80" fill="#e2e8f0" font-size="7" font-weight="bold" text-anchor="middle" transform="rotate(-90,139,80)">DAM</text>
+          <!-- Penstock -->
+          <rect x="148" y="60" width="130" height="16" fill="#374151" stroke="#94a3b8" stroke-width="1.5"/>
+          <!-- Penstock slope -->
+          <line x1="148" y1="68" x2="278" y2="100" stroke="#94a3b8" stroke-width="3"/>
+          <text x="200" y="82" fill="#94a3b8" font-size="8" text-anchor="middle">PENSTOCK</text>
+          <text x="200" y="92" fill="#64748b" font-size="7" text-anchor="middle">(pressurised pipe)</text>
+          <!-- Water flow arrow -->
+          <line x1="195" y1="68" x2="250" y2="95" stroke="#3b82f6" stroke-width="2" marker-end="url(#hw)"/>
+          <!-- Turbine -->
+          <ellipse cx="310" cy="110" rx="35" ry="35" fill="#292524" stroke="#f59e0b" stroke-width="2"/>
+          <text x="310" y="107" fill="#fcd34d" font-size="9" font-weight="bold" text-anchor="middle">TURBINE</text>
+          <text x="310" y="120" fill="#94a3b8" font-size="8" text-anchor="middle">(Francis/Kaplan)</text>
+          <!-- Shaft -->
+          <rect x="344" y="106" width="50" height="8" fill="#4ade80"/>
+          <text x="369" y="100" fill="#4ade80" font-size="8" text-anchor="middle">Shaft</text>
+          <!-- Generator -->
+          <ellipse cx="430" cy="110" rx="35" ry="35" fill="#0d2b1e" stroke="#10b981" stroke-width="2"/>
+          <text x="430" y="107" fill="#4ade80" font-size="9" font-weight="bold" text-anchor="middle">GENERATOR</text>
+          <text x="430" y="120" fill="#94a3b8" font-size="8" text-anchor="middle">AC electricity</text>
+          <!-- Transformer -->
+          <rect x="480" y="90" width="80" height="42" rx="4" fill="#1e1e3a" stroke="#a855f7" stroke-width="1.5"/>
+          <text x="520" y="110" fill="#f0abfc" font-size="9" font-weight="bold" text-anchor="middle">STEP-UP</text>
+          <text x="520" y="123" fill="#f0abfc" font-size="9" text-anchor="middle">TRANSFORMER</text>
+          <line x1="466" y1="111" x2="480" y2="111" stroke="#4ade80" stroke-width="2" marker-end="url(#he)"/>
+          <!-- Grid -->
+          <rect x="572" y="90" width="80" height="42" rx="4" fill="#1e2330" stroke="#7dd3fc" stroke-width="1.5"/>
+          <text x="612" y="110" fill="#7dd3fc" font-size="9" font-weight="bold" text-anchor="middle">GRID /</text>
+          <text x="612" y="123" fill="#7dd3fc" font-size="9" text-anchor="middle">CONSUMERS</text>
+          <line x1="560" y1="111" x2="572" y2="111" stroke="#4ade80" stroke-width="2" marker-end="url(#he)"/>
+          <!-- Tailrace -->
+          <path d="M 280 145 L 400 145 L 450 155 L 720 155" fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="5,3"/>
+          <text x="450" y="148" fill="#3b82f6" font-size="8">Tailrace — water discharged downstream</text>
+          <!-- Head label -->
+          <line x1="10" y1="30" x2="10" y2="145" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <line x1="5" y1="30" x2="15" y2="30" stroke="#fbbf24" stroke-width="1.5"/>
+          <line x1="5" y1="145" x2="15" y2="145" stroke="#fbbf24" stroke-width="1.5"/>
+          <text x="1" y="92" fill="#fbbf24" font-size="8" transform="rotate(-90,1,92)">HEAD (H)</text>
+        </svg>
+        <div class="diag-label">Hydropower plant — potential energy of stored water → kinetic energy (turbine) → mechanical → electrical</div>
+      </div>
+
+      <div class="ans-label">Functions of Major Components</div>
+      <ol class="num-list">
+        <li><strong>Reservoir / Dam</strong> — stores water and creates the hydraulic head (H = height difference between water surface and turbine). The higher the head, the more energy per litre of water. Dam wall holds back water and regulates release.</li>
+        <li><strong>Intake and Trash Rack</strong> — opening in dam wall where water enters the penstock. Trash rack (steel bars) prevents logs, debris and fish from entering and damaging the turbine.</li>
+        <li><strong>Penstock</strong> — large steel or concrete pipe that carries water from reservoir to turbine under high pressure. Water gains velocity (kinetic energy) as it drops through the penstock. Pressure = ρ × g × H.</li>
+        <li><strong>Turbine</strong> — heart of the plant. Water jets or flows through turbine blades, causing them to spin. Francis turbine (medium head, 40–600m), Kaplan turbine (low head, run-of-river), Pelton wheel (very high head, >300m). Converts water energy to mechanical shaft rotation.</li>
+        <li><strong>Generator</strong> — turbine shaft is directly coupled to the generator rotor. Rotating electromagnets inside coils produce AC electricity by electromagnetic induction. Same principle as all generators, but shaft rotation speed is slower (120–600 RPM) — step-up gearbox sometimes needed.</li>
+        <li><strong>Transformer and Switchyard</strong> — step-up transformer raises generator voltage (11 kV) to transmission voltage (220 kV or 400 kV) for efficient long-distance transmission. Switchyard has circuit breakers, protection relays and metering.</li>
+        <li><strong>Tailrace</strong> — channel that carries spent water from turbine discharge back to the river downstream. Flow rate through tailrace must be maintained for downstream river ecology.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Q2: Environmental issues of hydropower — 5 papers -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 5 papers</span>
+      <span class="q-text">Major environmental issues / harmful impacts of hydropower development</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Dec-25 Q5b</span><span class="etag">Jun-25 Q6b</span>
+        <span class="etag">Jun-24 Q5b</span><span class="etag">Dec-22 Q2b</span>
+        <span class="etag">Dec-21 Q6a</span>
+      </div>
+      <div class="rep-note">⚠ 5 papers — hydropower environmental issues is the #1 exam topic in Unit 15</div>
+
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title" style="color:#f87171;">🏔 Upstream / Reservoir</div>
+          <ol class="num-list">
+            <li><strong>Forest and farmland submergence</strong> — Sardar Sarovar Dam submerged 37,690 ha including rich forest. Permanently lost.</li>
+            <li><strong>Displacement of communities</strong> — 2–3 lakh people displaced by Sardar Sarovar; mostly Adivasi tribal communities with inadequate rehabilitation.</li>
+            <li><strong>Loss of biodiversity</strong> — unique riparian forests and endemic species destroyed; no recovery possible once submerged.</li>
+            <li><strong>Methane emissions</strong> — rotting submerged vegetation in tropical reservoirs generates significant CH₄ (25× more potent than CO₂). Tropical reservoirs can have higher greenhouse impact than coal plants per kWh.</li>
+            <li><strong>Reservoir induced seismicity</strong> — weight of water and pore pressure changes can trigger earthquakes. Koyna Dam (Maharashtra) caused a 6.3 magnitude earthquake in 1967.</li>
+          </ol>
+        </div>
+        <div class="col-box">
+          <div class="col-title" style="color:#f87171;">🐟 Downstream / River</div>
+          <ol class="num-list">
+            <li><strong>Fish migration blocked</strong> — dams are walls across rivers; migratory fish (hilsa, mahseer) cannot reach spawning grounds → population collapse. Without fish ladders, species extinction follows.</li>
+            <li><strong>Sediment starvation</strong> — dam traps 80–90% of sediment → downstream delta shrinks → coastal erosion → saltwater intrusion into agricultural land.</li>
+            <li><strong>Altered flood pulse</strong> — natural annual floods replenish floodplain soils and trigger fish spawning. Dams eliminate these → floodplain agriculture and biodiversity collapse.</li>
+            <li><strong>Reduced downstream flow</strong> — during dry seasons, less water reaches lower river → riverine species stressed, fishing communities suffer.</li>
+            <li><strong>Waterlogging and soil salinity</strong> — unlined irrigation canals from dams raise water table → waterlogging and salinisation of farmland over decades.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="hbox gold">Case study to mention: Sardar Sarovar Dam, Narmada — 37,690 ha submerged · 2–3 lakh displaced · Narmada delta shrinking · fish catch declined sharply. World Commission on Dams (2000): large dams often have unacceptable social and environmental costs that outweigh benefits. Short note: "Hydropower: Clean Energy or Destroyer?" — both sides are valid; depends on scale and site.</div>
+    </div>
+  </div>
+
+  <!-- Q3: Small hydropower — working, advantages, limitations — 5 papers -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 5 papers</span>
+      <span class="q-text">Small hydropower plant — working, advantages, limitations, criteria for tapping</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Jun-24 Q2b — limitations</span><span class="etag">Dec-23 Q5b — limitations</span>
+        <span class="etag">Dec-21 Q2a — working</span><span class="etag">Jun-22 Q4a — working with diagram</span>
+        <span class="etag">Jun-21 Q6c · Jun-20 Q5c — short notes</span><span class="etag">Terminal Q1 · Q2</span>
+      </div>
+
+      <div class="ans-label">What is Small Hydropower?</div>
+      <div class="ans-body"><p>Small hydropower (SHP) is defined as hydropower plants with installed capacity up to <strong>25 MW in India</strong> (some countries use &lt;10 MW). It typically uses run-of-river (ROR) design — water is diverted from a stream through a channel and penstock, passes through turbine, and is returned to the river — without a large dam or reservoir. India has <strong>~21 GW SHP potential</strong> and ~5 GW installed.</p></div>
+
+      <div class="two-col">
+        <div class="col-box">
+          <div class="col-title" style="color:#4ade80;">✅ Advantages</div>
+          <ul class="pt-list">
+            <li><strong>No large dam</strong> — minimal submergence, minimal displacement of people and forests</li>
+            <li><strong>Low ecological impact</strong> — run-of-river design maintains most natural river flow; fish can still migrate</li>
+            <li><strong>Local power supply</strong> — ideal for remote hill villages far from the grid; no long transmission lines needed</li>
+            <li><strong>Long operational life</strong> — 40–50 years with simple maintenance; no fuel cost after construction</li>
+            <li><strong>Reliable baseload</strong> — provides power 24×7 unlike solar or wind (subject to seasonal river flow variation)</li>
+            <li><strong>Proven technology</strong> — simple civil and mechanical components; local contractors can build and maintain</li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="col-title" style="color:#f87171;">❌ Limitations</div>
+          <ul class="pt-list">
+            <li><strong>Seasonal variation</strong> — river flows low in summer; generation drops significantly. May not meet year-round demand without backup.</li>
+            <li><strong>Site-specific</strong> — needs perennial river with sufficient head and flow. Cannot be located just anywhere.</li>
+            <li><strong>Environmental flow obligation</strong> — must leave minimum ecological flow in river at all times; limits generation in dry season</li>
+            <li><strong>Silt and sedimentation</strong> — mountain streams carry heavy silt loads; damages turbines; requires desilting chambers</li>
+            <li><strong>Remote location</strong> — high-altitude sites mean expensive access roads for construction and maintenance; difficult supply chain</li>
+            <li><strong>Flash flood risk</strong> — extreme monsoon events can damage diversion weir and intake structures</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ans-label">Criteria for Tapping Small Hydropower (Terminal Q2)</div>
+      <ul class="pt-list">
+        <li><strong>Minimum head</strong> — at least 3–5 metres head for micro hydro (below 100 kW); 10+ metres for small hydro up to 25 MW. Higher head = more power per litre of water.</li>
+        <li><strong>Perennial flow</strong> — river must flow year-round, not just during monsoon. Stream flow data for at least 10 years needed to assess reliability and seasonal variation.</li>
+        <li><strong>Minimum flow (discharge Q)</strong> — Power = η × ρ × g × Q × H. Minimum viable flow of 50–100 litres/second for small schemes.</li>
+        <li><strong>Environmental flow compliance</strong> — must leave at least 30% of minimum monthly flow in river for ecology and downstream uses.</li>
+        <li><strong>Geological stability</strong> — rock quality matters for tunnel and penstock placement; avoid landslide-prone slopes.</li>
+        <li><strong>Accessibility</strong> — practical access for construction equipment and long-term operation team.</li>
+        <li><strong>Proximity to load</strong> — for isolated mini-grids, site should be near the village it serves; for grid-connected, transmission cost determines viability.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q4: Wind energy — 7 papers — diagram required -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge rep">★ 7 papers — DIAGRAM REQUIRED</span>
+      <span class="q-text">Wind energy system — working with diagram / site selection criteria / applications / harmful impacts</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags">
+        <span class="etag">Jun-25 Q2b — working with labelled diagram</span>
+        <span class="etag">Jun-23 Q4b — site criteria + applications</span>
+        <span class="etag">Dec-24 Q5a — criteria + 2 applications</span>
+        <span class="etag">Dec-22 Q6b — criteria + applications</span>
+        <span class="etag">Dec-20 Q1c — harmful impacts</span>
+        <span class="etag">Dec-25 Q6c · Dec-21 Q6c — short notes</span>
+        <span class="etag">Jun-19 Q2b — India applications</span>
+      </div>
+      <div class="rep-note">⚠ 7 papers — wind energy is jointly the most examined topic in Unit 15</div>
+
+      <div class="ans-label">Working of a Wind Energy System — with Diagram (Jun-25 Q2b)</div>
+      <div class="diag-wrap">
+        <svg viewBox="0 0 720 170" xmlns="http://www.w3.org/2000/svg" width="100%">
+          <rect width="720" height="170" fill="#161b27" rx="6"/>
+          <defs><marker id="wd" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto">
+            <polygon points="0 0,8 2.5,0 5" fill="#3b82f6"/></marker>
+          <marker id="we" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto">
+            <polygon points="0 0,8 2.5,0 5" fill="#4ade80"/></marker></defs>
+          <!-- Tower -->
+          <line x1="200" y1="155" x2="200" y2="40" stroke="#6b7280" stroke-width="8"/>
+          <text x="215" y="140" fill="#6b7280" font-size="8">TOWER</text>
+          <text x="215" y="151" fill="#64748b" font-size="7">60–150m tall</text>
+          <!-- Nacelle -->
+          <rect x="180" y="28" width="60" height="26" rx="5" fill="#374151" stroke="#9ca3af" stroke-width="1.5"/>
+          <text x="210" y="44" fill="#e2e8f0" font-size="8" font-weight="bold" text-anchor="middle">NACELLE</text>
+          <!-- Rotor hub -->
+          <circle cx="185" cy="41" r="8" fill="#6b7280" stroke="#9ca3af" stroke-width="1"/>
+          <!-- Blades -->
+          <line x1="185" y1="33" x2="185" y2="5" stroke="#94a3b8" stroke-width="5"/>
+          <text x="155" y="12" fill="#94a3b8" font-size="7">BLADE 1</text>
+          <line x1="185" y1="33" x2="155" y2="55" stroke="#94a3b8" stroke-width="5"/>
+          <text x="120" y="60" fill="#94a3b8" font-size="7">BLADE 2</text>
+          <line x1="185" y1="33" x2="215" y2="55" stroke="#94a3b8" stroke-width="5"/>
+          <text x="218" y="60" fill="#94a3b8" font-size="7">BLADE 3</text>
+          <!-- Wind arrow -->
+          <line x1="10" y1="41" x2="140" y2="41" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#wd)"/>
+          <text x="70" y="35" fill="#3b82f6" font-size="9" font-weight="bold" text-anchor="middle">WIND →</text>
+          <!-- Components inside nacelle (zoomed label) -->
+          <rect x="290" y="10" width="420" height="100" rx="5" fill="#0f172a" stroke="#2d3748" stroke-width="1"/>
+          <text x="500" y="26" fill="#fbbf24" font-size="9" font-weight="bold" text-anchor="middle">INSIDE THE NACELLE</text>
+          <!-- Rotor -->
+          <rect x="300" y="34" width="75" height="40" rx="3" fill="#1e2d40" stroke="#3b82f6" stroke-width="1"/>
+          <text x="337" y="51" fill="#7dd3fc" font-size="8" text-anchor="middle">ROTOR/</text>
+          <text x="337" y="63" fill="#7dd3fc" font-size="8" text-anchor="middle">MAIN SHAFT</text>
+          <line x1="375" y1="54" x2="395" y2="54" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#we)"/>
+          <!-- Gearbox -->
+          <rect x="396" y="34" width="75" height="40" rx="3" fill="#292524" stroke="#f59e0b" stroke-width="1"/>
+          <text x="433" y="51" fill="#fcd34d" font-size="8" text-anchor="middle">GEAR-</text>
+          <text x="433" y="63" fill="#fcd34d" font-size="8" text-anchor="middle">BOX</text>
+          <text x="433" y="82" fill="#64748b" font-size="7" text-anchor="middle">Speeds up rotation</text>
+          <text x="433" y="91" fill="#64748b" font-size="7" text-anchor="middle">~20 RPM → 1500 RPM</text>
+          <line x1="471" y1="54" x2="491" y2="54" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#we)"/>
+          <!-- Generator -->
+          <rect x="492" y="34" width="75" height="40" rx="3" fill="#0d2b1e" stroke="#10b981" stroke-width="1"/>
+          <text x="529" y="51" fill="#4ade80" font-size="8" text-anchor="middle">GENE-</text>
+          <text x="529" y="63" fill="#4ade80" font-size="8" text-anchor="middle">RATOR</text>
+          <line x1="567" y1="54" x2="587" y2="54" stroke="#4ade80" stroke-width="1.5" marker-end="url(#we)"/>
+          <!-- Transformer -->
+          <rect x="588" y="34" width="110" height="40" rx="3" fill="#1e1e3a" stroke="#a855f7" stroke-width="1"/>
+          <text x="643" y="51" fill="#f0abfc" font-size="8" text-anchor="middle">TRANSFORMER</text>
+          <text x="643" y="63" fill="#94a3b8" font-size="7" text-anchor="middle">+ GRID CONNECTION</text>
+          <!-- Yaw control -->
+          <text x="500" y="115" fill="#94a3b8" font-size="8" text-anchor="middle">Yaw control system — rotates entire nacelle to face wind direction</text>
+          <text x="500" y="128" fill="#94a3b8" font-size="8" text-anchor="middle">Blade pitch control — adjusts blade angle to optimise power at different wind speeds</text>
+          <text x="500" y="141" fill="#94a3b8" font-size="8" text-anchor="middle">Anemometer + wind vane — measure wind speed and direction for control system</text>
+        </svg>
+        <div class="diag-label">Wind turbine — kinetic energy of wind → blade rotation → gearbox → generator → electricity</div>
+      </div>
+
+      <div class="ans-label">6 Criteria for Wind Turbine Site Selection (Jun-23 Q4b / Dec-24 Q5a)</div>
+      <ol class="num-list">
+        <li><strong>Mean annual wind speed</strong> — minimum 6–7 m/s needed for economic viability. Wind power scales as v³ (cube of velocity) — doubling wind speed gives 8× more power. India's Wind Atlas identifies areas with &gt;5.6 m/s wind at 50m height.</li>
+        <li><strong>Wind consistency</strong> — not just speed but how many hours per year the wind blows at usable speeds. Capacity factor (actual generation as % of rated capacity) should be &gt;25%. Coastal and highland sites have better consistency.</li>
+        <li><strong>Low turbulence</strong> — rough terrain, nearby forests and buildings create turbulence that reduces energy capture and fatigues turbine structure. Open flat land or offshore are ideal.</li>
+        <li><strong>Grid proximity</strong> — wind farms need transmission lines to export power. Remote offshore sites need expensive undersea cables. Grid capacity at the connection point must be adequate.</li>
+        <li><strong>Land availability and use</strong> — turbines need spacing of 5–10 rotor diameters. However, land between turbines can still be farmed. Must avoid bird migration corridors, protected forests, densely populated areas.</li>
+        <li><strong>Environmental and social clearance</strong> — bird and bat mortality assessment; noise impact on nearby residences (turbines should be &gt;500m from homes); radar interference check; community acceptance.</li>
+      </ol>
+
+      <div class="ans-label">Applications of Wind Energy in India (Jun-19 Q2b)</div>
+      <ul class="pt-list">
+        <li><strong>Grid-scale wind farms</strong> — Tamil Nadu (7,000+ MW installed, India's pioneer), Gujarat, Rajasthan, Karnataka, Andhra Pradesh. India is the <strong>4th largest wind power producer globally (47 GW installed, 2024)</strong>.</li>
+        <li><strong>Wind–solar hybrid</strong> — combining wind (blows more at night/winter) with solar (generates day/summer) on same land improves capacity utilisation and grid stability. India's hybrid policy promotes this.</li>
+        <li><strong>Offshore wind</strong> — Gujarat and Tamil Nadu coasts have strong offshore wind resource. India's first offshore wind policy (2023) targets 30 GW by 2030. Stronger, more consistent winds than onshore.</li>
+        <li><strong>Pumping water</strong> — small wind pumps (windmills) for groundwater irrigation; traditional use in Gujarat and Rajasthan for centuries.</li>
+        <li><strong>Remote telecom</strong> — small wind turbines + battery for powering remote telecom towers and weather monitoring stations in high-altitude locations.</li>
+      </ul>
+
+      <div class="ans-label">Harmful Impacts of Wind Energy (Dec-20 Q1c)</div>
+      <ul class="pt-list">
+        <li><strong>Bird and bat mortality</strong> — most serious ecological impact. Raptors (eagles, kites) killed by spinning blades; bats killed by pressure differential near blades. Proper siting away from migration routes is essential.</li>
+        <li><strong>Noise pollution</strong> — mechanical and aerodynamic noise audible up to 500m. Low-frequency vibration can be felt further. Disturbs residents near farms.</li>
+        <li><strong>Visual impact</strong> — 100–150m tall turbines significantly alter landscape character; concern in scenic and tourist areas.</li>
+        <li><strong>Shadow flicker</strong> — rotating blades cast moving shadows on nearby homes causing a stroboscopic effect; can cause headaches and annoyance.</li>
+        <li><strong>Land fragmentation</strong> — access roads, transmission lines and turbine pads fragment wildlife habitat even if land between turbines is used for farming.</li>
+        <li><strong>Non-recyclable blades</strong> — fibreglass composite blades cannot currently be recycled efficiently. Growing end-of-life blade waste problem globally.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q5: India context — SHP and wind together -->
+  <div class="qa-card">
+    <div class="qa-header" onclick="toggle(this)">
+      <span class="q-badge">Terminal Q5</span>
+      <span class="q-text">How small hydropower and wind energy can be used in the Indian context</span>
+      <span class="expand-icon">▶</span>
+    </div>
+    <div class="qa-body">
+      <div class="exam-tags"><span class="etag">Terminal Q5</span></div>
+
+      <div class="ans-label">Small Hydropower in Indian Context</div>
+      <ul class="pt-list">
+        <li><strong>Himalayan potential</strong> — Uttarakhand, Himachal Pradesh, J&K, Arunachal Pradesh and Sikkim have thousands of small perennial streams with high heads. India's SHP potential: ~21 GW, only ~5 GW developed so far.</li>
+        <li><strong>Northeast India</strong> — Brahmaputra tributaries and Meghalaya, Mizoram, Nagaland streams; region is isolated from main national grid; SHP mini-grids are the most practical solution.</li>
+        <li><strong>Western Ghats</strong> — Karnataka, Kerala and Maharashtra have many rivers from the Ghats with run-of-river SHP potential; Western Ghats is a biodiversity hotspot so run-of-river preferred over dams.</li>
+        <li><strong>Policy</strong> — MNRE's SHP programme offers capital subsidies; state nodal agencies implement. Feed-in tariff of ₹5–6/unit for SHP projects &lt;25 MW.</li>
+        <li><strong>Off-grid application</strong> — SHP mini-grids serve hundreds of remote Himalayan villages where grid extension is uneconomical; communities own and operate these plants successfully (Ladakh, Spiti).</li>
+      </ul>
+
+      <div class="ans-label">Wind Energy in Indian Context</div>
+      <ul class="pt-list">
+        <li><strong>Tamil Nadu</strong> — India's wind pioneer since 1985; Muppandal wind farm (1500 MW) is Asia's largest onshore wind cluster; strong south-west monsoon winds drive generation.</li>
+        <li><strong>Gujarat</strong> — second largest wind state; also the base for India's nascent offshore wind industry; Rann of Kutch and Saurashtra coast have excellent wind resource.</li>
+        <li><strong>Rajasthan</strong> — vast flat terrain, consistent Thar Desert winds; Jaisalmer wind park is India's largest single-location wind farm.</li>
+        <li><strong>Wind-Solar Complementarity</strong> — in India, wind blows strongest during monsoon (June–September) when solar is weakest. Combining both on same grid (and increasingly same land) provides more stable annual generation than either alone.</li>
+        <li><strong>Manufacturing</strong> — India has a growing wind turbine manufacturing industry (Suzlon, Inox Wind, Envision); reducing dependence on imported components; PLI scheme for wind components.</li>
+      </ul>
+      <div class="hbox gold">Combined SHP + Wind strategy: Small hydro provides reliable baseload for remote hill communities; wind provides large-scale grid supply for cities. Together they complement solar (wind stronger at night and in monsoon; solar stronger in winter days) to create a robust diversified renewable portfolio for India.</div>
+    </div>
+  </div>
+
+</div><!-- end unit 15 -->
+
+</div><!-- container -->
+
+<script>
+function showUnit(id) {
+  document.querySelectorAll('.unit-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.unit-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const idx = {u13:0, u14:1, u15:2}[id];
+  document.querySelectorAll('.unit-tab')[idx].classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function toggle(header) {
+  header.closest('.qa-card').classList.toggle('open');
+}
+</script>
+</body>
+</html>
